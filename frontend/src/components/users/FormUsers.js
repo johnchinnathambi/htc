@@ -4,6 +4,8 @@ import {
   inputEmail,
   inputPassword,
   inputText,
+  staticInputSelect,
+  inputDate
 } from '../../utils/dynamicForm'
 
 const FormUsers = ({
@@ -34,7 +36,7 @@ const FormUsers = ({
         <div className='modal-content modal-background'>
           <div className='modal-header'>
             <h3 className='modal-title ' id='userModalLabel'>
-              {edit ? 'Edit User' : 'Post User'}
+              {edit ? 'Edit User' : 'Add User'}
             </h3>
             <button
               type='button'
@@ -51,6 +53,28 @@ const FormUsers = ({
               <Message variant='danger'>{error}</Message>
             ) : (
               <form onSubmit={handleSubmit(submitHandler)}>
+                {staticInputSelect({
+                  register,
+                  errors,
+                  label: 'Department',
+                  name: 'department',
+                  placeholder: 'Department',
+                  isRequired: false,
+                  data: [
+                    { name: 'Account' },                    
+                  ],
+                })}
+                {staticInputSelect({
+                  register,
+                  errors,
+                  label: 'Designation',
+                  name: 'designation',
+                  placeholder: 'Designation',
+                  isRequired: false,
+                  data: [
+                    { name: 'Manager' },                    
+                  ],
+                })}
                 {inputText({
                   register,
                   errors,
@@ -58,14 +82,112 @@ const FormUsers = ({
                   name: 'name',
                   placeholder: 'Name',
                 })}
+                {inputText({
+                  register,
+                  errors,
+                  label: 'Address 1',
+                  name: 'address1',
+                  placeholder: 'House/Flat no, Building name',
+                })}
+                {inputText({
+                  register,
+                  errors,
+                  label: 'Address 2',
+                  name: 'address2',
+                  placeholder: 'Street name/number',
+                })}
+                {inputText({
+                  register,
+                  errors,
+                  label: 'Address 3',
+                  name: 'address3',
+                  placeholder: 'Block no. , Area Name',
+                })}
+                {staticInputSelect({
+                  register,
+                  errors,
+                  label: 'City',
+                  name: 'city',
+                  placeholder: 'City',
+                  isRequired: false,
+                  data: [
+                    { name: 'Chennai' },
+                    { name: 'Madurai' },                    
+                  ],
+                })}
+                {inputText({
+                  register,
+                  errors,
+                  label: 'Pin code',
+                  name: 'pincode',
+                  placeholder: '600 078',
+                })}
+                {staticInputSelect({
+                  register,
+                  errors,
+                  label: 'State',
+                  name: 'state',
+                  placeholder: 'State',
+                  isRequired: false,
+                  data: [
+                    { name: 'Tamilnadu' },
+                    { name: 'Kerala' },                    
+                  ],
+                })}
+                {inputText({
+                  register,
+                  errors,
+                  label: 'Mobile no.',
+                  name: 'mobile',
+                  placeholder: '044 12345678',
+                })}
                 {inputEmail({
                   register,
                   errors,
-                  label: 'Email',
+                  label: 'Email ID',
                   name: 'email',
                   placeholder: 'Email',
                 })}
-
+                {inputText({
+                  register,
+                  errors,
+                  label: 'Pan No.',
+                  name: 'pan',
+                  placeholder: 'AAAAA1234Z',
+                })}
+                {inputText({
+                  register,
+                  errors,
+                  label: 'PF No.',
+                  name: 'pf',
+                  placeholder: 'KN/PY/1234567/987',
+                })}
+                {inputText({
+                  register,
+                  errors,
+                  label: 'ESI No.',
+                  name: 'esi',
+                  placeholder: '31-00-123456-000-0001',
+                })}
+                {inputDate({
+                  register,
+                  errors,
+                  label: 'DOB',
+                  name: 'dob',
+                  placeholder: '11/11/1999',
+                })}                
+                {staticInputSelect({
+                  register,
+                  errors,
+                  label: 'Salary Schedule Type',
+                  name: 'salaryscheduletype',
+                  placeholder: 'Salary Schedule Type',
+                  isRequired: false,
+                  data: [
+                    { name: 'Weekly' },
+                    { name: 'Monthly' },
+                  ],
+                })}
                 {inputPassword({
                   register,
                   errors,
@@ -75,7 +197,6 @@ const FormUsers = ({
                   isRequired: false,
                   placeholder: 'Password',
                 })}
-
                 {inputPassword({
                   register,
                   errors,

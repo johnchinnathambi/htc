@@ -4,8 +4,22 @@ import bcrypt from 'bcryptjs'
 
 const userScheme = mongoose.Schema(
   {
+    department: { type: String },
+    designation: { type: String },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true, lowercase: true },
+    address1: { type: String },
+    address2: { type: String },
+    address3: { type: String },
+    city: { type: String },
+    pincode: { type: String },
+    state: { type: String },
+    mobile: { type: String },
+    pan: { type: String },
+    pf: { type: String },
+    esi: { type: String },
+    dob: { type: String },
+    salaryscheduletype: { type: String },    
     password: { type: String, required: true },
     resetPasswordToken: String,
     resetPasswordExpire: Date,

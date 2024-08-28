@@ -94,7 +94,21 @@ const Users = () => {
     edit
       ? mutateAsyncUpdate({
           _id: id,
+          department: data.department,
+          designation: data.designation,
           name: data.name,
+          address1: data.address1,
+          address2: data.address2,
+          address3: data.address3,
+          city: data.city,
+          pincode: data.pincode,
+          state: data.state,
+          mobile: data.mobile,
+          pan: data.pan,
+          pf: data.pf,
+          esi: data.esi,
+          dob: data.dob,
+          salaryscheduletype: data.salaryscheduletype, 
           email: data.email,
           confirmed: data.confirmed,
           blocked: data.blocked,
@@ -106,7 +120,21 @@ const Users = () => {
   const editHandler = (user) => {
     setId(user._id)
     setEdit(true)
+    setValue('department', user.department)
+    setValue('designation', user.designation)
     setValue('name', user.name)
+    setValue('address1', user.address1)
+    setValue('address2', user.address2)
+    setValue('address3', user.address3)
+    setValue('city', user.city)
+    setValue('pincode', user.pincode)
+    setValue('state', user.state)
+    setValue('mobile', user.mobile)
+    setValue('pan', user.pan)
+    setValue('pf', user.pf)
+    setValue('esi', user.esi)
+    setValue('dob', user.dob)
+    setValue('salaryscheduletype', user.salaryscheduletype)
     setValue('email', user.email)
     setValue('confirmed', user.confirmed)
     setValue('blocked', user.blocked)
