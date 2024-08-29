@@ -63,50 +63,68 @@ const Login = () => {
 
   return (
     <>
-      <FormContainer>
-        <Helmet>
-          <title>Login</title>
-          <meta property='og:title' content='Login' key='title' />
-        </Helmet>
-        <h3 className='fw-light font-monospace text-center'>Sign In</h3>
-        {isError && <Message variant='danger'>{error}</Message>}
-        {isErrorUserRole && <Message variant='danger'>{errorUserRole}</Message>}
+      <Helmet>
+        <title>Login | HTC Accounting</title>
+        <meta property='og:title' content='Login' key='title' />
+      </Helmet>
+      <div className="bg-gradient-to-b from-sky-100 to-sky-200">
+        <div className='grid grid-cols-12 gap-3 h-screen dark:bg-darkgray relative z-[999] bg-transparent'>
+          <div className='xl:col-span-8 col-span-12 items-center justify-center md:flex hidden relative overflow-hidden'>
+            <img className='max-w-100 w-[600px]' src='/accounting@2x.png' />
+          </div>
+          <div className='xl:col-span-4 col-span-12 flex items-center h-screen sm:px-12 px-4 relative z-10 xl:bg-white xl:dark:bg-darkgray bg-transparent'>
+            <FormContainer>
+              <div className='mb-10'>
+                <img
+                  width="80"
+                  src="/htc.svg"
+                  className="img-fluid"
+                  alt="HTC"
+                />
+              </div>
+              <h1 className="text-gray-900 text-2xl font-bold mb-2">Welcome to HTC Accounting</h1>
+              <p className="text-gray-900 text-lg font-medium mb-5">Sign in to Continue</p>
+              {isError && <Message variant='danger'>{error}</Message>}
+              {isErrorUserRole && <Message variant='danger'>{errorUserRole}</Message>}
 
-        <form onSubmit={handleSubmit(submitHandler)}>
-          {inputEmail({
-            register,
-            errors,
-            label: 'Email',
-            name: 'email',
-            placeholder: 'Email',
-          })}
-          {inputPassword({
-            register,
-            errors,
-            label: 'Password',
-            name: 'password',
-            placeholder: 'Password',
-          })}
-          <button
-            type='submit'
-            className='btn btn-primary form-control '
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <span className='spinner-border spinner-border-sm' />
-            ) : (
-              'Sign In'
-            )}
-          </button>
-        </form>
-        <div className='row pt-3'>
-          <div className='col'>
-            <Link to='/auth/forgot-password' className='ps-1'>
-              Forgot Password?
-            </Link>
+              <form onSubmit={handleSubmit(submitHandler)}>
+                {inputEmail({
+                  register,
+                  errors,
+                  label: 'Email',
+                  name: 'email',
+                  placeholder: 'Email',
+                })}
+                {inputPassword({
+                  register,
+                  errors,
+                  label: 'Password',
+                  name: 'password',
+                  placeholder: 'Password',
+                })}
+                <button
+                  type='submit'
+                  className="my-3 inline-flex items-center justify-center text-white bg-blue-700 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none w-full"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <span className="animate-spin inline-block size-4 border-[2px] border-current border-t-transparent text-white rounded-full dark:text-white" role="status" aria-label="loading">
+                      <span className="sr-only">Loading...</span>
+                    </span>
+                  ) : ''}
+                  <span className='px-3'>Sign In</span>
+                </button>
+              </form>
+              <div className='mt-3'>
+                <Link to='/auth/forgot-password' className="text-blue-700">
+                  Forgot Password?
+                </Link>
+              </div>
+            </FormContainer>
           </div>
         </div>
-      </FormContainer>
+
+      </div>
     </>
   )
 }

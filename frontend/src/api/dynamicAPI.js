@@ -6,22 +6,22 @@ const dynamicAPI = async (method, url, obj = {}) => {
     switch (method) {
       case 'get':
         return await axios
-          .get(`http://localhost:5000${url}`, config())
+          .get(`https://htcapi.aiotechsoft.com${url}`, config())
           .then((res) => res.data)
 
       case 'post':
         return await axios
-          .post(`http://localhost:5000${url}`, obj, config())
+          .post(`https://htcapi.aiotechsoft.com${url}`, obj, config())
           .then((res) => res.data)
 
       case 'put':
         return await axios
-          .put(`http://localhost:5000${url}`, obj, config())
+          .put(`https://htcapi.aiotechsoft.com${url}`, obj, config())
           .then((res) => res.data)
 
       case 'delete':
         return await axios
-          .delete(`http://localhost:5000${url}`, config())
+          .delete(`https://htcapi.aiotechsoft.com${url}`, config())
           .then((res) => res.data)
     }
   } catch (error) {

@@ -1,18 +1,19 @@
-import Navigation from './Navigation'
-import Footer from './Footer'
+import Navigation from "./Navigation";
+import Footer from "./Footer";
+import { Helmet } from 'react-helmet';
 
 export default function Layout({ children }) {
   return (
     <>
-      {/* <Helmet>
-        <title>NEXT.js Boilerplate</title>
-        <meta property='og:title' content='NEXT.js Boilerplate' key='title' />
-      </Helmet> */}
-      <Navigation />
-      <main className='container py-2' style={{ minHeight: '70vh' }}>
-        {children}
-      </main>
+      <Helmet>
+        <title>HTC Accounting</title>
+        <meta property='og:title' content='HTC Accounting' key='title' />
+      </Helmet>
+      <header className="bg-white shadow-sm relative z-10">
+        <Navigation />
+      </header>
+      <main className="main-container">{children}</main>
       <Footer />
     </>
-  )
+  );
 }

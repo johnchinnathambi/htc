@@ -3,15 +3,16 @@ export const inputText = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <input
         {...register(name, isRequired && { required: `${label} is required` })}
         type='text'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+
       />
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -22,15 +23,16 @@ export const inputTel = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <input
         {...register(name, isRequired && { required: `${label} is required` })}
         type='tel'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+
       />
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -41,17 +43,18 @@ export const inputTextArea = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <textarea
         rows='5'
         cols='30'
         {...register(name, isRequired && { required: `${label} is required` })}
         type='text'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+
       />
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -62,15 +65,16 @@ export const inputNumber = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <input
         {...register(name, isRequired && { required: `${label} is required` })}
         type='number'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+
       />
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -80,8 +84,8 @@ export const inputEmail = (args) => {
   const { register, placeholder, errors, label, name } = args
 
   return (
-    <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+    <div className='mb-4'>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <input
         {...register(name, {
           required: `${label} is required`,
@@ -92,10 +96,10 @@ export const inputEmail = (args) => {
         })}
         type='email'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
       />
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -116,27 +120,27 @@ export const inputPassword = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <input
         {...register(name, {
           required: isRequired ? `${label} is required` : null,
           minLength: minLength
             ? {
-                value: 6,
-                message: 'Password must have at least 6 characters',
-              }
+              value: 6,
+              message: 'Password must have at least 6 characters',
+            }
             : null,
           validate: validate
             ? (value) =>
-                value === watch().password || 'The passwords do not match'
+              value === watch().password || 'The passwords do not match'
             : null,
         })}
         type='password'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
       />
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -156,12 +160,12 @@ export const dynamicInputSelect = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <select
         {...register(name, isRequired && { required: `${label} is required` })}
         type='text'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
       >
         <option value=''>-------</option>
         {data &&
@@ -172,7 +176,7 @@ export const dynamicInputSelect = (args) => {
           ))}
       </select>
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -191,12 +195,12 @@ export const staticInputSelect = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <select
         {...register(name, isRequired && { required: `${label} is required` })}
         type='text'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
       >
         <option value=''>-------</option>
         {data &&
@@ -207,7 +211,7 @@ export const staticInputSelect = (args) => {
           ))}
       </select>
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -233,7 +237,7 @@ export const inputCheckBox = (args) => {
         </label>
       </div>
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -270,7 +274,7 @@ export const inputMultipleCheckBox = (args) => {
           ))}
       </div>
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -289,17 +293,18 @@ export const inputFile = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <input
         {...register(name, isRequired && { required: `${label} is required` })}
         type='file'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+
         id='formFile'
         onChange={(e) => setFile(e.target.files[0])}
       />
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -310,15 +315,16 @@ export const inputDate = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <input
         {...register(name, isRequired && { required: `${label} is required` })}
         type='date'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+
       />
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -337,17 +343,18 @@ export const InputAutoCompleteSelect = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor='exampleDataList' className='form-label'>
+      <label className="block mb-1" htmlFor='dataList'>
         {label}
       </label>
       <input
         list='datalistOptions'
         autoComplete='off'
-        id='exampleDataList'
+        id='dataList'
         {...register(name, isRequired && { required: `${label} is required` })}
         type='text'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+
       />
       <datalist id='datalistOptions'>
         <option value=''>-------------</option>
@@ -360,7 +367,7 @@ export const InputAutoCompleteSelect = (args) => {
       </datalist>
 
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
@@ -379,14 +386,14 @@ export const dynamicInputSelectNumber = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor={name}>{label}</label>
+      <label className="block mb-1" htmlFor={name}>{label}</label>
       <select
         {...register(name, isRequired && { required: `${label} is required` })}
         type='text'
         placeholder={`${placeholder}`}
-        className='form-control'
+        className="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
       >
-        <option value=''>-------</option>
+        <option value='select'>Select</option>
 
         {[...Array(data).keys()].map((num) => (
           <option key={num + 1} value={num + 1}>
@@ -395,7 +402,7 @@ export const dynamicInputSelectNumber = (args) => {
         ))}
       </select>
       {errors && errors[name] && (
-        <span className='text-danger'>{errors[name].message}</span>
+        <span className='block text-sm text-red-600 pt-1'>{errors[name].message}</span>
       )}
     </div>
   )
