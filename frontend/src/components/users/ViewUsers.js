@@ -37,8 +37,22 @@ const ViewUsers = ({
         <thead className='border-0'>
           <tr>
             <th>Joined Date</th>
+            <th>Department</th>
+            <th>Designation</th>
             <th>Name</th>
             <th>Email</th>
+            {/* <th>Address 1</th>
+            <th>Address 2</th>
+            <th>Address 3</th>
+            <th>City</th>
+            <th>Pin Code</th>
+            <th>State</th>
+            <th>Mobile</th>
+            <th>PAN No.</th>
+            <th>PF No.</th>
+            <th>ESI No.</th>
+            <th>DOB</th>
+            <th>Salary Schedule Type</th>             */}
             <th>Confirmed</th>
             <th>Blocked</th>
             <th>Actions</th>
@@ -50,10 +64,24 @@ const ViewUsers = ({
             data.data.map((user) => (
               <tr key={user._id}>
                 <td>{moment(user.createdAt).format('lll')}</td>
+                <td>{user.department}</td>
+                <td>{user.designation}</td>
                 <td>{user.name}</td>
                 <td>
                   <a href={`mailto:${user.email}`}>{user.email}</a>
                 </td>
+                {/* <td>{user.address1}</td>
+                <td>{user.address2}</td>
+                <td>{user.address3}</td>
+                <td>{user.city}</td>
+                <td>{user.pincode}</td>
+                <td>{user.state}</td>
+                <td>{user.mobile}</td>
+                <td>{user.pan}</td>
+                <td>{user.pf}</td>
+                <td>{user.esi}</td>
+                <td>{user.dob}</td>
+                <td>{user.salaryscheduletype}</td> */}
                 <td>
                   {user.confirmed ? (
                     <FaCheckCircle className='text-success' />

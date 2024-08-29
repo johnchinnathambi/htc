@@ -51,7 +51,21 @@ export const postUser = async (req, res) => {
 
     await Profile.create({
       user: object._id,
+      department: object.department,
+      designation: object.designation,
       name: object.name,
+      address1: object.address1,
+      address2: object.address2,
+      address3: object.address3,
+      city: object.city,
+      pincode: object.pincode,
+      state: object.state,
+      mobile: object.mobile,
+      pan: object.pan,
+      pf: object.pf,
+      esi: object.esi,
+      dob: object.dob,
+      salaryscheduletype: object.salaryscheduletype,      
       image: `https://avatars.githubusercontent.com/u/3984336?v=4`,
     })
 
@@ -80,15 +94,32 @@ export const getUserById = async (req, res) => {
 
 export const putUser = async (req, res) => {
   try {
+
+    console.log("req.body", req.body);
+
     const { id } = req.params
-    const { name, confirmed, blocked, password, email } = req.body
+    const { department, designation, name, confirmed, blocked, password, email } = req.body
 
     const object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
+    object.department = department
+    object.designation = designation
     object.name = name
     object.email = email
+    object.address1 = address1
+    object.address2 = address2
+    object.address3 = address3
+    object.city = city
+    object.pincode = pincode
+    object.state = state
+    object.mobile = mobile
+    object.pan = pan
+    object.pf = pf
+    object.esi = esi
+    object.dob = dob
+    object.salaryscheduletype = salaryscheduletype
     object.confirmed = confirmed
     object.blocked = blocked
 
@@ -108,6 +139,7 @@ export const putUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
+    console.log(req.params)
     const { id } = req.params
     const object = await schemaName.findById(id)
 
@@ -120,8 +152,9 @@ export const deleteUser = async (req, res) => {
 
     const userRole = await UserRole.findOne({ user: object._id })
     userRole && (await userRole.remove())
-
+    
     await object.remove()
+    
     res.status(200).json({ message: `${schemaNameString} removed` })
   } catch (error) {
     res.status(500).json({ error: error.message })

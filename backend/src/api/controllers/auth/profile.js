@@ -20,6 +20,7 @@ export const getProfile = async (req, res) => {
 }
 
 export const postProfile = async (req, res) => {
+
   try {
     const { _id } = req.user
     const { name, address, phone, bio, image, password } = req.body
