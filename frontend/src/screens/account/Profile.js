@@ -202,7 +202,7 @@ const Profile = () => {
 
         <button
           type='submit'
-          className='btn btn-primary form-control'
+          className='text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center form-control'
           disabled={isLoadingPost || isLoadingUpload}
         >
           {isLoadingPost || isLoadingUpload ? (

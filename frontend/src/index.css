@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 body {
-  background-color: #f2f6fc;
   color: #2b2b2b;
   line-height: 1.5;
   font-size: 14px;
@@ -11,7 +10,61 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+input[type="checkbox"],
+input[type="radio"] {
+  border-width: 1px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  background-color: currentColor;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 12'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M1 5.917 5.724 10.5 15 1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 8px 8px;
+  background-position: 50%;
+  border-color: transparent;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+select:not([size]) {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 6'%3E%3Cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  padding-right: 32px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  -webkit-appearance: none;
+  appearance: none;
+}
 
 .table > :not(:first-child) {
   border-top: 0;
+}
+
+.progress {
+  animation: progress 1s infinite linear;
+}
+
+.left-right {
+  transform-origin: 0% 50%;
+}
+@keyframes progress {
+  0% {
+    transform: translateX(0) scaleX(0);
+  }
+  40% {
+    transform: translateX(0) scaleX(0.4);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.5);
+  }
 }
