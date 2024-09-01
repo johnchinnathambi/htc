@@ -53,7 +53,7 @@ const ViewRoles = ({
                 <td>
                   <div className='btn-group'>
                     <button
-                      className='btn btn-primary btn-sm rounded-pill'
+                      className='text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center btn-sm rounded-pill'
                       onClick={() => editHandler(role)}
                       data-bs-toggle='modal'
                       data-bs-target='#roleModal'

@@ -1,21 +1,25 @@
-import { Link, useNavigate } from "react-router-dom";
-import useAuthHook from "../api/auth";
-import { useMutation } from "react-query";
+import { Link } from "react-router-dom";
+// import useAuthHook from "../api/auth";
+// import { useMutation } from "react-query";
 import useAuth from "../hooks/useAuth";
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
+import { clsx } from "clsx";
 const Navigation = () => {
-  const navigate = useNavigate();
-  const { postLogout } = useAuthHook();
+  // const navigate = useNavigate();
+  // const { postLogout } = useAuthHook();
   const { auth } = useAuth();
 
-  const { mutateAsync } = useMutation(postLogout, {
-    onSuccess: () => navigate("/auth/login"),
-  });
+  // const { mutateAsync } = useMutation(postLogout, {
+  //   onSuccess: () => navigate("/auth/login"),
+  // });
 
-  const logoutHandler = () => {
-    mutateAsync({});
-  };
+  // const logoutHandler = () => {
+  //   mutateAsync({});
+  // };
 
   const userInfo = localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
@@ -23,17 +27,19 @@ const Navigation = () => {
 
   const guestItems = () => {
     return (
-      <>
-        <nav className="">
-          <div className="navbar-nav ms-auto">
-            <div className="nav-item">
-              <Link to="/auth/login" className="block font-medium py-1 px-3 rounded border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-200 ease" aria-current="page">
-                Login
-              </Link>
-            </div>
+      <nav className="">
+        <div className="navbar-nav ms-auto">
+          <div className="nav-item">
+            <Link
+              to="/auth/login"
+              className="block font-medium py-1 px-3 rounded border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-200 ease"
+              aria-current="page"
+            >
+              Login
+            </Link>
           </div>
-        </nav>
-      </>
+        </div>
+      </nav>
     );
   };
 
@@ -62,91 +68,233 @@ const Navigation = () => {
   const authItems = () => {
     return (
       <>
-        <nav>
-          <div className="py-2 flex items-center">
-            {menus() &&
-              menus().menuItems.map(
-                (menu) =>
-                  menu.menu === "normal" &&
-                  menu.auth === true && (
-                    <li key={menu._id}>
-                      <Link
-                        to={menu.path}
-                        className="p-2 block"
-                        aria-current="page"
-                      >
-                        {menu.name}
-                      </Link>
-                    </li>
-                  )
-              )}
+        {menus() &&
+          menus().menuItems.map(
+            (menu) =>
+              menu.menu === "normal" &&
+              menu.auth === true && (
+                <li key={menu._id}>
+                  <Link
+                    to={menu.path}
+                    className="group relative flex items-center gap-2 rounded px-4 py-2 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600 dark:bg-slate-600 bg-slate-600 text-slate-50 active"
+                    aria-current="page"
+                  >
+                    <span className="material-symbols-rounded">dashboard</span>
+                    <span>{menu.name}</span>
+                  </Link>
+                </li>
+              )
+          )}
 
-            {menus() &&
-              menus().uniqueDropdowns.map((item) => (
-                <Menu key={item}>
-                  <MenuButton className="p-2" >
-                    {item === "profile"
-                      ? user() && user().name
-                      : item.charAt(0).toUpperCase() + item.substring(1)}
-                  </MenuButton>
-                  <MenuItems anchor="bottom start" className="w-40 z-20 bg-white py-3 rounded shadow-md">
-                    {menus() &&
-                      menus().menuItems.map(
-                        (menu) =>
-                          menu.menu === item && (
-                            <MenuItem key={menu._id} className="data-[active]:bg-blue-200">
-                              <a className="block px-3 py-2 data-[focus]:bg-blue-50 cursor-pointer" to={menu.path}>
-                                {menu.name}
-                              </a>
-                            </MenuItem>
-                          )
+        {menus() &&
+          menus().uniqueDropdowns.map((item) => (
+            <Disclosure as="li" key={item}>
+              {({ open }) => (
+                <>
+                  <DisclosureButton className="group relative flex justify-between items-center gap-2 w-full rounded p-2 text-slate-200 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600">
+                    <span className="material-symbols-rounded">
+                      shield_person
+                    </span>
+                    <span>
+                      {item === "profile"
+                        ? user() && user().name
+                        : item.charAt(0).toUpperCase() + item.substring(1)}
+                    </span>
+                    <span
+                      className={clsx(
+                        "material-symbols-rounded ml-auto",
+                        open && "rotate-180"
                       )}
-                  </MenuItems>
-                </Menu>
-              ))}
-
-            <div className="nav-item">
-              <Link
-                to="/auth/login"
-                className="nav-link"
-                aria-current="page"
-                onClick={logoutHandler}
-              >
-                Logout
-              </Link>
-            </div>
-          </div>
-        </nav>
+                    >
+                      keyboard_arrow_down
+                    </span>
+                  </DisclosureButton>
+                  <DisclosurePanel>
+                    <ul className="pb-4 pt-2 flex flex-col pl-4 space-y-2">
+                      {menus() &&
+                        menus().menuItems.map(
+                          (menu) =>
+                            menu.menu === item && (
+                              <li key={menu._id}>
+                                <Link
+                                  to={menu.path}
+                                  className="group relative flex items-center gap-2 rounded-md pl-6 py-1 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                                >
+                                  {menu.name}
+                                </Link>
+                              </li>
+                            )
+                        )}
+                    </ul>
+                  </DisclosurePanel>
+                </>
+              )}
+            </Disclosure>
+          ))}
       </>
     );
   };
 
   return (
-    <nav className="flex justify-between items-center px-4 py-2">
-      <Link to="/">
-        <img
-          width="40"
-          height="40"
-          src="/htc.svg"
-          className="img-fluid"
-          alt="HTC"
-        />
-      </Link>
-      <div className="flex items-center">
-        <button
-          className="p-1 w-8 h-8 block sm:hidden"
-          type="button"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="material-symbols-rounded">menu</span>
-        </button>
-        <div className="hidden sm:block">
-          {userInfo ? authItems() : guestItems()}
-        </div>
+    <>
+      <div className="flex flex-col p-3">
+        <img src="/htc-white.svg" width="80" className="max-w-full" alt="HTC" />
       </div>
-    </nav>
+      <div className="no-scrollbar flex flex-col overflow-y-auto duration-200 ease-linear">
+        <nav className="mt-3 py-4 px-2">
+          <ul className="mb-6 flex flex-col gap-2">
+            {userInfo ? authItems() : guestItems()}
+
+            {/* <Disclosure as="li">
+                <DisclosureButton className="group relative flex justify-between items-center gap-2 rounded py-2 px-4 text-slate-200 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600">
+                  <span className="material-symbols-rounded">
+                    shield_person
+                  </span>
+                  <span>Administration</span>
+                  <span className="material-symbols-rounded ml-auto">
+                    keyboard_arrow_down
+                  </span>
+                </DisclosureButton>
+                <DisclosurePanel>
+                  <ul className="mb-3 flex flex-col pl-4 space-y-3">
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        State & City
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        Department & Designation
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        Unit & Unit Conversion
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        Service Type
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        Users
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        Company Branch
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        Channel Partner
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        Rights
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        Reset Password
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="group relative flex items-center gap-2 rounded-md pl-8 text-slate-200 duration-200 ease-in-out hover:text-blue-400"
+                        href="#"
+                      >
+                        Configuration
+                      </a>
+                    </li>
+                  </ul>
+                </DisclosurePanel>
+              </Disclosure>
+              <li>
+                <a
+                  className="group relative flex items-center gap-2 rounded py-2 px-4 text-slate-200 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600"
+                  href="/profile"
+                >
+                  <span className="material-symbols-rounded">business</span>
+                  <span>Company</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-current="page"
+                  className="group relative flex items-center gap-2 rounded py-2 px-4 text-slate-200 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600 active"
+                  href="/"
+                >
+                  <span className="material-symbols-rounded">
+                    manage_accounts
+                  </span>
+                  <span>Account</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-current="page"
+                  className="group relative flex items-center gap-2 rounded py-2 px-4 text-slate-200 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600 active"
+                  href="/"
+                >
+                  <span className="material-symbols-rounded">inventory_2</span>
+                  <span>Product</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-current="page"
+                  className="group relative flex items-center gap-2 rounded py-2 px-4 text-slate-200 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600 active"
+                  href="/"
+                >
+                  <span className="material-symbols-rounded">contract</span>
+                  <span>Transaction</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-current="page"
+                  className="group relative flex items-center gap-2 rounded py-2 px-4 text-slate-200 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600 active"
+                  href="/"
+                >
+                  <span className="material-symbols-rounded">analytics</span>
+                  <span>Reports</span>
+                </a>
+              </li> */}
+          </ul>
+        </nav>
+      </div>
+    </>
   );
 };
 

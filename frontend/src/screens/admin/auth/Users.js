@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet'
-import { confirmAlert } from 'react-confirm-alert'
-import { useForm } from 'react-hook-form'
-import useUsersHook from '../../../api/users'
+import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
+import { confirmAlert } from "react-confirm-alert";
+import { useForm } from "react-hook-form";
+import useUsersHook from "../../../api/users";
 import {
   Spinner,
   ViewUsers,
@@ -10,18 +10,25 @@ import {
   FormUsers,
   Message,
   Confirm,
-} from '../../../components'
+} from "../../../components";
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  DialogBackdrop,
+} from "@headlessui/react";
 
 const Users = () => {
-  const [page, setPage] = useState(1)
-  const [id, setId] = useState(null)
-  const [edit, setEdit] = useState(false)
-  const [q, setQ] = useState('')
+  const [page, setPage] = useState(1);
+  const [id, setId] = useState(null);
+  const [edit, setEdit] = useState(false);
+  const [q, setQ] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { getUsers, postUser, updateUser, deleteUser } = useUsersHook({
     page,
     q,
-  })
+  });
 
   const {
     register,
@@ -35,9 +42,9 @@ const Users = () => {
       confirmed: true,
       blocked: false,
     },
-  })
+  });
 
-  const { data, isLoading, isError, error, refetch } = getUsers
+  const { data, isLoading, isError, error, refetch } = getUsers;
 
   const {
     isLoading: isLoadingUpdate,
@@ -45,7 +52,7 @@ const Users = () => {
     error: errorUpdate,
     isSuccess: isSuccessUpdate,
     mutateAsync: mutateAsyncUpdate,
-  } = updateUser
+  } = updateUser;
 
   const {
     isLoading: isLoadingDelete,
@@ -53,7 +60,7 @@ const Users = () => {
     error: errorDelete,
     isSuccess: isSuccessDelete,
     mutateAsync: mutateAsyncDelete,
-  } = deleteUser
+  } = deleteUser;
 
   const {
     isLoading: isLoadingPost,
@@ -61,34 +68,34 @@ const Users = () => {
     error: errorPost,
     isSuccess: isSuccessPost,
     mutateAsync: mutateAsyncPost,
-  } = postUser
+  } = postUser;
 
   const formCleanHandler = () => {
-    setEdit(false)
-    reset()
-  }
+    setEdit(false);
+    reset();
+  };
 
   useEffect(() => {
-    if (isSuccessPost || isSuccessUpdate) formCleanHandler()
-  }, [isSuccessPost, isSuccessUpdate])
+    if (isSuccessPost || isSuccessUpdate) formCleanHandler();
+  }, [isSuccessPost, isSuccessUpdate]);
 
   useEffect(() => {
-    refetch()
-  }, [page])
+    refetch();
+  }, [page]);
 
   useEffect(() => {
-    if (!q) refetch()
-  }, [q])
+    if (!q) refetch();
+  }, [q]);
 
   const searchHandler = (e) => {
-    e.preventDefault()
-    refetch()
-    setPage(1)
-  }
+    e.preventDefault();
+    refetch();
+    setPage(1);
+  };
 
   const deleteHandler = (id) => {
-    confirmAlert(Confirm(() => mutateAsyncDelete(id)))
-  }
+    confirmAlert(Confirm(() => mutateAsyncDelete(id)));
+  };
 
   const submitHandler = (data) => {
     edit
@@ -108,80 +115,109 @@ const Users = () => {
           pf: data.pf,
           esi: data.esi,
           dob: data.dob,
-          salaryscheduletype: data.salaryscheduletype, 
+          salaryscheduletype: data.salaryscheduletype,
           email: data.email,
           confirmed: data.confirmed,
           blocked: data.blocked,
           password: data.password,
         })
-      : mutateAsyncPost(data)
-  }
+      : mutateAsyncPost(data);
+  };
 
   const editHandler = (user) => {
-    setId(user._id)
-    setEdit(true)
-    setValue('department', user.department)
-    setValue('designation', user.designation)
-    setValue('name', user.name)
-    setValue('address1', user.address1)
-    setValue('address2', user.address2)
-    setValue('address3', user.address3)
-    setValue('city', user.city)
-    setValue('pincode', user.pincode)
-    setValue('state', user.state)
-    setValue('mobile', user.mobile)
-    setValue('pan', user.pan)
-    setValue('pf', user.pf)
-    setValue('esi', user.esi)
-    setValue('dob', user.dob)
-    setValue('salaryscheduletype', user.salaryscheduletype)
-    setValue('email', user.email)
-    setValue('confirmed', user.confirmed)
-    setValue('blocked', user.blocked)
-  }
+    setId(user._id);
+    setEdit(true);
+    setValue("department", user.department);
+    setValue("designation", user.designation);
+    setValue("name", user.name);
+    setValue("address1", user.address1);
+    setValue("address2", user.address2);
+    setValue("address3", user.address3);
+    setValue("city", user.city);
+    setValue("pincode", user.pincode);
+    setValue("state", user.state);
+    setValue("mobile", user.mobile);
+    setValue("pan", user.pan);
+    setValue("pf", user.pf);
+    setValue("esi", user.esi);
+    setValue("dob", user.dob);
+    setValue("salaryscheduletype", user.salaryscheduletype);
+    setValue("email", user.email);
+    setValue("confirmed", user.confirmed);
+    setValue("blocked", user.blocked);
+  };
 
   return (
     <>
       <Helmet>
-        <title>Users</title>
-        <meta property='og:title' content='Users' key='title' />
+        <title>Users | HTC</title>
+        <meta property="og:title" content="Users" key="title" />
       </Helmet>
       {isSuccessDelete && (
-        <Message variant='success'>User has been deleted successfully.</Message>
+        <Message variant="success">User has been deleted successfully.</Message>
       )}
-      {isErrorDelete && <Message variant='danger'>{errorDelete}</Message>}
+      {isErrorDelete && <Message variant="danger">{errorDelete}</Message>}
       {isSuccessUpdate && (
-        <Message variant='success'>User has been updated successfully.</Message>
+        <Message variant="success">User has been updated successfully.</Message>
       )}
-      {isErrorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+      {isErrorUpdate && <Message variant="danger">{errorUpdate}</Message>}
       {isSuccessPost && (
-        <Message variant='success'>User has been Created successfully.</Message>
+        <Message variant="success">User has been created successfully.</Message>
       )}
-      {isErrorPost && <Message variant='danger'>{errorPost}</Message>}
+      {isErrorPost && <Message variant="danger">{errorPost}</Message>}
 
-      <FormUsers
-        edit={edit}
-        formCleanHandler={formCleanHandler}
-        isLoading={isLoading}
-        isError={isError}
-        errors={errors}
-        isLoadingUpdate={isLoadingUpdate}
-        isLoadingPost={isLoadingPost}
-        register={register}
-        handleSubmit={handleSubmit}
-        submitHandler={submitHandler}
-        watch={watch}
-        error={error}
-      />
+      <Dialog
+        open={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        transition
+        className="realtive z-[1000] transition duration-100 ease-linear data-[closed]:opacity-0"
+      >
+        <div className="fixed z-[1000] inset-0 flex w-screen justify-end p-4">
+          <DialogPanel className="max-w-[800px] w-full flex flex-col rounded-xl shadow-sm bg-white">
+            <DialogTitle
+              className="flex justify-between items-center py-4 px-6"
+              as="div"
+            >
+              <h3 className="text-2xl font-bold">
+                {edit ? "Edit User" : "Add User"}
+              </h3>
 
-      <div className='ms-auto text-end'>
-        <Pagination data={data} setPage={setPage} />
-      </div>
+              <button
+                type="button"
+                className="inline-flex text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-600 focus-visible:ring-4 transition duration-150 ease-linear p-2"
+                aria-label="Close"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <span className="material-symbols-rounded">close</span>
+              </button>
+            </DialogTitle>
+            <div className="flex-1 overflow-auto py-4 px-6">
+              <FormUsers
+                edit={edit}
+                formCleanHandler={formCleanHandler}
+                isLoading={isLoading}
+                isError={isError}
+                errors={errors}
+                isLoadingUpdate={isLoadingUpdate}
+                isLoadingPost={isLoadingPost}
+                register={register}
+                handleSubmit={handleSubmit}
+                submitHandler={submitHandler}
+                watch={watch}
+                error={error}
+              />
+            </div>
+          </DialogPanel>
+        </div>
+        <DialogBackdrop className="fixed z-[999] inset-0 bg-black/30" />
+      </Dialog>
 
       {isLoading ? (
         <Spinner />
       ) : isError ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         <ViewUsers
           data={data}
@@ -190,11 +226,16 @@ const Users = () => {
           isLoadingDelete={isLoadingDelete}
           setQ={setQ}
           q={q}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
           searchHandler={searchHandler}
         />
       )}
+      <div className="my-3">
+        <Pagination data={data} setPage={setPage} />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Users
+export default Users;

@@ -14,8 +14,10 @@ import Pagination from './Pagination'
 import Message from './Message'
 import { Confirm } from './Confirm'
 import Layout from './Layout'
+import AuthLayout from './AuthLayout'
 import FormContainer from './FormContainer'
 import Search from './Search'
+import Header from './Header'
 import Footer from './Footer'
 
 export {
@@ -35,7 +37,9 @@ export {
   Message,
   Confirm,
   Layout,
+  AuthLayout,
   FormContainer,
   Search,
+  Header,
   Footer,
 }
