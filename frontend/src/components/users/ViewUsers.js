@@ -11,14 +11,13 @@ const ViewUsers = ({
   q,
   searchHandler,
 }) => {
-
   return (
     <>
-      <div className="flex items-center justify-between">
-        <h2 className="font-bold text-2xl text-gray-800 my-3">
+      <div className="flex flex-wrap items-center justify-between mb-3">
+        <h2 className="font-bold text-2xl text-gray-800 my-1">
           Users ({data && data.total})
         </h2>
-        <div className="mb-3 flex gap-5">
+        <div className="flex flex-wrap gap-3">
           <Search
             placeholder="Search by email"
             setQ={setQ}

@@ -8,7 +8,7 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { clsx } from "clsx";
-const Navigation = () => {
+const Navigation = ({ toggleSidebar }) => {
   // const navigate = useNavigate();
   // const { postLogout } = useAuthHook();
   const { auth } = useAuth();
@@ -91,7 +91,7 @@ const Navigation = () => {
             <Disclosure as="li" key={item}>
               {({ open }) => (
                 <>
-                  <DisclosureButton className="group relative flex justify-between items-center gap-2 w-full rounded p-2 text-slate-200 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600">
+                  <DisclosureButton className="group relative flex justify-between items-center gap-2 w-full rounded p-2 text-slate-200 duration-200 ease-in-out hover:bg-slate-700 dark:hover:bg-slate-600 data-[open]:bg-slate-700">
                     <span className="material-symbols-rounded">
                       shield_person
                     </span>
@@ -137,8 +137,16 @@ const Navigation = () => {
 
   return (
     <>
-      <div className="flex flex-col p-3">
+      <div className="flex justify-between p-3">
         <img src="/htc-white.svg" width="80" className="max-w-full" alt="HTC" />
+        <button
+          type="button"
+          className="inline-flex lg:hidden text-gray-400 rounded-full hover:text-gray-200 focus-visible:ring-4 transition duration-150 ease-linear p-2"
+          aria-label="Close"
+          onClick={toggleSidebar}
+        >
+          <span className="material-symbols-rounded">close</span>
+        </button>
       </div>
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-200 ease-linear">
         <nav className="mt-3 py-4 px-2">

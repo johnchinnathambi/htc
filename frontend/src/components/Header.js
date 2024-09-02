@@ -4,7 +4,7 @@ import useAuthHook from "../api/auth";
 import { useMutation } from "react-query";
 import useAuth from "../hooks/useAuth";
 
-const Header = () => {
+const Header = ({ toggleSidebar, isSidebarOpen }) => {
   const navigate = useNavigate();
   const { postLogout } = useAuthHook();
 
@@ -26,24 +26,24 @@ const Header = () => {
   return (
     <div className="flex flex-grow items-center justify-between px-4 py-2 shadow">
       <button
-        className="p-1 w-8 h-8 block sm:hidden"
+        className="p-1 w-8 h-8 block lg:hidden"
         type="button"
-        aria-controls="navbarNav"
-        aria-expanded="false"
+        aria-expanded={isSidebarOpen ? 'true' : 'false'}
         aria-label="Toggle navigation"
+        onClick={toggleSidebar}
       >
         <span className="material-symbols-rounded">menu</span>
       </button>
       <div className="hidden sm:block">
         <form action="" method="POST">
           <div className="relative">
-            <button className="absolute left-0 top-1/2 w-6 h-6 -translate-y-1/2 text-slate-500">
+            <button className="absolute left-2 lg:left-0 top-1/2 w-6 h-6 -translate-y-1/2 text-slate-500">
               <span className="material-symbols-rounded">search</span>
             </button>
             <input
               type="text"
               placeholder="Search User, Company and more"
-              className="w-full bg-transparent pl-9 pr-4 text-slate-800 focus:outline-none dark:text-white xl:w-125"
+              className="w-full bg-gray-100 lg:bg-transparent pl-9 pr-4 py-2 text-slate-800 rounded-md focus:outline-none dark:text-white xl:w-125"
             />
           </div>
         </form>

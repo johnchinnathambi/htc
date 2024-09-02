@@ -1,15 +1,13 @@
-import LoadingIcons from 'react-loading-icons'
-
 export const Spinner = (props) => {
-  const { height = '3em', stroke = '#06bcee' } = props
+  const { height = "1", stroke = "bg-blue-500" } = props;
   return (
-    <div className='text-center'>
-      <LoadingIcons.ThreeDots
-        stroke={stroke}
-        height={height}
-        fill='transparent'
-      />
-      <p style={{ color: '#06bcee' }}>Loading...</p>
+    <div className="w-full top-0 left-0 z-[999]">
+      <div className={`h-${height} w-full bg-blue-100 overflow-hidden`}>
+        <span className="sr-only">Loading...</span>
+        <div
+          className={`animate-progress w-full h-full origin-left-right ${stroke}`}
+        ></div>
+      </div>
     </div>
-  )
-}
+  );
+};

@@ -3,8 +3,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet";
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
+import { Spinner } from "../components";
 
 export default function Layout() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
     <>
       <Helmet>
@@ -12,14 +18,19 @@ export default function Layout() {
         <meta property="og:title" content="HTC Accounting" key="title" />
       </Helmet>
       <div className="flex min-h-screen relative w-full">
-        <div className="main-sidebar w-72 fixed left-0 top-0 z-[999] min-w-0">
-          <aside className="flex h-screen w-full flex-col overflow-y-hidden bg-slate-800 duration-100 ease-linear dark:bg-slate-900 lg:static lg:translate-x-0 -translate-x-full">
-            <Navigation />
+        <div
+          className={`main-sidebar w-72 fixed left-0 top-0 z-[999] min-w-0 duration-100 ease-linear lg:translate-x-0 ${
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <aside className="flex h-screen w-full flex-col overflow-y-hidden bg-slate-800 dark:bg-slate-900">
+            <Navigation toggleSidebar={toggleSidebar} />
           </aside>
         </div>
-        <div className="main-wrapper flex flex-col w-full ml-72">
-          <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
-            <Header />
+        <div className="main-wrapper flex flex-col w-full lg:ml-72">
+          <header className="sticky top-0 z-[990] flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
+            <Header toggleSidebar={toggleSidebar} />
+            <Spinner />
           </header>
           <main className="main-container p-4 min-w-0">
             <Outlet />
