@@ -19,6 +19,7 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
 
   const user = () => {
     const userInfo = auth?.userInfo;
+    console.log(userInfo);
 
     return userInfo;
   };
@@ -28,7 +29,7 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
       <button
         className="p-1 w-8 h-8 block lg:hidden"
         type="button"
-        aria-expanded={isSidebarOpen ? 'true' : 'false'}
+        aria-expanded={isSidebarOpen ? "true" : "false"}
         aria-label="Toggle navigation"
         onClick={toggleSidebar}
       >
@@ -53,7 +54,7 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
           <MenuButton className="flex items-center gap-4">
             <span className="hidden text-right lg:block">
               <span className="block text-sm font-medium text-black dark:text-white">
-                {user().name}
+                {user && user.name ? user().name : "Guest"}
               </span>
               <span className="block text-xs">Admin</span>
             </span>

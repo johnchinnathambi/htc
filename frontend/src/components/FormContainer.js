@@ -1,6 +1,6 @@
 const FormContainer = ({ children }) => {
   return (
-    <div className="w-full max-w-[600px]">{children}</div>
+    <div className="w-full max-w-[450px]">{children}</div>
   );
 };
 

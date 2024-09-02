@@ -39,7 +39,7 @@ const ForgotPassword = () => {
         <title>Forgot</title>
         <meta property="og:title" content="Forgot" key="title" />
       </Helmet>
-      <div className="bg-blue-100">
+      <div className="bg-blue-50">
         <div className="grid grid-cols-12 lg:h-screen dark:bg-darkgray relative z-[999]">
           <div className="xl:col-span-7 lg:col-span-6 col-span-12 px-8 xl:px-20 justify-start pt-8 md:pt-[50px] lg:pt[100px] pb-8 flex flex-col relative overflow-hidden bg-gradient-to-b from-green-100 to-sky-100">
             <div className="mb-10">
@@ -57,13 +57,13 @@ const ForgotPassword = () => {
               alt=""
             />
           </div>
-          <div className="xl:col-span-5 lg:col-span-6 col-span-12 flex flex-col justify-center items-center pt-8 md:pt-10 lg:pt[100px] pb-8 lg:h-screen sm:px-12 px-4 relative z-10 bg-white xl:dark:bg-darkgray bg-transparent">
+          <div className="xl:col-span-5 lg:col-span-6 col-span-12 flex flex-col justify-center items-center pt-8 md:pt-10 lg:pt[100px] pb-8 lg:h-screen sm:px-12 px-4 relative z-10 bg-white xl:dark:bg-darkgray">
             <FormContainer>
               <h3 className="text-gray-900 font-medium text-lg lg:text-xl 2xl:text-3xl mb-2 text-center">
-                Sign in
+                Forgot Password?
               </h3>
               <p className="text-gray-900 text-sm lg:text-base 2xl:text-lg 2xl:font-medium mb-5 text-center">
-                to start using HTC Accounting
+                Enter your registered email id to reset password
               </p>
               {isSuccess && (
                 <Message variant="success">
