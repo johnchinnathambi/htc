@@ -108,10 +108,13 @@ const ViewUsers = ({
                   </td>
 
                   <td className="p-2">
-                    <div className="btn-group">
+                    <div className="flex gap-2">
                       <button
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
-                        onClick={() => editHandler(user)}
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          editHandler(user);
+                        }}
                       >
                         <span className="material-symbols-rounded ">edit</span>
                       </button>

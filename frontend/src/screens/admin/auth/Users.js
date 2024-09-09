@@ -206,7 +206,7 @@ const Users = () => {
                 type="button"
                 className="inline-flex text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-600 focus-visible:ring-4 transition duration-150 ease-linear p-2"
                 aria-label="Close"
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => {setIsModalOpen(false); formCleanHandler()}}
               >
                 <span className="material-symbols-rounded">close</span>
               </button>
@@ -223,6 +223,7 @@ const Users = () => {
                 register={register}
                 handleSubmit={handleSubmit}
                 submitHandler={submitHandler}
+                setIsModalOpen={setIsModalOpen}
                 watch={watch}
                 error={error}
               />

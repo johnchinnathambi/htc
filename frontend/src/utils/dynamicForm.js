@@ -312,7 +312,7 @@ export const inputMultipleCheckBox = (args) => {
       <div className="mb-3">
         {data &&
           data.map((d) => (
-            <div key={d._id} className="flex flex-col items-center mb-4">
+            <div key={d._id} className="inline-flex w-1/2 items-center mb-4">
               <input
                 {...register(
                   name,

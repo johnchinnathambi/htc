@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import { Helmet } from "react-helmet";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
-import { Spinner } from "../components";
+// import { Spinner } from "../components";
 
 export default function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -30,10 +30,10 @@ export default function Layout() {
         <div className="main-wrapper flex flex-col w-full lg:ml-72">
           <header className="sticky top-0 z-[990] flex flex-col w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
             <Header toggleSidebar={toggleSidebar} />
-            <Spinner />
+            {/* <Spinner /> */}
           </header>
           <main className="main-container p-4 min-w-0">
-            <Outlet />
+              <Outlet />
           </main>
         </div>
       </div>
