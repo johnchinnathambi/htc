@@ -12,7 +12,7 @@ import {
 
 export const FormUsers = ({
   // edit,
-  // formCleanHandler,
+  formCleanHandler,
   isLoading,
   register,
   isError,
@@ -23,6 +23,7 @@ export const FormUsers = ({
   handleSubmit,
   submitHandler,
   error,
+  setIsModalOpen,
 }) => {
   return (
     <>
@@ -217,38 +218,18 @@ export const FormUsers = ({
                 <span>Save</span>
               )}
             </button>
+            <button
+              type="button"
+              className="px-4 py-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 active:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none "
+              onClick={() => {
+                setIsModalOpen(false);
+                formCleanHandler();
+              }}
+            >
+              Cancel
+            </button>
           </div>
         </form>
-
-        // <div
-        //   className='modal fade'
-        //   id='userModal'
-        //   data-bs-backdrop='static'
-        //   data-bs-keyboard='false'
-        //   tabIndex='-1'
-        //   aria-labelledby='userModalLabel'
-        //   aria-hidden='true'>
-        //
-        //   <div className='modal-dialog'>
-        //     <div className='modal-content modal-background'>
-        //       <div className='modal-header'>
-        //         <h3 className='modal-title ' id='userModalLabel'>
-        //           {edit ? 'Edit User' : 'Add User'}
-        //         </h3>
-        //         <button
-        //           type='button'
-        //           className='btn-close'
-        //           data-bs-dismiss='modal'
-        //           aria-label='Close'
-        //           onClick={formCleanHandler}
-        //         ></button>
-        //       </div>
-        //       <div className='modal-body'>
-
-        //       </div>
-        //     </div>
-        //   </div>
-        // </div>
       )}
     </>
   );

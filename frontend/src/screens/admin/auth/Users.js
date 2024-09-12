@@ -4,7 +4,6 @@ import { confirmAlert } from "react-confirm-alert";
 import { useForm } from "react-hook-form";
 import useUsersHook from "../../../api/users";
 import {
-  Spinner,
   ViewUsers,
   Pagination,
   FormUsers,
@@ -166,6 +165,25 @@ const Users = () => {
       )}
       {isErrorPost && <Message variant="danger">{errorPost}</Message>}
 
+      {isError ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <ViewUsers
+          data={data}
+          editHandler={editHandler}
+          deleteHandler={deleteHandler}
+          isLoadingDelete={isLoadingDelete}
+          setQ={setQ}
+          q={q}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          searchHandler={searchHandler}
+        />
+      )}
+      <div className="my-3">
+        <Pagination data={data} setPage={setPage} />
+      </div>
+
       <Dialog
         open={isModalOpen}
         onClose={() => {
@@ -188,7 +206,7 @@ const Users = () => {
                 type="button"
                 className="inline-flex text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-600 focus-visible:ring-4 transition duration-150 ease-linear p-2"
                 aria-label="Close"
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => {setIsModalOpen(false); formCleanHandler()}}
               >
                 <span className="material-symbols-rounded">close</span>
               </button>
@@ -205,6 +223,7 @@ const Users = () => {
                 register={register}
                 handleSubmit={handleSubmit}
                 submitHandler={submitHandler}
+                setIsModalOpen={setIsModalOpen}
                 watch={watch}
                 error={error}
               />
@@ -213,27 +232,6 @@ const Users = () => {
         </div>
         <DialogBackdrop className="fixed z-[999] inset-0 bg-black/30" />
       </Dialog>
-
-      {isLoading ? (
-        <Spinner />
-      ) : isError ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <ViewUsers
-          data={data}
-          editHandler={editHandler}
-          deleteHandler={deleteHandler}
-          isLoadingDelete={isLoadingDelete}
-          setQ={setQ}
-          q={q}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          searchHandler={searchHandler}
-        />
-      )}
-      <div className="my-3">
-        <Pagination data={data} setPage={setPage} />
-      </div>
     </>
   );
 };

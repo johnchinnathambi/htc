@@ -1,29 +1,32 @@
-import 'react-confirm-alert/src/react-confirm-alert.css'
-import { FaTrash } from 'react-icons/fa'
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export const Confirm = (action) => {
   return {
     customUI: ({ onClose }) => {
       return (
-        <div className='px-5 py-3 shadow-lg text-center text-dark'>
-          <h1>Are you sure?</h1>
-          <p>You want to delete this?</p>
-          <div className='btn-group d-flex justify-content-between'>
-            <button className='btn btn-outline-dark bg-sm' onClick={onClose}>
-              No
+        <div className="p-4 shadow-lg rounded-xl text-gray-800 bg-white">
+          <h4 className="text-xl font-bold mb-3">Delete?</h4>
+          <p className="pb-3">This action cannot be reversed.</p>
+          <div className="flex items-center justify-end gap-3 mt-3">
+            <button
+              className="px-4 py-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 active:bg-gray-50"
+              onClick={onClose}
+            >
+              No, Keep it
             </button>
             <button
-              className='btn btn-outline-danger bg-sm ml-1'
+              className="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center "
               onClick={() => {
-                action()
-                onClose()
+                action();
+                onClose();
               }}
             >
-              <FaTrash className='mb-1' /> Yes, Delete it!
+              <span className="material-symbols-rounded">delete</span>
+              <span className="ml-3">Yes, Delete it!</span>
             </button>
           </div>
         </div>
-      )
+      );
     },
-  }
-}
+  };
+};

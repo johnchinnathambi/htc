@@ -68,3 +68,9 @@ select:not([size]) {
     transform: translateX(100%) scaleX(0.5);
   }
 }
+.react-confirm-alert-overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(3px);
+  z-index: 1000 !important;
+}

@@ -11,14 +11,13 @@ const ViewUsers = ({
   q,
   searchHandler,
 }) => {
-
   return (
     <>
-      <div className="flex items-center justify-between">
-        <h2 className="font-bold text-2xl text-gray-800 my-3">
+      <div className="flex flex-wrap items-center justify-between mb-3">
+        <h2 className="font-bold text-2xl text-gray-800 my-1">
           Users ({data && data.total})
         </h2>
-        <div className="mb-3 flex gap-5">
+        <div className="flex flex-wrap gap-3">
           <Search
             placeholder="Search by email"
             setQ={setQ}
@@ -109,10 +108,13 @@ const ViewUsers = ({
                   </td>
 
                   <td className="p-2">
-                    <div className="btn-group">
+                    <div className="flex gap-2">
                       <button
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
-                        onClick={() => editHandler(user)}
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          editHandler(user);
+                        }}
                       >
                         <span className="material-symbols-rounded ">edit</span>
                       </button>
