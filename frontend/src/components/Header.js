@@ -2,7 +2,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthHook from "../api/auth";
 import { useMutation } from "react-query";
-import useAuth from "../hooks/useAuth";
+//import useAuth from "../hooks/useAuth";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -15,13 +15,13 @@ const Header = () => {
   const logoutHandler = () => {
     mutateAsync({});
   };
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
 
-  const user = () => {
-    const userInfo = auth?.userInfo;
+  // const user = () => {
+  //   const userInfo = auth?.userInfo;
 
-    return userInfo;
-  };
+  //   return userInfo;
+  // };
 
   return (
     <div className="flex flex-grow items-center justify-between px-4 py-2 shadow">
@@ -53,7 +53,7 @@ const Header = () => {
           <MenuButton className="flex items-center gap-4">
             <span className="hidden text-right lg:block">
               <span className="block text-sm font-medium text-black dark:text-white">
-                {user().name}
+                {/* {user().name} */}
               </span>
               <span className="block text-xs">Admin</span>
             </span>

@@ -7,6 +7,18 @@ import {
   deletePermission,
 } from '../controllers/auth/permissions.js'
 import {
+  getStates,
+  postState,
+  putState,
+  deleteState,
+} from '../controllers/auth/states.js'
+import {
+  getCities,
+  postCity,
+  putCity,
+  deleteCity,
+} from '../controllers/auth/cities.js'
+import {
   deleteRole,
   getRoles,
   postRole,
@@ -65,6 +77,27 @@ router
   .route('/api/auth/permissions/:id')
   .put(isAuth, putPermission)
   .delete(isAuth, deletePermission)
+
+
+// state
+router
+  .route('/api/auth/states')
+  .get(isAuth, getStates)
+  .post(isAuth, postState)
+router
+  .route('/api/auth/states/:id')
+  .put(isAuth, putState)
+  .delete(isAuth, deleteState)
+
+// city
+router
+  .route('/api/auth/cities')
+  .get(isAuth, getCities)
+  .post(isAuth, postCity)
+router
+  .route('/api/auth/cities/:id')
+  .put(isAuth, putCity)
+  .delete(isAuth, deleteCity)  
 
 // roles
 router.route('/api/auth/roles').get(isAuth, getRoles).post(isAuth, postRole)
