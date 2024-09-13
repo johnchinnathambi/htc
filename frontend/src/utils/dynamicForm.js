@@ -217,7 +217,7 @@ export const dynamicInputSelect = (args) => {
         placeholder={`${placeholder}`}
         className="block w-full rounded-md border-0 py-2 px-3 text-gray-800 focus:shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 focus:outline-none sm:text-sm sm:leading-6"
       >
-        <option value="">-------</option>
+        <option value="">Select {label}</option>
         {data &&
           data.map((d) => (
             <option key={d._id} value={d._id}>
@@ -256,7 +256,7 @@ export const staticInputSelect = (args) => {
         placeholder={`${placeholder}`}
         className="block w-full rounded-md border-0 py-2 px-3 text-gray-800 focus:shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 focus:outline-none sm:text-sm sm:leading-6"
       >
-        <option value="">-------</option>
+        <option value="">Select {label}</option>
         {data &&
           data.map((d) => (
             <option key={d.name} value={d.name}>

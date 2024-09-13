@@ -2,7 +2,10 @@ import mongoose from 'mongoose'
 
 const CityScheme = mongoose.Schema(
   {
-    name: { type: String, required: true },
+    stateID: { type: String, required: true },
+    cityID: { type: String, required: true },
+    cityName: { type: String, required: true },
+    cityShortName: { type: String, required: true },
   },
   { timestamps: true }
 )

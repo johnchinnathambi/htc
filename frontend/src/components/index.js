@@ -2,8 +2,8 @@ import ViewUsers from './users/ViewUsers'
 import FormUsers from './users/FormUsers'
 import ViewPermissions from './permissions/ViewPermissions'
 import FormPermissions from './permissions/FormPermissions'
-import ViewCityState from './city-state/ViewCityState'
-import FormCityState from './city-state/FormCityState'
+import ViewCityStates from './city-states/ViewCityStates'
+import FormCityStates from './city-states/FormCityStates'
 import ViewClientPermissions from './client-permissions/ViewClientPermissions'
 import FormClientPermissions from './client-permissions/FormClientPermissions'
 import ViewUserRoles from './user-roles/ViewUserRoles'
@@ -27,8 +27,8 @@ export {
   FormUsers,
   ViewPermissions,
   FormPermissions,
-  ViewCityState,
-  FormCityState,
+  ViewCityStates,
+  FormCityStates,
   ViewClientPermissions,
   FormClientPermissions,
   ViewRoles,

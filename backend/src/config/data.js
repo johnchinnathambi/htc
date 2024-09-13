@@ -303,20 +303,32 @@
 
 const states = [
   {
-    name: 'dfdfdfdfdf',
+    stateID: 'ST01',
+    stateName: 'Tamilnadu',
+    stateShortName: 'TN',
+    stateGSTCode: '33',
   },
-  {    
-    name: 'gdfgdgfdfdf',
+  {
+    stateID: 'ST02',
+    stateName: 'Kerala',
+    stateShortName: 'KL',
+    stateGSTCode: '34',
   }  
 ]
 
 const cities = [
   {
-    name: 'dfdfdfdfdf',
+    stateID: 'ST01',
+    cityID: 'CT01',
+    cityName: 'Chennai',
+    cityShortName: 'CHN',
   },
-  {    
-    name: 'gdfgdgfdfdf',
-  }  
+  {
+    stateID: 'ST01',
+    cityID: 'CT02',
+    cityName: 'Madurai',
+    cityShortName: 'MDU',
+  }, 
 ]
 
 // export { roles, users, profile, permissions, clientPermissions, cityStates }

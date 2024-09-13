@@ -4,7 +4,7 @@ import { FormContainer, Message } from "../../components";
 import { useForm } from "react-hook-form";
 import useAuthHook from "../../api/auth";
 import useUserRolesHook from "../../api/userRoles";
-import { inputEmail, inputPassword } from "../../utils/dynamicForm";
+import { inputEmail, inputPassword, staticInputSelect } from "../../utils/dynamicForm";
 import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet";
 
@@ -77,7 +77,7 @@ const Login = () => {
               Welcome to HTC Accounting
             </h1>
             <h2 className="text-sm lg:text-base 2xl:text-lg 2xl:font-medium">
-              an simple and easy-to-use online accounting software
+              a simple and easy-to-use online accounting software.
             </h2>
             <img
               className="max-w-100 hidden lg:block lg:w-auto"
@@ -99,12 +99,21 @@ const Login = () => {
               )}
 
               <form onSubmit={handleSubmit(submitHandler)}>
+                {staticInputSelect({
+                  register,
+                  errors,
+                  label: "User Type",
+                  name: "usertype",
+                  placeholder: "User Type",
+                  isRequired: true,
+                  data: [{name: "Admin"}, {name: "Client"}, {name: "Channel Partner"}],
+                })}
                 {inputEmail({
                   register,
                   errors,
-                  label: "Email",
+                  label: "User Name",
                   name: "email",
-                  placeholder: "Email",
+                  placeholder: "Email or User Name",
                 })}
                 {inputPassword({
                   register,

@@ -8,7 +8,7 @@ import ResetPassword from "./screens/auth/ResetPassword";
 import Profile from "./screens/account/Profile";
 import ClientPermissions from "./screens/admin/auth/ClientPermissions";
 import Permissions from "./screens/admin/auth/Permissions";
-import CityState from './screens/admin/auth/CityState'
+import CityState from './screens/admin/auth/CityStates'
 import Roles from "./screens/admin/auth/Roles";
 import UserRoles from "./screens/admin/auth/UserRoles";
 import UserProfiles from "./screens/admin/auth/UserProfiles";
