@@ -4,16 +4,18 @@
 // import Permission from '../../models/Permission.js'
 // import UserRole from '../../models/UserRole.js'
 // import ClientPermission from '../../models/ClientPermission.js'
-import City from '../../models/City.js'
-import State from '../../models/State.js'
+// import City from '../../models/City.js'
+// import State from '../../models/State.js'
+import Company from '../../models/Company.js'
 import {
+  companies,
   // users,
   // profile,
   // roles,
   // permissions,
   // clientPermissions,
-  states,
-  cities
+  // states,
+  // cities
 } from '../../../config/data.js'
 
 const secret = 'js'
@@ -30,14 +32,18 @@ export const seed = async (req, res) => {
     // await Permission.deleteMany({})
     // await UserRole.deleteMany({})
     // await ClientPermission.deleteMany({})
-    await State.deleteMany({})
-    await City.deleteMany({})
+    // await State.deleteMany({})
+    // await City.deleteMany({})
+    await Company.deleteMany({})
+
+    // Create Company
+    await Company.create(companies)
 
     // Create States
-    await State.create(states)
+    // await State.create(states)
 
     // Create Cities
-    await City.create(cities)
+    // await City.create(cities)
 
     // // Create users
     // const userObject = await User.create({

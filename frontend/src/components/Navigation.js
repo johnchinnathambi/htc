@@ -50,6 +50,7 @@ const Navigation = ({ toggleSidebar }) => {
   };
 
   const menus = () => {
+    console.log("auth", auth);
     const dropdownItems = auth?.userRole?.clientPermission?.map(
       (route) => route?.menu
     );

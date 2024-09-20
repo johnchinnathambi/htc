@@ -1,9 +1,13 @@
 import ViewUsers from './users/ViewUsers'
 import FormUsers from './users/FormUsers'
+import ViewCompanies from './companies/ViewCompanies'
+import FormCompanies from './companies/FormCompanies'
 import ViewPermissions from './permissions/ViewPermissions'
 import FormPermissions from './permissions/FormPermissions'
-import ViewCityStates from './city-states/ViewCityStates'
-import FormCityStates from './city-states/FormCityStates'
+import ViewCities from './cities/ViewCities'
+import FormCities from './cities/FormCities'
+import ViewStates from './states/ViewStates'
+import FormStates from './states/FormStates'
 import ViewClientPermissions from './client-permissions/ViewClientPermissions'
 import FormClientPermissions from './client-permissions/FormClientPermissions'
 import ViewUserRoles from './user-roles/ViewUserRoles'
@@ -25,10 +29,14 @@ import Footer from './Footer'
 export {
   ViewUsers,
   FormUsers,
+  ViewCompanies,
+  FormCompanies,
   ViewPermissions,
   FormPermissions,
-  ViewCityStates,
-  FormCityStates,
+  ViewCities,
+  FormCities,
+  ViewStates,
+  FormStates,
   ViewClientPermissions,
   FormClientPermissions,
   ViewRoles,

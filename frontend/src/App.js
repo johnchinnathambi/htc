@@ -8,11 +8,13 @@ import ResetPassword from "./screens/auth/ResetPassword";
 import Profile from "./screens/account/Profile";
 import ClientPermissions from "./screens/admin/auth/ClientPermissions";
 import Permissions from "./screens/admin/auth/Permissions";
-import CityState from './screens/admin/auth/CityStates'
+import Cities from './screens/admin/auth/Cities';
+import States from './screens/admin/auth/States';
 import Roles from "./screens/admin/auth/Roles";
 import UserRoles from "./screens/admin/auth/UserRoles";
 import UserProfiles from "./screens/admin/auth/UserProfiles";
 import Users from "./screens/admin/auth/Users";
+import Companies from "./screens/admin/auth/Companies";
 import { Layout, AuthLayout } from "./components";
 
 const App = () => {
@@ -31,12 +33,14 @@ const App = () => {
             path="/admin/auth/client-permissions"
             element={<ClientPermissions />}
           />
-          <Route path='/admin/auth/city-state' element={<CityState />} />
+          <Route path='/admin/auth/cities' element={<Cities />} />
+          <Route path='/admin/auth/states' element={<States />} />
           <Route path="/admin/auth/permissions" element={<Permissions />} />
           <Route path="/admin/auth/roles" element={<Roles />} />
           <Route path="/admin/auth/user-roles" element={<UserRoles />} />
           <Route path="/admin/auth/user-profiles" element={<UserProfiles />} />
           <Route path="/admin/auth/users" element={<Users />} />
+          <Route path='/admin/auth/companies' element={<Companies />} />
         </Route>
       </Route>
 

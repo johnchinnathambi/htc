@@ -301,36 +301,64 @@
 //   },
 // ]
 
-const states = [
+// const states = [
+//   {
+//     stateID: 'ST01',
+//     stateName: 'Tamilnadu',
+//     stateShortName: 'TN',
+//     stateGSTCode: '33',
+//   },
+//   {
+//     stateID: 'ST02',
+//     stateName: 'Kerala',
+//     stateShortName: 'KL',
+//     stateGSTCode: '34',
+//   }  
+// ]
+
+// const cities = [
+//   {
+//     stateID: 'ST01',
+//     cityID: 'CT01',
+//     cityName: 'Chennai',
+//     cityShortName: 'CHN',
+//   },
+//   {
+//     stateID: 'ST01',
+//     cityID: 'CT02',
+//     cityName: 'Madurai',
+//     cityShortName: 'MDU',
+//   }, 
+// ]
+
+const companies = [
   {
-    stateID: 'ST01',
-    stateName: 'Tamilnadu',
-    stateShortName: 'TN',
-    stateGSTCode: '33',
-  },
-  {
-    stateID: 'ST02',
-    stateName: 'Kerala',
-    stateShortName: 'KL',
-    stateGSTCode: '34',
-  }  
+    companySerialNo: 'CMP01',
+    registrationDate: '2024-06-12',
+    introductionID: 'TNCHN56789CP',
+    city: 'CT01',
+    companyID: 'TNCHN123456',
+    typeofService: 'S-1',
+    companyType: 'Proprietor',
+    user: '66cc220075d69b52d4a4292e',
+    companyName: 'ACB Agency',
+    companyShortName: 'ACB',
+    gSTINNumber: '33ABCDE1234F1ZR',
+    companyAdminName: '66cc220075d69b52d4a4292e',
+    address1: '#3',
+    address2: 'Ramkrishna Street',
+    address3: 'Kodambakkam',
+    pinCode: '600078',
+    mobileNumber1: '9876543210',
+    mobileNumber2: '04412345678',
+    phoneNumber: '04412345678',
+    email: 'hramkumar@gmail.com',
+    logo: 'acbagency.jpg',
+    watermark: 'ACB Agency',
+    blocked: false
+  }
 ]
 
-const cities = [
-  {
-    stateID: 'ST01',
-    cityID: 'CT01',
-    cityName: 'Chennai',
-    cityShortName: 'CHN',
-  },
-  {
-    stateID: 'ST01',
-    cityID: 'CT02',
-    cityName: 'Madurai',
-    cityShortName: 'MDU',
-  }, 
-]
+// export { roles, users, profile, permissions, clientPermissions, states, cities }
 
-// export { roles, users, profile, permissions, clientPermissions, cityStates }
-
-export { states, cities }
+export { companies }

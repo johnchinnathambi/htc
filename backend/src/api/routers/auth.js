@@ -38,6 +38,13 @@ import {
   getUserById,
 } from '../controllers/auth/users.js'
 import {
+  getCompanies,
+  postCompany,
+  putCompany,
+  deleteCompany,
+  getCompanyById,
+} from '../controllers/auth/companies.js'
+import {
   getUserRoles,
   postUserRole,
   deleteUserRole,
@@ -140,5 +147,15 @@ router
   .put(isAuth, putUser)
   .delete(isAuth, deleteUser)
   .get(isAuth, getUserById)
+
+
+// companies
+router.route('/api/auth/companies').get(isAuth, getCompanies).post(isAuth, postCompany)
+router
+  .route('/api/auth/companies/:id')
+  .put(isAuth, putCompany)
+  .delete(isAuth, deleteCompany)
+  .get(isAuth, getCompanyById)
+
 
 export default router
