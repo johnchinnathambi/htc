@@ -12,7 +12,7 @@ const Home = () => {
         />
       </Helmet>
       <div className="page-wrapper flex flex-col relative">
-        
+        Dashboard
       </div>
     </>
   );

@@ -100,25 +100,29 @@ const Companies = () => {
     edit
       ? mutateAsyncUpdate({
           _id: id,
-          department: data.department,
-          designation: data.designation,
-          name: data.name,
+          companySerialNo: data.companySerialNo,
+          registrationDate: data.registrationDate,
+          introductionID: data.introductionID,
+          city: data.city,
+          companyID: data.companyID,
+          typeofService: data.typeofService,
+          companyType: data.companyType,
+          user: data.user,
+          companyName: data.companyName,
+          companyShortName: data.companyShortName,
+          gSTINNumber: data.gSTINNumber,
+          companyAdminName: data.companyAdminName,
           address1: data.address1,
           address2: data.address2,
           address3: data.address3,
-          city: data.city,
           pincode: data.pincode,
-          state: data.state,
-          mobile: data.mobile,
-          pan: data.pan,
-          pf: data.pf,
-          esi: data.esi,
-          dob: data.dob,
-          salaryscheduletype: data.salaryscheduletype,
+          mobileNumber1: data.mobileNumber1,
+          mobileNumber2: data.mobileNumber2,
+          phoneNumber: data.phoneNumber,
           email: data.email,
-          confirmed: data.confirmed,
+          logo: data.logo,
+          watermark: data.watermark,
           blocked: data.blocked,
-          password: data.password,
         })
       : mutateAsyncPost(data);
   };
@@ -126,23 +130,28 @@ const Companies = () => {
   const editHandler = (company) => {
     setId(company._id);
     setEdit(true);
-    setValue("department", company.department);
-    setValue("designation", company.designation);
-    setValue("name", company.name);
+    setValue("companySerialNo", company.companySerialNo);
+    setValue("registrationDate", company.registrationDate);
+    setValue("introductionID", company.introductionID);
+    setValue("city", company.city);
+    setValue("companyID", company.companyID);
+    setValue("typeofService", company.typeofService);
+    setValue("companyType", company.companyType);
+    setValue("user", company.user);
+    setValue("companyName", company.companyName);
+    setValue("companyShortName", company.companyShortName);
+    setValue("gSTINNumber", company.gSTINNumber);
+    setValue("companyAdminName", company.companyAdminName);
     setValue("address1", company.address1);
     setValue("address2", company.address2);
     setValue("address3", company.address3);
-    setValue("city", company.city);
     setValue("pincode", company.pincode);
-    setValue("state", company.state);
-    setValue("mobile", company.mobile);
-    setValue("pan", company.pan);
-    setValue("pf", company.pf);
-    setValue("esi", company.esi);
-    setValue("dob", company.dob);
-    setValue("salaryscheduletype", company.salaryscheduletype);
+    setValue("mobileNumber1", company.mobileNumber1);
+    setValue("mobileNumber2", company.mobileNumber2);
+    setValue("phoneNumber", company.phoneNumber);
     setValue("email", company.email);
-    setValue("confirmed", company.confirmed);
+    setValue("logo", company.logo);
+    setValue("watermark", company.watermark);
     setValue("blocked", company.blocked);
   };
 

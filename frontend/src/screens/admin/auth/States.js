@@ -103,21 +103,21 @@ const States = () => {
     edit
       ? mutateAsyncUpdate({
           _id: id,
-          name: data.name,
-          menu: data.menu,
-          path: data.path,
-          description: data.description,
+          stateID: data.stateID,
+          stateName: data.stateName,
+          stateShortName: data.stateShortName,
+          stateGSTCode: data.stateGSTCode,
         })
       : mutateAsyncPost(data);
   };
 
-  const editHandler = (StateState) => {
-    setId(StateState._id);
+  const editHandler = (state) => {
+    setId(state._id);
     setEdit(true);
-    setValue("name", StateState.name);
-    setValue("menu", StateState.menu);
-    setValue("path", StateState.path);
-    setValue("description", StateState.description);
+    setValue("stateID", state.stateID);
+    setValue("stateName", state.stateName);
+    setValue("stateShortName", state.stateShortName);
+    setValue("stateGSTCode", state.stateGSTCode);
   };
 
   return (

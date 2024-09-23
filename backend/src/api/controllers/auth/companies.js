@@ -49,25 +49,25 @@ export const postCompany = async (req, res) => {
   try {
     const object = await schemaName.create(req.body)
 
-    await Profile.create({
-      user: object._id,
-      department: object.department,
-      designation: object.designation,
-      name: object.name,
-      address1: object.address1,
-      address2: object.address2,
-      address3: object.address3,
-      city: object.city,
-      pincode: object.pincode,
-      state: object.state,
-      mobile: object.mobile,
-      pan: object.pan,
-      pf: object.pf,
-      esi: object.esi,
-      dob: object.dob,
-      salaryscheduletype: object.salaryscheduletype,      
-      image: `https://avatars.githubusercontent.com/u/3984336?v=4`,
-    })
+    // await Profile.create({
+    //   user: object._id,
+    //   department: object.department,
+    //   designation: object.designation,
+    //   name: object.name,
+    //   address1: object.address1,
+    //   address2: object.address2,
+    //   address3: object.address3,
+    //   city: object.city,
+    //   pincode: object.pincode,
+    //   state: object.state,
+    //   mobile: object.mobile,
+    //   pan: object.pan,
+    //   pf: object.pf,
+    //   esi: object.esi,
+    //   dob: object.dob,
+    //   salaryscheduletype: object.salaryscheduletype,      
+    //   image: `https://avatars.githubusercontent.com/u/3984336?v=4`,
+    // })
 
     res.status(200).send(object)
   } catch (error) {
@@ -98,36 +98,37 @@ export const putCompany = async (req, res) => {
     console.log("req.body", req.body);
 
     const { id } = req.params
-    const { department, designation, name, confirmed, blocked, password, email } = req.body
+    const { companySerialNo, registrationDate, introductionID, city, companyID, typeofService, companyType, user, 
+      companyName, companyShortName, gSTINNumber, companyAdminName, address1, address2, address3, pincode, mobileNumber1, 
+      mobileNumber2, phoneNumber, email, logo, watermark, blocked} = req.body
 
     const object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    object.department = department
-    object.designation = designation
-    object.name = name
-    object.email = email
+    object.companySerialNo = companySerialNo
+    object.registrationDate = registrationDate
+    object.introductionID = introductionID
+    object.city = city
+    object.companyID = companyID
+    object.typeofService = typeofService
+    object.companyType = companyType
+    object.user = user
+    object.companyName = companyName
+    object.companyShortName = companyShortName
+    object.gSTINNumber = gSTINNumber
+    object.companyAdminName = companyAdminName
     object.address1 = address1
     object.address2 = address2
     object.address3 = address3
-    object.city = city
     object.pincode = pincode
-    object.state = state
-    object.mobile = mobile
-    object.pan = pan
-    object.pf = pf
-    object.esi = esi
-    object.dob = dob
-    object.salaryscheduletype = salaryscheduletype
-    object.confirmed = confirmed
+    object.mobileNumber1 = mobileNumber1
+    object.mobileNumber2 = mobileNumber2
+    object.phoneNumber = phoneNumber
+    object.email = email
+    object.logo = logo
+    object.watermark = watermark
     object.blocked = blocked
-
-    password && (object.password = await object.encryptPassword(password))
-
-    if (name) {
-      await Profile.findOneAndUpdate({ user: id }, { name })
-    }
 
     await object.save()
 
@@ -141,19 +142,19 @@ export const deleteCompany = async (req, res) => {
   try {
     console.log(req.params)
     const { id } = req.params
-    const object = await schemaName.findById(id)
+    const object = await schemaName.findByIdAndDelete(id)
 
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    await Profile.findOneAndDelete({
-      user: object._id,
-    })
+    // await Profile.findOneAndDelete({
+    //   user: object._id,
+    // })
 
-    const userRole = await UserRole.findOne({ user: object._id })
-    userRole && (await userRole.remove())
+    // const userRole = await UserRole.findOne({ user: object._id })
+    // userRole && (await userRole.remove())
     
-    await object.remove()
+    // await object.remove()
     
     res.status(200).json({ message: `${schemaNameString} removed` })
   } catch (error) {

@@ -13,9 +13,9 @@ body {
 input[type="checkbox"],
 input[type="radio"] {
   border-width: 1px;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+  appearance: none; */
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
   -webkit-user-select: none;

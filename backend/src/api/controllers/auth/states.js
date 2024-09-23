@@ -50,17 +50,16 @@ export const putState = async (req, res) => {
   try {
     const { id } = req.params
 
-    const { name, description, method, route, auth } = req.body
+    const { stateID, stateName, stateShortName, stateGSTCode } = req.body
 
     const object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    object.name = name
-    object.description = description
-    object.method = method
-    object.route = route
-    object.auth = auth
+    object.stateID = stateID
+    object.stateName = stateName
+    object.stateShortName = stateShortName
+    object.stateGSTCode = stateGSTCode
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })
   } catch (error) {
@@ -71,22 +70,22 @@ export const putState = async (req, res) => {
 export const deleteState = async (req, res) => {
   try {
     const { id } = req.params
-    const object = await schemaName.findById(id)
+    const object = await schemaName.findByIdAndDelete(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    const rolesObject = await Role.find({
-      cityState: object._id,
-    })
+    // const rolesObject = await Role.find({
+    //   cityState: object._id,
+    // })
 
-    if (rolesObject.length > 0) {
-      rolesObject.forEach(async (role) => {
-        role.cityState.filter((item) => item.toString() !== id).length
-        await role.save()
-      })
-    }
+    // if (rolesObject.length > 0) {
+    //   rolesObject.forEach(async (role) => {
+    //     role.cityState.filter((item) => item.toString() !== id).length
+    //     await role.save()
+    //   })
+    // }
 
-    await object.remove()
+    // await object.remove()
     res.status(200).json({ message: `${schemaNameString} removed` })
   } catch (error) {
     res.status(500).json({ error: error.message })

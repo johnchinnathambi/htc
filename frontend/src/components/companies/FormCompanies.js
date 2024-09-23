@@ -1,8 +1,7 @@
 import { Message } from "../../components";
 import {
   inputCheckBox,
-  inputEmail,
-  inputPassword,
+  inputEmail,  
   inputText,
   staticInputSelect,
   inputDate,
@@ -38,30 +37,88 @@ export const FormCompanies = ({
         <Message variant="danger">{error}</Message>
       ) : (
         <form onSubmit={handleSubmit(submitHandler)}>
-          {staticInputSelect({
+          {inputText({
             register,
             errors,
-            label: "Department",
-            name: "department",
-            placeholder: "Department",
-            isRequired: false,
-            data: [{ name: "Account" }],
+            label: "Company Serial No.",
+            name: "companySerialNo",
+            placeholder: "Company Serial No.",
+          })}
+          {inputDate({
+            register,
+            errors,
+            label: "Registration Date",
+            name: "registrationDate",
+            placeholder: "11/11/2024",
           })}
           {staticInputSelect({
             register,
             errors,
-            label: "Designation",
-            name: "designation",
-            placeholder: "Designation",
+            label: "Introduction ID",
+            name: "introductionID",
+            placeholder: "Introduction ID",
             isRequired: false,
-            data: [{ name: "Manager" }],
+            data: [{ name: "TNCHN56789CP" }],
           })}
           {inputText({
             register,
             errors,
-            label: "Name",
-            name: "name",
-            placeholder: "Name",
+            label: "Company ID",
+            name: "companyID",
+            placeholder: "TNCHN12345CO",
+          })}
+          {staticInputSelect({
+            register,
+            errors,
+            label: "Type of Service",
+            name: "typeofService",
+            placeholder: "Type of Service",
+            isRequired: false,
+            data: [{ name: "S-1" }, { name: "S-2" }],
+          })}
+          {staticInputSelect({
+            register,
+            errors,
+            label: "Company Type",
+            name: "companyType",
+            placeholder: "Company Type",
+            isRequired: false,
+            data: [{ name: "Proprietor" }, { name: "Partnership" }],
+          })}
+          {inputText({
+            register,
+            errors,
+            label: "User ID",
+            name: "user",
+            placeholder: "User ID",
+          })}
+          {inputText({
+            register,
+            errors,
+            label: "Company Name",
+            name: "companyName",
+            placeholder: "Company Name",
+          })}
+          {inputText({
+            register,
+            errors,
+            label: "Company Short Name",
+            name: "companyShortName",
+            placeholder: "Company Short Name",
+          })}
+          {inputText({
+            register,
+            errors,
+            label: "GSTIN Number",
+            name: "gSTINNumber",
+            placeholder: "GSTIN Number",
+          })}
+          {inputText({
+            register,
+            errors,
+            label: "Company Admin Name",
+            name: "companyAdminName",
+            placeholder: "Company Admin Name",
           })}
           {inputText({
             register,
@@ -100,21 +157,26 @@ export const FormCompanies = ({
             name: "pincode",
             placeholder: "600 078",
           })}
-          {staticInputSelect({
+          {inputText({
             register,
             errors,
-            label: "State",
-            name: "state",
-            placeholder: "State",
-            isRequired: false,
-            data: [{ name: "Tamilnadu" }, { name: "Kerala" }],
+            label: "Mobile Number 1",
+            name: "mobileNumber1",
+            placeholder: "9876543210",
           })}
           {inputText({
             register,
             errors,
-            label: "Mobile no.",
-            name: "mobile",
+            label: "Mobile Number 2",
+            name: "mobileNumber2",
             placeholder: "044 12345678",
+          })}
+          {inputText({
+            register,
+            errors,
+            label: "Phone Number",
+            name: "phoneNumber",
+            placeholder: "04412345678",
           })}
           {inputEmail({
             register,
@@ -126,71 +188,17 @@ export const FormCompanies = ({
           {inputText({
             register,
             errors,
-            label: "Pan No.",
-            name: "pan",
-            placeholder: "AAAAA1234Z",
+            label: "Logo",
+            name: "logo",
+            placeholder: "Logo",
           })}
           {inputText({
             register,
             errors,
-            label: "PF No.",
-            name: "pf",
-            placeholder: "KN/PY/1234567/987",
-          })}
-          {inputText({
-            register,
-            errors,
-            label: "ESI No.",
-            name: "esi",
-            placeholder: "31-00-123456-000-0001",
-          })}
-          {inputDate({
-            register,
-            errors,
-            label: "DOB",
-            name: "dob",
-            placeholder: "11/11/1999",
-          })}
-          {staticInputSelect({
-            register,
-            errors,
-            label: "Salary Schedule Type",
-            name: "salaryscheduletype",
-            placeholder: "Salary Schedule Type",
-            isRequired: false,
-            data: [{ name: "Weekly" }, { name: "Monthly" }],
-          })}
-          {inputPassword({
-            register,
-            errors,
-            label: "Password",
-            name: "password",
-            minLength: true,
-            isRequired: false,
-            placeholder: "Password",
-          })}
-          {inputPassword({
-            register,
-            errors,
-            watch,
-            name: "confirmPassword",
-            label: "Confirm Password",
-            validate: true,
-            minLength: true,
-            isRequired: false,
-            placeholder: "Confirm Password",
-          })}
-
-          {inputCheckBox({
-            register,
-            errors,
-            watch,
-            name: "confirmed",
-            label: "Confirmed",
-            isRequired: false,
-            placeholder: "Confirmed",
-          })}
-
+            label: "Watermark",
+            name: "watermark",
+            placeholder: "Watermark",
+          })}                   
           {inputCheckBox({
             register,
             errors,

@@ -1,8 +1,13 @@
 import mongoose from 'mongoose'
 
 const CityScheme = mongoose.Schema(
-  {
-    stateID: { type: String, required: true },
+  {    
+    stateID: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'State',
+      },
+    ],
     cityID: { type: String, required: true },
     cityName: { type: String, required: true },
     cityShortName: { type: String, required: true },

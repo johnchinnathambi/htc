@@ -348,7 +348,7 @@ const companies = [
     address1: '#3',
     address2: 'Ramkrishna Street',
     address3: 'Kodambakkam',
-    pinCode: '600078',
+    pincode: '600078',
     mobileNumber1: '9876543210',
     mobileNumber2: '04412345678',
     phoneNumber: '04412345678',

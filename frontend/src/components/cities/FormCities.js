@@ -1,5 +1,5 @@
 import { Spinner, Message } from "..";
-import { inputText } from "../../utils/dynamicForm";
+import { inputText, staticInputSelect } from "../../utils/dynamicForm";
 
 const FormCities = ({
   // edit,
@@ -44,12 +44,14 @@ const FormCities = ({
             name: "cityShortName",
             placeholder: "City Short Name",
           })}
-          {inputText({
+          {staticInputSelect({
             register,
             errors,
-            label: "State Name",
-            name: "stateID",
-            placeholder: "State Name",
+            label: "State",
+            name: "StateID",
+            placeholder: "State",
+            isRequired: false,
+            data: [{ name: "Tamil Nadu" }, { name: "Kerala" }],
           })}
           <div className="flex gap-3">
             <button
