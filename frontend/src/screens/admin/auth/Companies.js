@@ -21,6 +21,7 @@ const Companies = () => {
   const [page, setPage] = useState(1);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
+  const [view, setView] = useState(false);
   const [q, setQ] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -127,8 +128,37 @@ const Companies = () => {
       : mutateAsyncPost(data);
   };
 
+  const viewHandler = (company) => {
+    setId(company._id);
+    setView(true);
+    setValue("companySerialNo", company.companySerialNo);
+    setValue("registrationDate", company.registrationDate);
+    setValue("introductionID", company.introductionID);
+    setValue("city", company.city);
+    setValue("companyID", company.companyID);
+    setValue("typeofService", company.typeofService);
+    setValue("companyType", company.companyType);
+    setValue("user", company.user);
+    setValue("companyName", company.companyName);
+    setValue("companyShortName", company.companyShortName);
+    setValue("gSTINNumber", company.gSTINNumber);
+    setValue("companyAdminName", company.companyAdminName);
+    setValue("address1", company.address1);
+    setValue("address2", company.address2);
+    setValue("address3", company.address3);
+    setValue("pincode", company.pincode);
+    setValue("mobileNumber1", company.mobileNumber1);
+    setValue("mobileNumber2", company.mobileNumber2);
+    setValue("phoneNumber", company.phoneNumber);
+    setValue("email", company.email);
+    setValue("logo", company.logo);
+    setValue("watermark", company.watermark);
+    setValue("blocked", company.blocked);
+  };
+
   const editHandler = (company) => {
     setId(company._id);
+    setView(false);
     setEdit(true);
     setValue("companySerialNo", company.companySerialNo);
     setValue("registrationDate", company.registrationDate);
@@ -179,6 +209,7 @@ const Companies = () => {
       ) : (
         <ViewCompanies
           data={data}
+          viewHandler={viewHandler}
           editHandler={editHandler}
           deleteHandler={deleteHandler}
           isLoadingDelete={isLoadingDelete}
@@ -207,8 +238,8 @@ const Companies = () => {
               className="flex justify-between items-center py-4 px-6"
               as="div"
             >
-              <h3 className="text-2xl font-bold">
-                {edit ? "Edit Company" : "Add Company"}
+              <h3 className="text-2xl font-bold">                
+                {edit ? "Edit Company" : view ? "View Company" : "Add Company"}
               </h3>
 
               <button
@@ -223,6 +254,7 @@ const Companies = () => {
             <div className="flex-1 overflow-auto py-4 px-6">
               <FormCompanies
                 edit={edit}
+                view={view}
                 formCleanHandler={formCleanHandler}
                 isLoading={isLoading}
                 isError={isError}

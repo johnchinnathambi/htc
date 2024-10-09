@@ -1,7 +1,7 @@
 import { Spinner, Message } from "..";
-import { inputText, dynamicInputSelect } from "../../utils/dynamicForm";
+import { inputText, inputTextArea } from "../../utils/dynamicForm";
 
-const FormCities = ({
+const FormMenus = ({
   edit,
   view,
   formCleanHandler,
@@ -14,13 +14,10 @@ const FormCities = ({
   handleSubmit,
   submitHandler,
   error,
-  stateData,
   setIsModalOpen,
 }) => {
   return (
     <>
-      <h1>{view}</h1>
-
       {isLoading ? (
         <Spinner />
       ) : isError ? (
@@ -30,36 +27,35 @@ const FormCities = ({
           {inputText({
             register,
             errors,
-            label: "City ID",
-            name: "cityID",
-            placeholder: "City ID",
+            label: "Name",
+            name: "name",
+            placeholder: "Name",
             readOnly: view,
           })}
           {inputText({
             register,
             errors,
-            label: "City Name",
-            name: "cityName",
-            placeholder: "City Name",
+            label: "Menu",
+            name: "menu",
+            placeholder: "Menu",
             readOnly: view,
           })}
           {inputText({
             register,
             errors,
-            label: "City Short Name",
-            name: "cityShortName",
-            placeholder: "City Short Name",
+            label: "Path",
+            name: "path",
+            placeholder: "Path",
             readOnly: view,
           })}
-          {dynamicInputSelect({
+
+          {inputTextArea({
             register,
             errors,
-            label: "State",
-            name: "state",
-            placeholder: "State",
-            isRequired: false,            
-            data: stateData && stateData,
-            value: "stateName",
+            label: "Description",
+            name: "description",
+            placeholder: "Description",
+            isRequired: false,
             readOnly: view,
           })}
           {view ? "" :
@@ -101,4 +97,4 @@ const FormCities = ({
   );
 };
 
-export default FormCities;
+export default FormMenus;

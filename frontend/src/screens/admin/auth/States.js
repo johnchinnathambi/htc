@@ -22,6 +22,7 @@ const States = () => {
   const [page, setPage] = useState(1);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
+  const [view, setView] = useState(false);
   const [q, setQ] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -111,8 +112,18 @@ const States = () => {
       : mutateAsyncPost(data);
   };
 
+  const viewHandler = (state) => {
+    setId(state._id);
+    setView(true);
+    setValue("stateID", state.stateID);
+    setValue("stateName", state.stateName);
+    setValue("stateShortName", state.stateShortName);
+    setValue("stateGSTCode", state.stateGSTCode);
+  };
+
   const editHandler = (state) => {
     setId(state._id);
+    setView(false);
     setEdit(true);
     setValue("stateID", state.stateID);
     setValue("stateName", state.stateName);
@@ -123,24 +134,24 @@ const States = () => {
   return (
     <>
       <Helmet>
-        <title>States and States | HTC</title>
-        <meta property="og:title" content="States and States" key="title" />
+        <title>States | HTC</title>
+        <meta property="og:title" content="States" key="title" />
       </Helmet>
       {isSuccessDelete && (
         <Message variant="success">
-          Client Permission has been deleted successfully.
+          State has been deleted successfully.
         </Message>
       )}
       {isErrorDelete && <Message variant="danger">{errorDelete}</Message>}
       {isSuccessUpdate && (
         <Message variant="success">
-          Client Permission has been updated successfully.
+          State has been updated successfully.
         </Message>
       )}
       {isErrorUpdate && <Message variant="danger">{errorUpdate}</Message>}
       {isSuccessPost && (
         <Message variant="success">
-          Client Permission has been Created successfully.
+          State has been Created successfully.
         </Message>
       )}
       {isErrorPost && <Message variant="danger">{errorPost}</Message>}
@@ -152,6 +163,7 @@ const States = () => {
       ) : (
         <ViewStates
           data={data}
+          viewHandler={viewHandler}
           editHandler={editHandler}
           deleteHandler={deleteHandler}
           isLoadingDelete={isLoadingDelete}
@@ -160,6 +172,7 @@ const States = () => {
           searchHandler={searchHandler}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          setView={setView}
         />
       )}
 
@@ -182,7 +195,7 @@ const States = () => {
               as="div"
             >
               <h3 className="text-2xl font-bold">
-                {edit ? "Edit Client Permission" : "Add Client Permission"}
+              {edit ? "Edit State" : view ? "View State" : "Add State"}
               </h3>
 
               <button
@@ -200,6 +213,7 @@ const States = () => {
             <div className="flex-1 overflow-auto py-4 px-6">
               <FormStates
                 edit={edit}
+                view={view}
                 formCleanHandler={formCleanHandler}
                 isLoading={isLoading}
                 isError={isError}

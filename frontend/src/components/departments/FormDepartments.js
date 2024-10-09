@@ -1,7 +1,7 @@
 import { Spinner, Message } from "..";
-import { inputText, dynamicInputSelect } from "../../utils/dynamicForm";
+import { inputText } from "../../utils/dynamicForm";
 
-const FormCities = ({
+const FormDepartments = ({
   edit,
   view,
   formCleanHandler,
@@ -14,13 +14,10 @@ const FormCities = ({
   handleSubmit,
   submitHandler,
   error,
-  stateData,
   setIsModalOpen,
 }) => {
   return (
     <>
-      <h1>{view}</h1>
-
       {isLoading ? (
         <Spinner />
       ) : isError ? (
@@ -30,38 +27,19 @@ const FormCities = ({
           {inputText({
             register,
             errors,
-            label: "City ID",
-            name: "cityID",
-            placeholder: "City ID",
+            label: "Department Serial No",
+            name: "departmentSerialNo",
+            placeholder: "Department Serial No",
             readOnly: view,
           })}
           {inputText({
             register,
             errors,
-            label: "City Name",
-            name: "cityName",
-            placeholder: "City Name",
+            label: "Department",
+            name: "department",
+            placeholder: "Department",
             readOnly: view,
-          })}
-          {inputText({
-            register,
-            errors,
-            label: "City Short Name",
-            name: "cityShortName",
-            placeholder: "City Short Name",
-            readOnly: view,
-          })}
-          {dynamicInputSelect({
-            register,
-            errors,
-            label: "State",
-            name: "state",
-            placeholder: "State",
-            isRequired: false,            
-            data: stateData && stateData,
-            value: "stateName",
-            readOnly: view,
-          })}
+          })}          
           {view ? "" :
           <div className="flex gap-3">
             <button
@@ -85,7 +63,7 @@ const FormCities = ({
             </button>
             <button
               type="button"
-              className="px-4 py-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 active:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none "
+              className="px-4 py-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 active:bg-gray-50 disabled:opaDepartment-50 disabled:pointer-events-none "
               onClick={() => {
                 setIsModalOpen(false);
                 formCleanHandler();
@@ -101,4 +79,4 @@ const FormCities = ({
   );
 };
 
-export default FormCities;
+export default FormDepartments;

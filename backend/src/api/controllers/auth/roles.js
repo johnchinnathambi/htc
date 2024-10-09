@@ -25,7 +25,7 @@ export const getRoles = async (req, res) => {
       .sort({ createdAt: -1 })
       .lean()
       .populate('permission')
-      .populate('clientPermission')
+      .populate('menu')
 
     const result = await query
 
@@ -48,7 +48,7 @@ export const postRole = async (req, res) => {
     const { name, description } = req.body
     let type
     let permission = []
-    let clientPermission = []
+    let menu = []
     if (name) type = name.toUpperCase().trim().replace(/\s+/g, '_')
 
     if (req.body.permission) {
@@ -59,11 +59,11 @@ export const postRole = async (req, res) => {
       }
     }
 
-    if (req.body.clientPermission) {
-      if (Array.isArray(req.body.clientPermission)) {
-        clientPermission = req.body.clientPermission
+    if (req.body.menu) {
+      if (Array.isArray(req.body.menu)) {
+        menu = req.body.menu
       } else {
-        clientPermission = [req.body.clientPermission]
+        menu = [req.body.menu]
       }
     }
 
@@ -72,7 +72,7 @@ export const postRole = async (req, res) => {
       description,
       type,
       permission,
-      clientPermission,
+      menu,
     })
 
     res.status(200).send(object)
@@ -87,7 +87,7 @@ export const putRole = async (req, res) => {
     const { name, description } = req.body
     let type
     let permission = []
-    let clientPermission = []
+    let menu = []
     if (name) type = name.toUpperCase().trim().replace(/\s+/g, '_')
 
     if (req.body.permission) {
@@ -98,11 +98,11 @@ export const putRole = async (req, res) => {
       }
     }
 
-    if (req.body.clientPermission) {
-      if (Array.isArray(req.body.clientPermission)) {
-        clientPermission = req.body.clientPermission
+    if (req.body.menu) {
+      if (Array.isArray(req.body.menu)) {
+        menu = req.body.menu
       } else {
-        clientPermission = [req.body.clientPermission]
+        menu = [req.body.menu]
       }
     }
 
@@ -114,7 +114,7 @@ export const putRole = async (req, res) => {
     object.type = type
     object.description = description
     object.permission = permission
-    object.clientPermission = clientPermission
+    object.menu = menu
     await object.save()
 
     res.status(200).json({ message: `${schemaNameString} updated` })

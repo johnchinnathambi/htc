@@ -9,7 +9,7 @@ import {
 
 // import { useState } from "react";
 
-export const FormCompanies = ({
+export const FormBranches = ({
   view,
   edit,
   formCleanHandler,
@@ -41,9 +41,9 @@ export const FormCompanies = ({
           {inputText({
             register,
             errors,
-            label: "Company Serial No.",
-            name: "companySerialNo",
-            placeholder: "Company Serial No.",
+            label: "Branch Serial No.",
+            name: "branchSerialNo",
+            placeholder: "Branch Serial No.",
             readOnly: view,
           })}
           {inputDate({
@@ -57,9 +57,9 @@ export const FormCompanies = ({
           {staticInputSelect({
             register,
             errors,
-            label: "Introduction ID",
-            name: "introductionID",
-            placeholder: "Introduction ID",
+            label: "Company ID",
+            name: "companyID",
+            placeholder: "Company ID",
             isRequired: false,
             data: [{ name: "TNCHN56789CP" }],
             readOnly: view,
@@ -67,31 +67,11 @@ export const FormCompanies = ({
           {inputText({
             register,
             errors,
-            label: "Company ID",
-            name: "companyID",
+            label: "Branch ID",
+            name: "branchID",
             placeholder: "TNCHN12345CO",
             readOnly: view,
-          })}
-          {staticInputSelect({
-            register,
-            errors,
-            label: "Type of Service",
-            name: "typeofService",
-            placeholder: "Type of Service",
-            isRequired: false,
-            data: [{ name: "S-1" }, { name: "S-2" }],
-            readOnly: view,
-          })}
-          {staticInputSelect({
-            register,
-            errors,
-            label: "Company Type",
-            name: "companyType",
-            placeholder: "Company Type",
-            isRequired: false,
-            data: [{ name: "Proprietor" }, { name: "Partnership" }],
-            readOnly: view,
-          })}
+          })}          
           {inputText({
             register,
             errors,
@@ -103,17 +83,17 @@ export const FormCompanies = ({
           {inputText({
             register,
             errors,
-            label: "Company Name",
-            name: "companyName",
-            placeholder: "Company Name",
+            label: "Branch Name",
+            name: "branchName",
+            placeholder: "Branch Name",
             readOnly: view,
           })}
           {inputText({
             register,
             errors,
-            label: "Company Short Name",
-            name: "companyShortName",
-            placeholder: "Company Short Name",
+            label: "Branch Short Name",
+            name: "branchShortName",
+            placeholder: "Branch Short Name",
             readOnly: view,
           })}
           {inputText({
@@ -123,15 +103,7 @@ export const FormCompanies = ({
             name: "gSTINNumber",
             placeholder: "GSTIN Number",
             readOnly: view,
-          })}
-          {inputText({
-            register,
-            errors,
-            label: "Company Admin Name",
-            name: "companyAdminName",
-            placeholder: "Company Admin Name",
-            readOnly: view,
-          })}
+          })}          
           {inputText({
             register,
             errors,
@@ -177,19 +149,11 @@ export const FormCompanies = ({
           {inputText({
             register,
             errors,
-            label: "Mobile Number 1",
-            name: "mobileNumber1",
+            label: "Mobile Number",
+            name: "mobileNumber",
             placeholder: "9876543210",
             readOnly: view,
-          })}
-          {inputText({
-            register,
-            errors,
-            label: "Mobile Number 2",
-            name: "mobileNumber2",
-            placeholder: "044 12345678",
-            readOnly: view,
-          })}
+          })}          
           {inputText({
             register,
             errors,
@@ -271,4 +235,4 @@ export const FormCompanies = ({
   );
 };
 
-export default FormCompanies;
+export default FormBranches;

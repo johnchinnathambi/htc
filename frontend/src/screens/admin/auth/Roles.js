@@ -4,7 +4,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { useForm } from "react-hook-form";
 import useRolesHook from "../../../api/roles";
 import usePermissionsHook from "../../../api/permissions";
-import useClientPermissionsHook from "../../../api/clientPermissions";
+import useMenusHook from "../../../api/menus";
 import {
   ViewRoles,
   Pagination,
@@ -33,7 +33,7 @@ const Roles = () => {
   const { getPermissions } = usePermissionsHook({
     limit: 1000000,
   });
-  const { getClientPermissions } = useClientPermissionsHook({
+  const { getMenus } = useMenusHook({
     limit: 1000000,
   });
 
@@ -50,7 +50,7 @@ const Roles = () => {
 
   const { data, isLoading, isError, error, refetch } = getRoles;
   const { data: permissionData } = getPermissions;
-  const { data: clientPermissionData } = getClientPermissions;
+  const { data: menuData } = getMenus;
 
   const {
     isLoading: isLoadingUpdate,
@@ -110,7 +110,7 @@ const Roles = () => {
           name: data.name,
           description: data.description,
           permission: data.permission,
-          clientPermission: data.clientPermission,
+          menu: data.menu,
         })
       : mutateAsyncPost(data);
   };
@@ -125,8 +125,8 @@ const Roles = () => {
       role.permission && role.permission.map((item) => item._id)
     );
     setValue(
-      "clientPermission",
-      role.clientPermission && role.clientPermission.map((item) => item._id)
+      "menu",
+      role.menu && role.menu.map((item) => item._id)
     );
   };
 
@@ -216,8 +216,8 @@ const Roles = () => {
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 permissionData={permissionData && permissionData.data}
-                clientPermissionData={
-                  clientPermissionData && clientPermissionData.data
+                menuData={
+                  menuData && menuData.data
                 }
               />
             </div>

@@ -1,7 +1,8 @@
 import { Search } from "..";
 
-const ViewClientPermissions = ({
+const ViewMenus = ({
   data,
+  viewHandler,
   editHandler,
   deleteHandler,
   isLoadingDelete,
@@ -9,12 +10,13 @@ const ViewClientPermissions = ({
   q,
   searchHandler,
   setIsModalOpen,
+  setView,
 }) => {
   return (
     <>
       <div className="flex flex-wrap items-center justify-between mb-3">
         <h2 className="font-bold text-2xl text-gray-800 my-1">
-          Client Permissions ({data && data.total})
+          Menus ({data && data.total})
         </h2>
         <div className="flex flex-wrap gap-3">
           <Search
@@ -25,9 +27,9 @@ const ViewClientPermissions = ({
           />
           <button
             className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {setIsModalOpen(true);setView(false);}}
           >
-            Add New Client Permission
+            Add New Menu
           </button>
         </div>
       </div>
@@ -45,19 +47,29 @@ const ViewClientPermissions = ({
 
           <tbody>
             {data &&
-              data.data.map((clientPermission) => (
-                <tr key={clientPermission._id}>
-                  <td className="p-2">{clientPermission.name}</td>
-                  <td className="p-2">{clientPermission.menu}</td>
-                  <td className="p-2">{clientPermission.path}</td>
-                  <td className="p-2">{clientPermission.description}</td>
+              data.data.map((menu) => (
+                <tr key={menu._id}>
+                  <td className="p-2">{menu.name}</td>
+                  <td className="p-2">{menu.menu}</td>
+                  <td className="p-2">{menu.path}</td>
+                  <td className="p-2">{menu.description}</td>
                   <td className="p-2">
                     <div className="flex gap-2">
                       <button
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
                         onClick={() => {
                           setIsModalOpen(true);
-                          editHandler(clientPermission);
+                          viewHandler(menu);
+                        }}
+                      >
+                        <span className="material-symbols-rounded ">visibility</span>
+                      </button>
+
+                      <button
+                        className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          editHandler(menu);
                         }}
                       >
                         <span className="material-symbols-rounded ">edit</span>
@@ -65,7 +77,7 @@ const ViewClientPermissions = ({
 
                       <button
                         className="inline-flex text-gray-600 hover:text-red-600 hover:bg-red-100 focus:ring-4 focus:ring-red-200 font-medium rounded-full text-sm p-2"
-                        onClick={() => deleteHandler(clientPermission._id)}
+                        onClick={() => deleteHandler(menu._id)}
                         disabled={isLoadingDelete}
                       >
                         {isLoadingDelete ? (
@@ -93,4 +105,4 @@ const ViewClientPermissions = ({
   );
 };
 
-export default ViewClientPermissions;
+export default ViewMenus;

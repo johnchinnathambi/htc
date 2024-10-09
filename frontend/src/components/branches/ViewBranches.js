@@ -1,7 +1,7 @@
 import moment from "moment";
 import { Search } from "..";
 
-const ViewCompany = ({
+const ViewBranches = ({
   data,
   viewHandler,
   editHandler,
@@ -16,7 +16,7 @@ const ViewCompany = ({
     <>
       <div className="flex flex-wrap items-center justify-between mb-3">
         <h2 className="font-bold text-2xl text-gray-800 my-1">
-          Companies ({data && data.total})
+          Branches ({data && data.total})
         </h2>
         <div className="flex flex-wrap gap-3">
           <Search
@@ -29,7 +29,7 @@ const ViewCompany = ({
             className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center"
             onClick={() => setIsModalOpen(true)}
           >
-            Add New Company
+            Add New Branch
           </button>
         </div>
       </div>
@@ -37,45 +37,39 @@ const ViewCompany = ({
         <table className="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-400 rounded">
           <thead className="text-xs text-slate-500 uppercase bg-slate-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th className="px-2 py-4">Joined Date</th>
-              <th className="px-2 py-4">Introduction ID</th>
+              <th className="px-2 py-4">Joined Date</th>              
               <th className="px-2 py-4">Company ID</th>
-              <th className="px-2 py-4">Company Name</th>
+              <th className="px-2 py-4">Branch ID</th>
+              <th className="px-2 py-4">Branch Name</th>
               <th className="px-2 py-4">Admin ID</th>
-              <th className="px-2 py-4">Address 1</th>
-              <th className="px-2 py-4">Address 2</th>
               <th className="px-2 py-4">Address 3</th>
-              <th className="px-2 py-4">City</th>              
+              <th className="px-2 py-4">City</th>
               <th className="px-2 py-4">State</th>
               <th className="px-2 py-4">Mobile No.</th>
-              <th className="px-2 py-4">Email</th>
-              <th className="px-2 py-4">Service Type</th>            
-              <th className="px-2 py-4">Status</th>              
+              <th className="px-2 py-4">Email</th>              
+              <th className="px-2 py-4">Status</th>
               <th className="px-2 py-4">Actions</th>
             </tr>
           </thead>
 
           <tbody>
             {data &&
-              data.data.map((company) => (
-                <tr key={company._id}>
+              data.data.map((branch) => (
+                <tr key={branch._id}>
                   <td className="p-2">
-                    {moment(company.createdAt).format("lll")}
-                  </td>
-                  <td className="p-2">{company.introductionID}</td>
-                  <td className="p-2">{company.companyID}</td>
-                  <td className="p-2">{company.companyName}</td>
-                  <td className="p-2">{company.user}</td>
-                  <td className="p-2">{company.address1}</td>
-                  <td className="p-2">{company.address2}</td>
-                  <td className="p-2">{company.address3}</td>
-                  <td className="p-2">{company.city}</td>                  
-                  <td className="p-2">{company.state}</td>
-                  <td className="p-2">{company.mobile}</td>                  
-                  <td className="p-2">{company.email}</td>
-                  <td className="p-2">{company.typeofService}</td>
+                    {moment(branch.createdAt).format("lll")}
+                  </td>                  
+                  <td className="p-2">{branch.companyID}</td>
+                  <td className="p-2">{branch.branchID}</td>
+                  <td className="p-2">{branch.branchName}</td>
+                  <td className="p-2">{branch.user}</td>                  
+                  <td className="p-2">{branch.address3}</td>
+                  <td className="p-2">{branch.city}</td>                  
+                  <td className="p-2">{branch.state}</td>
+                  <td className="p-2">{branch.mobileNumber}</td>                  
+                  <td className="p-2">{branch.email}</td>                  
                   {/* <td className="p-2">
-                    {company.confirmed ? (
+                    {branch.confirmed ? (
                       <span className="material-symbols-rounded text-green-600">
                         check_circle
                       </span>
@@ -86,7 +80,7 @@ const ViewCompany = ({
                     )}
                   </td> */}
                   <td className="p-2">
-                    {company.blocked ? (
+                    {branch.blocked ? (
                       <span className="material-symbols-rounded text-green-600">
                         check_circle
                       </span>                       
@@ -104,7 +98,7 @@ const ViewCompany = ({
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
                         onClick={() => {
                           setIsModalOpen(true);                          
-                          viewHandler(company);
+                          viewHandler(branch);
                         }}
                       >
                         <span className="material-symbols-rounded ">visibility</span>
@@ -114,7 +108,7 @@ const ViewCompany = ({
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
                         onClick={() => {
                           setIsModalOpen(true);
-                          editHandler(company);
+                          editHandler(branch);
                         }}
                       >
                         <span className="material-symbols-rounded ">edit</span>
@@ -122,7 +116,7 @@ const ViewCompany = ({
 
                       <button
                         className="inline-flex text-gray-600 hover:text-red-600 hover:bg-red-100 focus:ring-4 focus:ring-red-200 font-medium rounded-full text-sm p-2"
-                        onClick={() => deleteHandler(company._id)}
+                        onClick={() => deleteHandler(branch._id)}
                         disabled={isLoadingDelete}
                       >
                         {isLoadingDelete ? (
@@ -150,4 +144,4 @@ const ViewCompany = ({
   );
 };
 
-export default ViewCompany;
+export default ViewBranches;

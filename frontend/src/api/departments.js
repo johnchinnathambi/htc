@@ -1,28 +1,28 @@
 import dynamicAPI from './dynamicAPI'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 
-const url = '/api/auth/states'
+const url = '/api/auth/departments'
 
-const queryKey = 'states'
+const queryKey = 'departments'
 
-export default function useStateHook(props) {
+export default function useDepartmentHook(props) {
   const { page = 1, id, q = '', limit = 25 } = props
   const queryClient = useQueryClient()
 
-  const getStates = useQuery(
+  const getDepartments = useQuery(
     queryKey,
     async () =>
       await dynamicAPI('get', `${url}?page=${page}&q=${q}&limit=${limit}`, {}),
     { retry: 0 }
   )
 
-  const getStateById = useQuery(
+  const getDepartmentById = useQuery(
     queryKey,
     async (id) => await dynamicAPI('get', `${url}/${id}`, {}),
     { retry: 0, enabled: !!id }
   )
 
-  const updateState = useMutation(
+  const updateDepartment = useMutation(
     async (obj) => await dynamicAPI('put', `${url}/${obj._id}`, obj),
     {
       retry: 0,
@@ -30,7 +30,7 @@ export default function useStateHook(props) {
     }
   )
 
-  const deleteState = useMutation(
+  const deleteDepartment = useMutation(
     async (id) => await dynamicAPI('delete', `${url}/${id}`, {}),
     {
       retry: 0,
@@ -38,7 +38,7 @@ export default function useStateHook(props) {
     }
   )
 
-  const postState = useMutation(
+  const postDepartment = useMutation(
     async (obj) => await dynamicAPI('post', url, obj),
     {
       retry: 0,
@@ -47,10 +47,10 @@ export default function useStateHook(props) {
   )
 
   return {
-    getStates,
-    updateState,
-    deleteState,
-    postState,
-    getStateById,
+    getDepartments,
+    updateDepartment,
+    deleteDepartment,
+    postDepartment,
+    getDepartmentById,
   }
 }

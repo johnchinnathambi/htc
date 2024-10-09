@@ -1,8 +1,9 @@
 import { Spinner, Message } from "..";
-import { inputText, inputTextArea } from "../../utils/dynamicForm";
+import { inputText, dynamicInputSelect } from "../../utils/dynamicForm";
 
-const FormClientPermissions = ({
-  // edit,
+const FormDesignations = ({
+  edit,
+  view,
   formCleanHandler,
   isLoading,
   register,
@@ -13,10 +14,13 @@ const FormClientPermissions = ({
   handleSubmit,
   submitHandler,
   error,
+  departmentData,
   setIsModalOpen,
 }) => {
   return (
     <>
+      <h1>{view}</h1>
+
       {isLoading ? (
         <Spinner />
       ) : isError ? (
@@ -26,34 +30,31 @@ const FormClientPermissions = ({
           {inputText({
             register,
             errors,
-            label: "Name",
-            name: "name",
-            placeholder: "Name",
+            label: "Designation Serial No",
+            name: "designationSerialNo",
+            placeholder: "Designation Serial No",
+            readOnly: view,
           })}
           {inputText({
             register,
             errors,
-            label: "Menu",
-            name: "menu",
-            placeholder: "Menu",
+            label: "Designation",
+            name: "designation",
+            placeholder: "Designation",
+            readOnly: view,
           })}
-          {inputText({
+          {dynamicInputSelect({
             register,
             errors,
-            label: "Path",
-            name: "path",
-            placeholder: "Path",
+            label: "Department",
+            name: "department",
+            placeholder: "Department",
+            isRequired: false,            
+            data: departmentData && departmentData,
+            value: "department",
+            readOnly: view,
           })}
-
-          {inputTextArea({
-            register,
-            errors,
-            label: "Description",
-            name: "description",
-            placeholder: "Description",
-            isRequired: false,
-          })}
-
+          {view ? "" :
           <div className="flex gap-3">
             <button
               type="submit"
@@ -69,7 +70,9 @@ const FormClientPermissions = ({
                   <span className="sr-only">Loading...</span>
                 </span>
               ) : (
-                <span>Save</span>
+                <span>
+                  {edit ? 'Update' : 'Save' }
+                </span>
               )}
             </button>
             <button
@@ -83,10 +86,11 @@ const FormClientPermissions = ({
               Cancel
             </button>
           </div>
+        }
         </form>
       )}
     </>
   );
 };
 
-export default FormClientPermissions;
+export default FormDesignations;

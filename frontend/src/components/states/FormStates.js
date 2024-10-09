@@ -2,7 +2,8 @@ import { Spinner, Message } from "..";
 import { inputText } from "../../utils/dynamicForm";
 
 const FormStates = ({
-  // edit,
+  edit,
+  view,
   formCleanHandler,
   isLoading,
   register,
@@ -29,6 +30,7 @@ const FormStates = ({
             label: "State ID",
             name: "stateID",
             placeholder: "State ID",
+            readOnly: view,
           })}
           {inputText({
             register,
@@ -36,6 +38,7 @@ const FormStates = ({
             label: "State Name",
             name: "stateName",
             placeholder: "State Name",
+            readOnly: view,
           })}
           {inputText({
             register,
@@ -43,6 +46,7 @@ const FormStates = ({
             label: "State Short Name",
             name: "stateShortName",
             placeholder: "State Short Name",
+            readOnly: view,
           })}
           {inputText({
             register,
@@ -50,7 +54,9 @@ const FormStates = ({
             label: "State GST Code",
             name: "stateGSTCode",
             placeholder: "State GST Code",
+            readOnly: view,
           })}
+          {view ? "" :
           <div className="flex gap-3">
             <button
               type="submit"
@@ -66,7 +72,9 @@ const FormStates = ({
                   <span className="sr-only">Loading...</span>
                 </span>
               ) : (
-                <span>Save</span>
+                <span>
+                  {edit ? 'Update' : 'Save' }
+                </span>
               )}
             </button>
             <button
@@ -80,6 +88,7 @@ const FormStates = ({
               Cancel
             </button>
           </div>
+        }
         </form>
       )}
     </>

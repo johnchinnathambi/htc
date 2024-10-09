@@ -43,7 +43,7 @@
 //   bio: 'Technical Architect',
 // }
 
-// const clientPermissions = [
+// const menus = [
 //   {
 //     name: 'Home',
 //     path: '/',
@@ -80,11 +80,11 @@
 //     description: 'Permissions page',
 //   },
 //   {
-//     name: 'Client Permissions',
-//     path: '/admin/auth/client-permissions',
+//     name: 'Menus',
+//     path: '/admin/auth/menus',
 //     menu: 'admin',
 //     auth: true,
-//     description: 'Client Permissions page',
+//     description: 'Menus page',
 //   },
 //   {
 //     name: 'User Roles',
@@ -272,31 +272,31 @@
 //     method: 'DELETE',
 //   },
 //   {
-//     description: 'Get All ClientPermissions',
-//     route: '/api/auth/client-permissions',
+//     description: 'Get All Menus',
+//     route: '/api/auth/menus',
 //     auth: true,
-//     name: 'ClientPermissions',
+//     name: 'Menus',
 //     method: 'GET',
 //   },
 //   {
 //     description: 'Create Permission',
-//     route: '/api/auth/client-permissions',
+//     route: '/api/auth/menus',
 //     auth: true,
-//     name: 'ClientPermissions',
+//     name: 'Menus',
 //     method: 'POST',
 //   },
 //   {
 //     description: 'Update Permission',
-//     route: '/api/auth/client-permissions/:id',
+//     route: '/api/auth/menus/:id',
 //     auth: true,
-//     name: 'ClientPermissions',
+//     name: 'Menus',
 //     method: 'PUT',
 //   },
 //   {
 //     description: 'Delete Permission',
-//     route: '/api/auth/client-permissions/:id',
+//     route: '/api/auth/menus/:id',
 //     auth: true,
-//     name: 'ClientPermissions',
+//     name: 'Menus',
 //     method: 'DELETE',
 //   },
 // ]
@@ -318,47 +318,96 @@
 
 // const cities = [
 //   {
-//     stateID: 'ST01',
+//     state: 'ST01',
 //     cityID: 'CT01',
 //     cityName: 'Chennai',
 //     cityShortName: 'CHN',
 //   },
 //   {
-//     stateID: 'ST01',
+//     state: 'ST01',
 //     cityID: 'CT02',
 //     cityName: 'Madurai',
 //     cityShortName: 'MDU',
 //   }, 
 // ]
 
-const companies = [
+// const companies = [
+//   {
+//     companySerialNo: 'CMP01',
+//     registrationDate: '2024-06-12',
+//     introductionID: 'TNCHN56789CP',
+//     city: 'CT01',
+//     companyID: 'TNCHN123456',
+//     typeofService: 'S-1',
+//     companyType: 'Proprietor',
+//     user: '66cc220075d69b52d4a4292e',
+//     companyName: 'ACB Agency',
+//     companyShortName: 'ACB',
+//     gSTINNumber: '33ABCDE1234F1ZR',
+//     companyAdminName: '66cc220075d69b52d4a4292e',
+//     address1: '#3',
+//     address2: 'Ramkrishna Street',
+//     address3: 'Kodambakkam',
+//     pincode: '600078',
+//     mobileNumber1: '9876543210',
+//     mobileNumber2: '04412345678',
+//     phoneNumber: '04412345678',
+//     email: 'hramkumar@gmail.com',
+//     logo: 'acbagency.jpg',
+//     watermark: 'ACB Agency',
+//     blocked: false
+//   }
+// ]
+
+// const branches = [
+//   {
+//     branchSerialNo: 'CMP01',
+//     registrationDate: '2024-06-12',
+//     companyID: 'TNCHN56789CP',
+//     city: 'CT01',
+//     branchID: 'TNCHN123456',        
+//     user: '66cc220075d69b52d4a4292e',
+//     branchName: 'ACB Agency',
+//     branchShortName: 'ACB',
+//     gSTINNumber: '33ABCDE1234F1ZR',    
+//     address1: '#3',
+//     address2: 'Ramkrishna Street',
+//     address3: 'Kodambakkam',
+//     pincode: '600078',
+//     mobileNumber: '9876543210',    
+//     phoneNumber: '04412345678',
+//     email: 'hramkumar@gmail.com',
+//     logo: 'acbagency.jpg',
+//     watermark: 'ACB Agency',
+//     blocked: false
+//   }
+// ]
+
+
+const departments = [
   {
-    companySerialNo: 'CMP01',
-    registrationDate: '2024-06-12',
-    introductionID: 'TNCHN56789CP',
-    city: 'CT01',
-    companyID: 'TNCHN123456',
-    typeofService: 'S-1',
-    companyType: 'Proprietor',
-    user: '66cc220075d69b52d4a4292e',
-    companyName: 'ACB Agency',
-    companyShortName: 'ACB',
-    gSTINNumber: '33ABCDE1234F1ZR',
-    companyAdminName: '66cc220075d69b52d4a4292e',
-    address1: '#3',
-    address2: 'Ramkrishna Street',
-    address3: 'Kodambakkam',
-    pincode: '600078',
-    mobileNumber1: '9876543210',
-    mobileNumber2: '04412345678',
-    phoneNumber: '04412345678',
-    email: 'hramkumar@gmail.com',
-    logo: 'acbagency.jpg',
-    watermark: 'ACB Agency',
-    blocked: false
-  }
+    departmentSerialNo: 'DEP01',
+    department: 'Sales',
+  },
+  {
+    departmentSerialNo: 'DEP02',
+    department: 'Purchase',
+  }  
 ]
 
-// export { roles, users, profile, permissions, clientPermissions, states, cities }
+const designations = [
+  {
+    designationSerialNo: 'DES01',
+    department: 'Sales',
+    designation: 'Manager',    
+  },
+  {
+    designationSerialNo: 'DES02',
+    department: 'Sales',
+    designation: 'Executive',
+  }  
+]
 
-export { companies }
+// export { roles, users, profile, permissions, menus, states, cities, companies, branches }
+
+export { departments, designations }

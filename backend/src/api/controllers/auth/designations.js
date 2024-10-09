@@ -1,10 +1,10 @@
-import ClientPermission from '../../models/ClientPermission.js'
-import Role from '../../models/Role.js'
+import Designation from '../../models/Designation.js'
 
-const schemaName = ClientPermission
-const schemaNameString = 'ClientPermission'
+const schemaName = Designation
+const schemaNameString = 'Designation'
 
-export const getClientPermissions = async (req, res) => {
+export const getDesignations = async (req, res) => {
+
   try {
     const q = req.query && req.query.q
 
@@ -19,7 +19,12 @@ export const getClientPermissions = async (req, res) => {
 
     const pages = Math.ceil(total / pageSize)
 
-    query = query.skip(skip).limit(pageSize).sort({ createdAt: -1 }).lean()
+    query = query
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createdAt: -1 })
+      .lean()
+      .populate('department', ['department'])
 
     const result = await query
 
@@ -37,7 +42,7 @@ export const getClientPermissions = async (req, res) => {
   }
 }
 
-export const postClientPermission = async (req, res) => {
+export const postDesignation = async (req, res) => {
   try {
     const object = await schemaName.create(req.body)
     res.status(200).send(object)
@@ -46,44 +51,46 @@ export const postClientPermission = async (req, res) => {
   }
 }
 
-export const putClientPermission = async (req, res) => {
+export const putDesignation = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, menu, path, description } = req.body
+
+    const { designationSerialNo, department, designation } = req.body
 
     const object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    object.name = name
-    object.menu = menu
-    object.path = path
-    object.description = description
+    object.designationSerialNo = designationSerialNo
+    object.department = department
+    object.designation = designation
+        
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
-export const deleteClientPermission = async (req, res) => {
+
+export const deleteDesignation = async (req, res) => {
   try {
     const { id } = req.params
-    const object = await schemaName.findById(id)
+    const object = await schemaName.findByIdAndDelete(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    const rolesObject = await Role.find({
-      clientPermission: object._id,
-    })
+    // const rolesObject = await Role.find({
+    //   cityState: object._id,
+    // })
 
-    if (rolesObject.length > 0) {
-      rolesObject.forEach(async (role) => {
-        role.clientPermission.filter((item) => item.toString() !== id).length
-        await role.save()
-      })
-    }
+    // if (rolesObject.length > 0) {
+    //   rolesObject.forEach(async (role) => {
+    //     role.cityState.filter((item) => item.toString() !== id).length
+    //     await role.save()
+    //   })
+    // }
 
-    await object.remove()
+    // await object.remove()
     res.status(200).json({ message: `${schemaNameString} removed` })
   } catch (error) {
     res.status(500).json({ error: error.message })

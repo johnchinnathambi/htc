@@ -80,8 +80,8 @@ export const postUserRoleById = async (req, res) => {
       .populate({
         path: 'role',
         populate: {
-          path: 'clientPermission',
-          model: 'ClientPermission',
+          path: 'menu',
+          model: 'Menu',
         },
       })
 
@@ -91,9 +91,9 @@ export const postUserRoleById = async (req, res) => {
         .json({ error: 'No ' + schemaNameString + ' found' })
 
     const role = objects.role.type
-    const clientPermission = objects.role.clientPermission
+    const menu = objects.role.menu
 
-    res.status(200).send({ role, clientPermission })
+    res.status(200).send({ role, menu })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }

@@ -1,15 +1,21 @@
 import ViewUsers from './users/ViewUsers'
 import FormUsers from './users/FormUsers'
+import ViewBranches from './branches/ViewBranches'
+import FormBranches from './branches/FormBranches'
 import ViewCompanies from './companies/ViewCompanies'
 import FormCompanies from './companies/FormCompanies'
 import ViewPermissions from './permissions/ViewPermissions'
 import FormPermissions from './permissions/FormPermissions'
+import ViewDesignations from './designations/ViewDesignations'
+import FormDesignations from './designations/FormDesignations'
+import ViewDepartments from './departments/ViewDepartments'
+import FormDepartments from './departments/FormDepartments'
 import ViewCities from './cities/ViewCities'
 import FormCities from './cities/FormCities'
 import ViewStates from './states/ViewStates'
 import FormStates from './states/FormStates'
-import ViewClientPermissions from './client-permissions/ViewClientPermissions'
-import FormClientPermissions from './client-permissions/FormClientPermissions'
+import ViewMenus from './menus/ViewMenus'
+import FormMenus from './menus/FormMenus'
 import ViewUserRoles from './user-roles/ViewUserRoles'
 import FormUserRoles from './user-roles/FormUserRoles'
 import ViewUserProfiles from './user-profiles/ViewUserProfiles'
@@ -29,16 +35,22 @@ import Footer from './Footer'
 export {
   ViewUsers,
   FormUsers,
+  ViewBranches,
+  FormBranches,
   ViewCompanies,
-  FormCompanies,
+  FormCompanies,  
   ViewPermissions,
   FormPermissions,
+  ViewDesignations,
+  FormDesignations,
+  ViewDepartments,
+  FormDepartments,  
   ViewCities,
   FormCities,
   ViewStates,
   FormStates,
-  ViewClientPermissions,
-  FormClientPermissions,
+  ViewMenus,
+  FormMenus,
   ViewRoles,
   FormRoles,
   ViewUserProfiles,

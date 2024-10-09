@@ -5,7 +5,7 @@ const url = '/api/auth/cities'
 
 const queryKey = 'cities'
 
-export default function useCityStateHook(props) {
+export default function useCityHook(props) {
   const { page = 1, id, q = '', limit = 25 } = props
   const queryClient = useQueryClient()
 

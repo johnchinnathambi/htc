@@ -6,16 +6,22 @@
 // import ClientPermission from '../../models/ClientPermission.js'
 // import City from '../../models/City.js'
 // import State from '../../models/State.js'
-import Company from '../../models/Company.js'
-import {
-  companies,
+// import Company from '../../models/Company.js'
+// import Branch from '../../models/Branch.js'
+import Department from '../../models/Department.js'
+import Designation from '../../models/Designation.js'
+import {  
   // users,
   // profile,
   // roles,
   // permissions,
   // clientPermissions,
   // states,
-  // cities
+  // cities,
+  // companies,
+  // branches,
+  departments,
+  designations,
 } from '../../../config/data.js'
 
 const secret = 'js'
@@ -34,10 +40,22 @@ export const seed = async (req, res) => {
     // await ClientPermission.deleteMany({})
     // await State.deleteMany({})
     // await City.deleteMany({})
-    await Company.deleteMany({})
+    // await Company.deleteMany({})
+    // await Branch.deleteMany({})
+    await Department.deleteMany({})
+    await Designation.deleteMany({})
+
+    // Department Branch
+    await Department.create(departments)
+
+    // Designation Branch
+    await Designation.create(designations)
+
+    // Create Branch
+    //await Branch.create(branches)
 
     // Create Company
-    await Company.create(companies)
+    //await Company.create(companies)
 
     // Create States
     // await State.create(states)

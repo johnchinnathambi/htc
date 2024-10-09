@@ -1,10 +1,9 @@
-import Permission from '../../models/Permission.js'
-import Role from '../../models/Role.js'
+import Department from '../../models/Department.js'
 
-const schemaName = Permission
-const schemaNameString = 'Permission'
+const schemaName = Department
+const schemaNameString = 'Department'
 
-export const getPermissions = async (req, res) => {
+export const getDepartments = async (req, res) => {
   try {
     const q = req.query && req.query.q
 
@@ -19,7 +18,7 @@ export const getPermissions = async (req, res) => {
 
     const pages = Math.ceil(total / pageSize)
 
-    query = query.skip(skip).limit(pageSize).sort({ name: 1, method: -1 }).lean()
+    query = query.skip(skip).limit(pageSize).sort({ createdAt: -1 }).lean()
 
     const result = await query
 
@@ -37,7 +36,7 @@ export const getPermissions = async (req, res) => {
   }
 }
 
-export const postPermission = async (req, res) => {
+export const postDepartment = async (req, res) => {
   try {
     const object = await schemaName.create(req.body)
     res.status(200).send(object)
@@ -46,21 +45,18 @@ export const postPermission = async (req, res) => {
   }
 }
 
-export const putPermission = async (req, res) => {
+export const putDepartment = async (req, res) => {
   try {
     const { id } = req.params
 
-    const { name, description, method, route, auth } = req.body
+    const { departmentSerialNo, department } = req.body
 
     const object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    object.name = name
-    object.description = description
-    object.method = method
-    object.route = route
-    object.auth = auth
+    object.departmentSerialNo = departmentSerialNo
+    object.department = department
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })
   } catch (error) {
@@ -68,25 +64,25 @@ export const putPermission = async (req, res) => {
   }
 }
 
-export const deletePermission = async (req, res) => {
+export const deleteDepartment = async (req, res) => {
   try {
     const { id } = req.params
-    const object = await schemaName.findById(id)
+    const object = await schemaName.findByIdAndDelete(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    const rolesObject = await Role.find({
-      permission: object._id,
-    })
+    // const rolesObject = await Role.find({
+    //   cityDepartment: object._id,
+    // })
 
-    if (rolesObject.length > 0) {
-      rolesObject.forEach(async (role) => {
-        role.permission.filter((item) => item.toString() !== id).length
-        await role.save()
-      })
-    }
+    // if (rolesObject.length > 0) {
+    //   rolesObject.forEach(async (role) => {
+    //     role.cityDepartment.filter((item) => item.toString() !== id).length
+    //     await role.save()
+    //   })
+    // }
 
-    await object.remove()
+    // await object.remove()
     res.status(200).json({ message: `${schemaNameString} removed` })
   } catch (error) {
     res.status(500).json({ error: error.message })

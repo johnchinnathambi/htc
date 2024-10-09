@@ -5,7 +5,7 @@ const RequireAuth = () => {
   const { auth } = useAuth()
   const location = useLocation()
 
-  return auth?.userRole?.clientPermission
+  return auth?.userRole?.menu
     ?.map((path) => path?.path)
     ?.includes(location.pathname) ? (
     <Outlet />

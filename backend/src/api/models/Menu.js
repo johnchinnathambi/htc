@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const ClientPermissionScheme = mongoose.Schema(
+const MenuScheme = mongoose.Schema(
   {
     name: { type: String, required: true },
     menu: { type: String, required: true },
@@ -10,8 +10,5 @@ const ClientPermissionScheme = mongoose.Schema(
   { timestamps: true }
 )
 
-const ClientPermission = mongoose.model(
-  'ClientPermission',
-  ClientPermissionScheme
-)
-export default ClientPermission
+const Menu = mongoose.model('Menu', MenuScheme)
+export default Menu

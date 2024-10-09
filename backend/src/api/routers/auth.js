@@ -7,6 +7,18 @@ import {
   deletePermission,
 } from '../controllers/auth/permissions.js'
 import {
+  getDepartments,
+  postDepartment,
+  putDepartment,
+  deleteDepartment,
+} from '../controllers/auth/departments.js'
+import {
+  getDesignations,
+  postDesignation,
+  putDesignation,
+  deleteDesignation,
+} from '../controllers/auth/designations.js'
+import {
   getStates,
   postState,
   putState,
@@ -25,11 +37,11 @@ import {
   putRole,
 } from '../controllers/auth/roles.js'
 import {
-  getClientPermissions,
-  postClientPermission,
-  putClientPermission,
-  deleteClientPermission,
-} from '../controllers/auth/client-permissions.js'
+  getMenus,
+  postMenu,
+  putMenu,
+  deleteMenu,
+} from '../controllers/auth/menus.js'
 import {
   getUsers,
   postUser,
@@ -44,6 +56,13 @@ import {
   deleteCompany,
   getCompanyById,
 } from '../controllers/auth/companies.js'
+import {
+  getBranches,
+  postBranch,
+  putBranch,
+  deleteBranch,
+  getBranchById,
+} from '../controllers/auth/branches.js'
 import {
   getUserRoles,
   postUserRole,
@@ -85,6 +104,26 @@ router
   .put(isAuth, putPermission)
   .delete(isAuth, deletePermission)
 
+// department
+router
+  .route('/api/auth/departments')
+  .get(isAuth, getDepartments)
+  .post(isAuth, postDepartment)
+router
+  .route('/api/auth/departments/:id')
+  .put(isAuth, putDepartment)
+  .delete(isAuth, deleteDepartment)
+
+// designation
+router
+  .route('/api/auth/designations')
+  .get(isAuth, getDesignations)
+  .post(isAuth, postDesignation)
+router
+  .route('/api/auth/designations/:id')
+  .put(isAuth, putDesignation)
+  .delete(isAuth, deleteDesignation)  
+
 
 // state
 router
@@ -113,15 +152,15 @@ router
   .put(isAuth, putRole)
   .delete(isAuth, deleteRole)
 
-// client permissions
+// menus
 router
-  .route('/api/auth/client-permissions')
-  .get(isAuth, getClientPermissions)
-  .post(isAuth, postClientPermission)
+  .route('/api/auth/menus')
+  .get(isAuth, getMenus)
+  .post(isAuth, postMenu)
 router
-  .route('/api/auth/client-permissions/:id')
-  .put(isAuth, putClientPermission)
-  .delete(isAuth, deleteClientPermission)
+  .route('/api/auth/menus/:id')
+  .put(isAuth, putMenu)
+  .delete(isAuth, deleteMenu)
 
 // profile
 router
@@ -157,5 +196,12 @@ router
   .delete(isAuth, deleteCompany)
   .get(isAuth, getCompanyById)
 
+// branches
+router.route('/api/auth/branches').get(isAuth, getBranches).post(isAuth, postBranch)
+router
+  .route('/api/auth/branches/:id')
+  .put(isAuth, putBranch)
+  .delete(isAuth, deleteBranch)
+  .get(isAuth, getBranchById)
 
 export default router

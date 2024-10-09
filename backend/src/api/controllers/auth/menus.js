@@ -1,10 +1,10 @@
-import Permission from '../../models/Permission.js'
+import Menu from '../../models/Menu.js'
 import Role from '../../models/Role.js'
 
-const schemaName = Permission
-const schemaNameString = 'Permission'
+const schemaName = Menu
+const schemaNameString = 'Menu'
 
-export const getPermissions = async (req, res) => {
+export const getMenus = async (req, res) => {
   try {
     const q = req.query && req.query.q
 
@@ -19,7 +19,7 @@ export const getPermissions = async (req, res) => {
 
     const pages = Math.ceil(total / pageSize)
 
-    query = query.skip(skip).limit(pageSize).sort({ name: 1, method: -1 }).lean()
+    query = query.skip(skip).limit(pageSize).sort({ createdAt: -1 }).lean()
 
     const result = await query
 
@@ -37,7 +37,7 @@ export const getPermissions = async (req, res) => {
   }
 }
 
-export const postPermission = async (req, res) => {
+export const postMenu = async (req, res) => {
   try {
     const object = await schemaName.create(req.body)
     res.status(200).send(object)
@@ -46,29 +46,26 @@ export const postPermission = async (req, res) => {
   }
 }
 
-export const putPermission = async (req, res) => {
+export const putMenu = async (req, res) => {
   try {
     const { id } = req.params
-
-    const { name, description, method, route, auth } = req.body
+    const { name, menu, path, description } = req.body
 
     const object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
     object.name = name
+    object.menu = menu
+    object.path = path
     object.description = description
-    object.method = method
-    object.route = route
-    object.auth = auth
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
-
-export const deletePermission = async (req, res) => {
+export const deleteMenu = async (req, res) => {
   try {
     const { id } = req.params
     const object = await schemaName.findById(id)
@@ -76,17 +73,18 @@ export const deletePermission = async (req, res) => {
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
     const rolesObject = await Role.find({
-      permission: object._id,
+      menu: object._id,
     })
 
     if (rolesObject.length > 0) {
       rolesObject.forEach(async (role) => {
-        role.permission.filter((item) => item.toString() !== id).length
+        role.menu.filter((item) => item.toString() !== id).length
         await role.save()
       })
     }
 
-    await object.remove()
+    await schemaName.findByIdAndDelete(id)
+    //await object.remove()
     res.status(200).json({ message: `${schemaNameString} removed` })
   } catch (error) {
     res.status(500).json({ error: error.message })

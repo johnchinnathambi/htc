@@ -21,13 +21,14 @@ const Login = () => {
   } = useForm();
 
   const { setAuth } = useAuth();
-
   const { postLogin } = useAuthHook();
   const { postUserRoleById } = useUserRolesHook({
     page: 1,
     q: "",
     limit: 10000000,
   });
+
+  console.log("postLogin", postLogin);
 
   const { isLoading, isError, error, mutateAsync, isSuccess, data } = postLogin;
   const {
@@ -41,6 +42,7 @@ const Login = () => {
     if (isSuccess) {
       userRoleMutateAsync(data._id);
       if (userRole) {
+
         localStorage.setItem("userRole", JSON.stringify(userRole));
         localStorage.setItem("userInfo", JSON.stringify(data));
 

@@ -11,10 +11,10 @@ const roleScheme = mongoose.Schema(
         ref: 'Permission',
       },
     ],
-    clientPermission: [
+    menu: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ClientPermission',
+        ref: 'Menu',
       },
     ],
   },

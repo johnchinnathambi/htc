@@ -4,6 +4,20 @@ const schemaName = City
 const schemaNameString = 'City'
 
 export const getCities = async (req, res) => {
+
+  // try {
+  //   const { _id } = req.user
+  //   const objects = await schemaName
+  //     .findOne({ user: _id })
+  //     .lean()
+  //     .sort({ createdAt: -1 })
+  //     .populate('user', ['name', 'email', 'confirmed', 'blocked'])
+
+  //   res.status(200).send(objects)
+  // } catch (error) {
+  //   res.status(500).json({ error: error.message })
+  // }
+
   try {
     const q = req.query && req.query.q
 
@@ -18,7 +32,12 @@ export const getCities = async (req, res) => {
 
     const pages = Math.ceil(total / pageSize)
 
-    query = query.skip(skip).limit(pageSize).sort({ createdAt: -1 }).lean()
+    query = query
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createdAt: -1 })
+      .lean()
+      .populate('state', ['stateName'])
 
     const result = await query
 
@@ -49,13 +68,13 @@ export const putCity = async (req, res) => {
   try {
     const { id } = req.params
 
-    const { stateID, cityID, cityName, cityShortName } = req.body
+    const { state, cityID, cityName, cityShortName } = req.body
 
     const object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    object.stateID = stateID
+    object.state = state
     object.cityID = cityID
     object.cityName = cityName
     object.cityShortName = cityShortName

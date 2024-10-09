@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { confirmAlert } from "react-confirm-alert";
 import { useForm } from "react-hook-form";
-import useClientPermissionsHook from "../../../api/clientPermissions";
+import useMenusHook from "../../../api/menus";
 import {
   Spinner,
-  ViewClientPermissions,
+  ViewMenus,
   Pagination,
-  FormClientPermissions,
+  FormMenus,
   Message,
   Confirm,
 } from "../../../components";
@@ -18,19 +18,20 @@ import {
   DialogBackdrop,
 } from "@headlessui/react";
 
-const ClientPermissions = () => {
+const Menus = () => {
   const [page, setPage] = useState(1);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
+  const [view, setView] = useState(false);
   const [q, setQ] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
-    getClientPermissions,
-    postClientPermission,
-    updateClientPermission,
-    deleteClientPermission,
-  } = useClientPermissionsHook({
+    getMenus,
+    postMenu,
+    updateMenu,
+    deleteMenu,
+  } = useMenusHook({
     page,
     q,
   });
@@ -46,7 +47,7 @@ const ClientPermissions = () => {
     defaultValues: {},
   });
 
-  const { data, isLoading, isError, error, refetch } = getClientPermissions;
+  const { data, isLoading, isError, error, refetch } = getMenus;
 
   const {
     isLoading: isLoadingUpdate,
@@ -54,7 +55,7 @@ const ClientPermissions = () => {
     error: errorUpdate,
     isSuccess: isSuccessUpdate,
     mutateAsync: mutateAsyncUpdate,
-  } = updateClientPermission;
+  } = updateMenu;
 
   const {
     isLoading: isLoadingDelete,
@@ -62,7 +63,7 @@ const ClientPermissions = () => {
     error: errorDelete,
     isSuccess: isSuccessDelete,
     mutateAsync: mutateAsyncDelete,
-  } = deleteClientPermission;
+  } = deleteMenu;
 
   const {
     isLoading: isLoadingPost,
@@ -70,7 +71,7 @@ const ClientPermissions = () => {
     error: errorPost,
     isSuccess: isSuccessPost,
     mutateAsync: mutateAsyncPost,
-  } = postClientPermission;
+  } = postMenu;
 
   const formCleanHandler = () => {
     setEdit(false);
@@ -111,36 +112,46 @@ const ClientPermissions = () => {
       : mutateAsyncPost(data);
   };
 
-  const editHandler = (clientPermission) => {
-    setId(clientPermission._id);
+  const viewHandler = (menu) => {
+    setId(menu._id);
+    setView(true);
+    setValue("name", menu.name);
+    setValue("menu", menu.menu);
+    setValue("path", menu.path);
+    setValue("description", menu.description);
+  };
+
+  const editHandler = (menu) => {
+    setId(menu._id);
+    setView(false);
     setEdit(true);
-    setValue("name", clientPermission.name);
-    setValue("menu", clientPermission.menu);
-    setValue("path", clientPermission.path);
-    setValue("description", clientPermission.description);
+    setValue("name", menu.name);
+    setValue("menu", menu.menu);
+    setValue("path", menu.path);
+    setValue("description", menu.description);
   };
 
   return (
     <>
       <Helmet>
-        <title>Client Permissions | HTC</title>
-        <meta property="og:title" content="Client Permissions" key="title" />
+        <title>Menus | HTC</title>
+        <meta property="og:title" content="Menus" key="title" />
       </Helmet>
       {isSuccessDelete && (
         <Message variant="success">
-          Client Permission has been deleted successfully.
+          Menu has been deleted successfully.
         </Message>
       )}
       {isErrorDelete && <Message variant="danger">{errorDelete}</Message>}
       {isSuccessUpdate && (
         <Message variant="success">
-          Client Permission has been updated successfully.
+          Menu has been updated successfully.
         </Message>
       )}
       {isErrorUpdate && <Message variant="danger">{errorUpdate}</Message>}
       {isSuccessPost && (
         <Message variant="success">
-          Client Permission has been Created successfully.
+          Menu has been Created successfully.
         </Message>
       )}
       {isErrorPost && <Message variant="danger">{errorPost}</Message>}
@@ -150,8 +161,9 @@ const ClientPermissions = () => {
       ) : isError ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <ViewClientPermissions
+        <ViewMenus
           data={data}
+          viewHandler={viewHandler}
           editHandler={editHandler}
           deleteHandler={deleteHandler}
           isLoadingDelete={isLoadingDelete}
@@ -160,6 +172,7 @@ const ClientPermissions = () => {
           searchHandler={searchHandler}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          setView={setView}
         />
       )}
 
@@ -182,7 +195,7 @@ const ClientPermissions = () => {
               as="div"
             >
               <h3 className="text-2xl font-bold">
-                {edit ? "Edit Client Permission" : "Add Client Permission"}
+                {edit ? "Edit Menu" : view ? "View Menu" : "Add Menu"}
               </h3>
 
               <button
@@ -198,8 +211,9 @@ const ClientPermissions = () => {
               </button>
             </DialogTitle>
             <div className="flex-1 overflow-auto py-4 px-6">
-              <FormClientPermissions
+              <FormMenus
                 edit={edit}
+                view={view}
                 formCleanHandler={formCleanHandler}
                 isLoading={isLoading}
                 isError={isError}
@@ -222,4 +236,4 @@ const ClientPermissions = () => {
   );
 };
 
-export default ClientPermissions;
+export default Menus;

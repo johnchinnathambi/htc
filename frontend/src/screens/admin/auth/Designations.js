@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { confirmAlert } from "react-confirm-alert";
 import { useForm } from "react-hook-form";
-import useCitiesHook from "../../../api/cities";
-import useStatesHook from "../../../api/states";
+import useDesignationsHook from "../../../api/designations";
+import useDepartmentsHook from "../../../api/departments";
 import {
   Spinner,
-  ViewCities,
+  ViewDesignations,
   Pagination,
-  FormCities,
+  FormDesignations,
   Message,
   Confirm,
 } from "../../../components";
@@ -19,7 +19,7 @@ import {
   DialogBackdrop,
 } from "@headlessui/react";
 
-const Cities = () => {
+const Designations = () => {
   const [page, setPage] = useState(1);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
@@ -28,16 +28,16 @@ const Cities = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
-    getCities,
-    postCity,
-    updateCity,
-    deleteCity,
-  } = useCitiesHook({
+    getDesignations,
+    postDesignation,
+    updateDesignation,
+    deleteDesignation,
+  } = useDesignationsHook({
     page,
     q,
   });
 
-  const { getStates } = useStatesHook({
+  const { getDepartments } = useDepartmentsHook({
     limit: 1000000,
   });
 
@@ -52,7 +52,7 @@ const Cities = () => {
     defaultValues: {},
   });
 
-  const { data, isLoading, isError, error, refetch } = getCities;
+  const { data, isLoading, isError, error, refetch } = getDesignations;
 
   const {
     isLoading: isLoadingUpdate,
@@ -60,7 +60,7 @@ const Cities = () => {
     error: errorUpdate,
     isSuccess: isSuccessUpdate,
     mutateAsync: mutateAsyncUpdate,
-  } = updateCity;
+  } = updateDesignation;
 
   const {
     isLoading: isLoadingDelete,
@@ -68,9 +68,9 @@ const Cities = () => {
     error: errorDelete,
     isSuccess: isSuccessDelete,
     mutateAsync: mutateAsyncDelete,
-  } = deleteCity;
+  } = deleteDesignation;
 
-  const { data: stateData } = getStates;
+  const { data: departmentData } = getDepartments;
 
   const {
     isLoading: isLoadingPost,
@@ -78,7 +78,7 @@ const Cities = () => {
     error: errorPost,
     isSuccess: isSuccessPost,
     mutateAsync: mutateAsyncPost,
-  } = postCity;
+  } = postDesignation;
 
   const formCleanHandler = () => {
     setEdit(false);
@@ -111,54 +111,51 @@ const Cities = () => {
     edit
       ? mutateAsyncUpdate({
           _id: id,
-          cityID: data.cityID,
-          cityName: data.cityName,
-          cityShortName: data.cityShortName,
-          state: data.state,
+          designationSerialNo: data.designationSerialNo,
+          designation: data.designation,          
+          department: data.department,
         })
       : mutateAsyncPost(data);
   };
 
-  const viewHandler = (city) => {
-    setId(city._id);
+  const viewHandler = (designation) => {
+    setId(designation._id);
     setView(true);
-    setValue("cityID", city.cityID);
-    setValue("cityName", city.cityName);
-    setValue("cityShortName", city.cityShortName);
-    setValue("state", city.state._id);   
+    setValue("designationSerialNo", designation.designationSerialNo);
+    setValue("designation", designation.designation);    
+    setValue("department", designation.department._id);   
   };
 
-  const editHandler = (city) => {    
-    setId(city._id);
+  const editHandler = (designation) => {    
+    setId(designation._id);
     setView(false);
     setEdit(true);
-    setValue("cityID", city.cityID);
-    setValue("cityName", city.cityName);
-    setValue("cityShortName", city.cityShortName);
-    setValue("state", city.state._id);    
+    setValue("designationSerialNo", designation.designationSerialNo);
+    setValue("designation", designation.designation);    
+    setValue("department", designation.department._id);
   };
 
   return (
     <>
       <Helmet>
-        <title>Cities | HTC</title>
-        <meta property="og:title" content="Cities" key="title" />
+        <title>Designations | HTC</title>
+        <meta property="og:title" content="Designations" key="title" />
       </Helmet>
       {isSuccessDelete && (
         <Message variant="success">
-          City has been deleted successfully.
+          Designation has been deleted successfully.
         </Message>
       )}
       {isErrorDelete && <Message variant="danger">{errorDelete}</Message>}
       {isSuccessUpdate && (
         <Message variant="success">
-          City has been updated successfully.
+          Designation has been updated successfully.
         </Message>
       )}
       {isErrorUpdate && <Message variant="danger">{errorUpdate}</Message>}
       {isSuccessPost && (
         <Message variant="success">
-          City has been Created successfully.
+          Designation has been Created successfully.
         </Message>
       )}
       {isErrorPost && <Message variant="danger">{errorPost}</Message>}
@@ -168,7 +165,7 @@ const Cities = () => {
       ) : isError ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <ViewCities
+        <ViewDesignations
           data={data}
           viewHandler={viewHandler}
           editHandler={editHandler}
@@ -193,7 +190,7 @@ const Cities = () => {
           setIsModalOpen(false);
         }}
         transition
-        className="realtive z-[1000] transition duration-100 ease-linear data-[closed]:opacity-0"
+        className="realtive z-[1000] transition duration-100 ease-linear data-[closed]:opadesignation-0"
       >
         <div className="fixed z-[1000] inset-0 flex w-screen justify-end p-4">
           <DialogPanel className="max-w-[800px] w-full flex flex-col rounded-xl shadow-sm bg-white">
@@ -202,7 +199,7 @@ const Cities = () => {
               as="div"
             >
               <h3 className="text-2xl font-bold">                
-                {edit ? "Edit City" : view ? "View City" : "Add City"}
+                {edit ? "Edit Designation" : view ? "View Designation" : "Add Designation"}
               </h3>
 
               <button
@@ -218,7 +215,7 @@ const Cities = () => {
               </button>
             </DialogTitle>
             <div className="flex-1 overflow-auto py-4 px-6">
-              <FormCities
+              <FormDesignations
                 edit={edit}
                 view={view}
                 formCleanHandler={formCleanHandler}
@@ -231,7 +228,7 @@ const Cities = () => {
                 handleSubmit={handleSubmit}
                 submitHandler={submitHandler}
                 setIsModalOpen={setIsModalOpen}
-                stateData={stateData && stateData.data}
+                departmentData={departmentData && departmentData.data}
                 watch={watch}
                 error={error}
               />
@@ -244,4 +241,4 @@ const Cities = () => {
   );
 };
 
-export default Cities;
+export default Designations;

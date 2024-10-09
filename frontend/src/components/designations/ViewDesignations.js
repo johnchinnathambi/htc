@@ -1,6 +1,6 @@
 import { Search } from "..";
 
-const ViewStates = ({
+const ViewDesignations = ({
   data,
   editHandler,
   viewHandler,
@@ -16,7 +16,7 @@ const ViewStates = ({
     <>
       <div className="flex flex-wrap items-center justify-between mb-3">
         <h2 className="font-bold text-2xl text-gray-800 my-1">
-          States ({data && data.total})
+          Designations ({data && data.total})
         </h2>
         <div className="flex flex-wrap gap-3">
           <Search
@@ -27,9 +27,9 @@ const ViewStates = ({
           />
           <button
             className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center"
-            onClick={() => {setIsModalOpen(true);setView(false);}}
+            onClick={() => {setIsModalOpen(true); setView(false)}}
           >
-            Add New State
+            Add New Designation
           </button>
         </div>
       </div>
@@ -37,30 +37,27 @@ const ViewStates = ({
         <table className="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-400 rounded">
           <thead className="text-xs text-slate-500 uppercase bg-slate-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th className="px-2 py-4">State Name</th>
-              <th className="px-2 py-4">State ID</th>
-              <th className="px-2 py-4">State Short Name</th>
-              <th className="px-2 py-4">State GST Code</th>
+              <th className="px-2 py-4">Designation Serial No</th>              
+              <th className="px-2 py-4">Designation</th>
+              <th className="px-2 py-4">Department</th>    
               <th className="px-2 py-4">Actions</th>
             </tr>
           </thead>
-
           <tbody>
             {data &&
-              data.data.map((state) => (
-                <tr key={state._id}>
-                  <td className="p-2">{state.stateName}</td>
-                  <td className="p-2">{state.stateID}</td>
-                  <td className="p-2">{state.stateShortName}</td>
-                  <td className="p-2">{state.stateGSTCode}</td>
+              data.data.map((designation) => (
+                <tr key={designation._id}>
+                  <td className="p-2">{designation.designationSerialNo}</td>
+                  <td className="p-2">{designation.designation}</td>                  
+                  <td className="p-2">{designation.department.department}</td>
                   <td className="p-2">
                     <div className="flex gap-2">
 
-                      <button
+                    <button
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
                         onClick={() => {
                           setIsModalOpen(true);
-                          viewHandler(state);
+                          viewHandler(designation);
                         }}
                       >
                         <span className="material-symbols-rounded ">visibility</span>
@@ -70,7 +67,7 @@ const ViewStates = ({
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
                         onClick={() => {
                           setIsModalOpen(true);
-                          editHandler(state);
+                          editHandler(designation);
                         }}
                       >
                         <span className="material-symbols-rounded ">edit</span>
@@ -78,16 +75,16 @@ const ViewStates = ({
 
                       <button
                         className="inline-flex text-gray-600 hover:text-red-600 hover:bg-red-100 focus:ring-4 focus:ring-red-200 font-medium rounded-full text-sm p-2"
-                        onClick={() => deleteHandler(state._id)}
+                        onClick={() => deleteHandler(designation._id)}
                         disabled={isLoadingDelete}
                       >
-                        {isLoadingDelete ? (       
+                        {isLoadingDelete ? (
                           <span
                             className="animate-spin inline-block size-4 border-[2px] border-current border-t-transparent text-white rounded-full dark:text-white"
                             role="status"
                             aria-label="loading"
                           >
-                            <span className="sr-only">Loading...</span> 
+                            <span className="sr-only">Loading...</span>
                           </span>
                         ) : (
                           <span className="material-symbols-rounded">
@@ -106,4 +103,4 @@ const ViewStates = ({
   );
 };
 
-export default ViewStates;
+export default ViewDesignations;

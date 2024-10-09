@@ -1,28 +1,28 @@
 import dynamicAPI from './dynamicAPI'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 
-const url = '/api/auth/client-permissions'
+const url = '/api/auth/menus'
 
-const queryKey = 'client-permissions'
+const queryKey = 'menus'
 
-export default function useClientPermissionsHook(props) {
+export default function useMenusHook(props) {
   const { page = 1, id, q = '', limit = 25 } = props
   const queryClient = useQueryClient()
 
-  const getClientPermissions = useQuery(
+  const getMenus = useQuery(
     queryKey,
     async () =>
       await dynamicAPI('get', `${url}?page=${page}&q=${q}&limit=${limit}`, {}),
     { retry: 0 }
   )
 
-  const getClientPermissionById = useQuery(
+  const getMenuById = useQuery(
     queryKey,
     async (id) => await dynamicAPI('get', `${url}/${id}`, {}),
     { retry: 0, enabled: !!id }
   )
 
-  const updateClientPermission = useMutation(
+  const updateMenu = useMutation(
     async (obj) => await dynamicAPI('put', `${url}/${obj._id}`, obj),
     {
       retry: 0,
@@ -30,7 +30,7 @@ export default function useClientPermissionsHook(props) {
     }
   )
 
-  const deleteClientPermission = useMutation(
+  const deleteMenu = useMutation(
     async (id) => await dynamicAPI('delete', `${url}/${id}`, {}),
     {
       retry: 0,
@@ -38,7 +38,7 @@ export default function useClientPermissionsHook(props) {
     }
   )
 
-  const postClientPermission = useMutation(
+  const postMenu = useMutation(
     async (obj) => await dynamicAPI('post', url, obj),
     {
       retry: 0,
@@ -47,10 +47,10 @@ export default function useClientPermissionsHook(props) {
   )
 
   return {
-    getClientPermissions,
-    updateClientPermission,
-    deleteClientPermission,
-    postClientPermission,
-    getClientPermissionById,
+    getMenus,
+    updateMenu,
+    deleteMenu,
+    postMenu,
+    getMenuById,
   }
 }

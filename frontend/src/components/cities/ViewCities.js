@@ -3,12 +3,14 @@ import { Search } from "..";
 const ViewCities = ({
   data,
   editHandler,
+  viewHandler,
   deleteHandler,
   isLoadingDelete,
   setQ,
   q,
   searchHandler,
   setIsModalOpen,
+  setView,
 }) => {
   return (
     <>
@@ -25,7 +27,7 @@ const ViewCities = ({
           />
           <button
             className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {setIsModalOpen(true); setView(false)}}
           >
             Add New City
           </button>
@@ -49,9 +51,20 @@ const ViewCities = ({
                   <td className="p-2">{city.cityName}</td>
                   <td className="p-2">{city.cityID}</td>
                   <td className="p-2">{city.cityShortName}</td>
-                  <td className="p-2">{city.stateID}</td>
+                  <td className="p-2">{city.state.stateName}</td>
                   <td className="p-2">
                     <div className="flex gap-2">
+
+                    <button
+                        className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          viewHandler(city);
+                        }}
+                      >
+                        <span className="material-symbols-rounded ">visibility</span>
+                      </button>
+
                       <button
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
                         onClick={() => {

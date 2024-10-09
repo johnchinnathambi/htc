@@ -3,7 +3,17 @@ import {
   inputText,
   inputTextArea,
   inputMultipleCheckBox,
+  inputMultipleCheckBoxGroups,
 } from "../../utils/dynamicForm";
+
+const methodConversion = (methodName) => {
+  switch(methodName){
+    case 'GET': return 'List';
+    case 'POST': return 'Add';
+    case 'PUT': return 'Edit';
+    case 'DELETE': return 'Delete';
+  }  
+}
 
 const FormRoles = ({
   formCleanHandler,
@@ -17,7 +27,7 @@ const FormRoles = ({
   submitHandler,
   error,
   permissionData,
-  clientPermissionData,
+  menuData,
   setIsModalOpen,
 }) => {
   return (
@@ -38,7 +48,7 @@ const FormRoles = ({
             errors,
             label: "Name",
             name: "name",
-            placeholder: "Name",
+            placeholder: "Name",            
           })}
 
           {inputTextArea({
@@ -50,40 +60,41 @@ const FormRoles = ({
           })}
 
           <div className="mb-3 p-3 border border-gray-400 rounded-md">
-            <h4 className="font-medium text-base mb-3">API Permission</h4>
-            {inputMultipleCheckBox({
+            <h4 className="font-medium text-base mb-3">Permissions</h4>
+            {inputMultipleCheckBoxGroups({
               register,
               errors,
               label: "Permission",
               name: "permission",
               placeholder: "Permission",
               data:
-                permissionData &&
-                permissionData.map((item) => ({
-                  name: `${item.method} - ${item.description}`,
-                  _id: item._id,
+                permissionData &&                
+                permissionData.filter(item => item.show).map((item) => ({                  
+                    name: `${item.name}`,
+                    method: methodConversion(item.method),
+                    _id: item._id,
                 })),
               isRequired: false,
             })}
           </div>
 
-          <div className="mb-3 p-3 border border-gray-400 rounded-md">
-            <h4 className="font-medium text-base mb-3">Client Permission</h4>
+          {/* <div className="mb-3 p-3 border border-gray-400 rounded-md">
+            <h4 className="font-medium text-base mb-3">Menu</h4>
             {inputMultipleCheckBox({
               register,
               errors,
-              label: "Client Permission",
-              name: "clientPermission",
-              placeholder: "Client Permission",
+              label: "Menu",
+              name: "menu",
+              placeholder: "Menu",
               data:
-                clientPermissionData &&
-                clientPermissionData.map((item) => ({
+                menuData &&
+                menuData.map((item) => ({
                   name: `${item.menu} - ${item.path}`,
                   _id: item._id,
                 })),
               isRequired: false,
             })}
-          </div>
+          </div> */}
 
           <div className="flex gap-3">
             <button

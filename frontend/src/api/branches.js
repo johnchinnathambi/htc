@@ -1,28 +1,28 @@
 import dynamicAPI from './dynamicAPI'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 
-const url = '/api/auth/cities'
+const url = '/api/auth/branches'
 
-const queryKey = 'cities'
+const queryKey = 'branches'
 
-export default function useCityStateHook(props) {
+export default function useBranchesHook(props) {
   const { page = 1, id, q = '', limit = 25 } = props
   const queryClient = useQueryClient()
 
-  const getCities = useQuery(
+  const getBranches = useQuery(
     queryKey,
     async () =>
       await dynamicAPI('get', `${url}?page=${page}&q=${q}&limit=${limit}`, {}),
     { retry: 0 }
   )
 
-  const getCityById = useQuery(
+  const getBranchById = useQuery(
     queryKey,
     async (id) => await dynamicAPI('get', `${url}/${id}`, {}),
     { retry: 0, enabled: !!id }
   )
 
-  const updateCity = useMutation(
+  const updateBranch = useMutation(
     async (obj) => await dynamicAPI('put', `${url}/${obj._id}`, obj),
     {
       retry: 0,
@@ -30,7 +30,7 @@ export default function useCityStateHook(props) {
     }
   )
 
-  const deleteCity = useMutation(
+  const deleteBranch = useMutation(
     async (id) => await dynamicAPI('delete', `${url}/${id}`, {}),
     {
       retry: 0,
@@ -38,7 +38,7 @@ export default function useCityStateHook(props) {
     }
   )
 
-  const postCity = useMutation(
+  const postBranch = useMutation(
     async (obj) => await dynamicAPI('post', url, obj),
     {
       retry: 0,
@@ -46,11 +46,5 @@ export default function useCityStateHook(props) {
     }
   )
 
-  return {
-    getCities,
-    updateCity,
-    deleteCity,
-    postCity,
-    getCityById,
-  }
+  return { getBranches, updateBranch, deleteBranch, postBranch, getBranchById }
 }

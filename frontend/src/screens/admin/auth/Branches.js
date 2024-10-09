@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { confirmAlert } from "react-confirm-alert";
 import { useForm } from "react-hook-form";
-import useCitiesHook from "../../../api/cities";
-import useStatesHook from "../../../api/states";
+import useBranchesHook from "../../../api/branches";
 import {
-  Spinner,
-  ViewCities,
+  ViewBranches,
   Pagination,
-  FormCities,
+  FormBranches,
   Message,
   Confirm,
 } from "../../../components";
@@ -19,7 +17,7 @@ import {
   DialogBackdrop,
 } from "@headlessui/react";
 
-const Cities = () => {
+const Branches = () => {
   const [page, setPage] = useState(1);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
@@ -27,18 +25,9 @@ const Cities = () => {
   const [q, setQ] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const {
-    getCities,
-    postCity,
-    updateCity,
-    deleteCity,
-  } = useCitiesHook({
+  const { getBranches, postBranch, updateBranch, deleteBranch } = useBranchesHook({
     page,
     q,
-  });
-
-  const { getStates } = useStatesHook({
-    limit: 1000000,
   });
 
   const {
@@ -49,10 +38,13 @@ const Cities = () => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: {},
+    defaultValues: {
+      confirmed: true,
+      blocked: false,
+    },
   });
 
-  const { data, isLoading, isError, error, refetch } = getCities;
+  const { data, isLoading, isError, error, refetch } = getBranches;
 
   const {
     isLoading: isLoadingUpdate,
@@ -60,7 +52,7 @@ const Cities = () => {
     error: errorUpdate,
     isSuccess: isSuccessUpdate,
     mutateAsync: mutateAsyncUpdate,
-  } = updateCity;
+  } = updateBranch;
 
   const {
     isLoading: isLoadingDelete,
@@ -68,9 +60,7 @@ const Cities = () => {
     error: errorDelete,
     isSuccess: isSuccessDelete,
     mutateAsync: mutateAsyncDelete,
-  } = deleteCity;
-
-  const { data: stateData } = getStates;
+  } = deleteBranch;
 
   const {
     isLoading: isLoadingPost,
@@ -78,7 +68,7 @@ const Cities = () => {
     error: errorPost,
     isSuccess: isSuccessPost,
     mutateAsync: mutateAsyncPost,
-  } = postCity;
+  } = postBranch;
 
   const formCleanHandler = () => {
     setEdit(false);
@@ -111,64 +101,101 @@ const Cities = () => {
     edit
       ? mutateAsyncUpdate({
           _id: id,
-          cityID: data.cityID,
-          cityName: data.cityName,
-          cityShortName: data.cityShortName,
-          state: data.state,
+          branchSerialNo: data.branchSerialNo,
+          registrationDate: data.registrationDate,
+          companyID: data.companyID,
+          city: data.city,
+          branchID: data.branchID,          
+          user: data.user,
+          branchName: data.branchName,
+          branchShortName: data.branchShortName,
+          gSTINNumber: data.gSTINNumber,          
+          address1: data.address1,
+          address2: data.address2,
+          address3: data.address3,
+          pincode: data.pincode,
+          mobileNumber: data.mobileNumber,
+          phoneNumber: data.phoneNumber,
+          email: data.email,
+          logo: data.logo,
+          watermark: data.watermark,
+          blocked: data.blocked,
         })
       : mutateAsyncPost(data);
   };
 
-  const viewHandler = (city) => {
-    setId(city._id);
+  const viewHandler = (branch) => {
+    setId(branch._id);
     setView(true);
-    setValue("cityID", city.cityID);
-    setValue("cityName", city.cityName);
-    setValue("cityShortName", city.cityShortName);
-    setValue("state", city.state._id);   
+    setValue("branchSerialNo", branch.branchSerialNo);
+    setValue("registrationDate", branch.registrationDate);
+    setValue("companyID", branch.companyID);
+    setValue("city", branch.city);
+    setValue("branchID", branch.branchID);    
+    setValue("user", branch.user);
+    setValue("branchName", branch.branchName);
+    setValue("branchShortName", branch.branchShortName);
+    setValue("gSTINNumber", branch.gSTINNumber);    
+    setValue("address1", branch.address1);
+    setValue("address2", branch.address2);
+    setValue("address3", branch.address3);
+    setValue("pincode", branch.pincode);
+    setValue("mobileNumber", branch.mobileNumber);    
+    setValue("phoneNumber", branch.phoneNumber);
+    setValue("email", branch.email);
+    setValue("logo", branch.logo);
+    setValue("watermark", branch.watermark);
+    setValue("blocked", branch.blocked);
   };
 
-  const editHandler = (city) => {    
-    setId(city._id);
+  const editHandler = (branch) => {
+    setId(branch._id);
     setView(false);
     setEdit(true);
-    setValue("cityID", city.cityID);
-    setValue("cityName", city.cityName);
-    setValue("cityShortName", city.cityShortName);
-    setValue("state", city.state._id);    
+    setValue("branchSerialNo", branch.branchSerialNo);
+    setValue("registrationDate", branch.registrationDate);
+    setValue("companyID", branch.companyID);
+    setValue("city", branch.city);
+    setValue("branchID", branch.branchID);    
+    setValue("user", branch.user);
+    setValue("branchName", branch.branchName);
+    setValue("branchShortName", branch.branchShortName);
+    setValue("gSTINNumber", branch.gSTINNumber);    
+    setValue("address1", branch.address1);
+    setValue("address2", branch.address2);
+    setValue("address3", branch.address3);
+    setValue("pincode", branch.pincode);
+    setValue("mobileNumber", branch.mobileNumber);    
+    setValue("phoneNumber", branch.phoneNumber);
+    setValue("email", branch.email);
+    setValue("logo", branch.logo);
+    setValue("watermark", branch.watermark);
+    setValue("blocked", branch.blocked);
   };
 
   return (
     <>
       <Helmet>
-        <title>Cities | HTC</title>
-        <meta property="og:title" content="Cities" key="title" />
+        <title>Branches | HTC</title>
+        <meta property="og:title" content="Branches" key="title" />
       </Helmet>
       {isSuccessDelete && (
-        <Message variant="success">
-          City has been deleted successfully.
-        </Message>
+        <Message variant="success">Branch has been deleted successfully.</Message>
       )}
       {isErrorDelete && <Message variant="danger">{errorDelete}</Message>}
       {isSuccessUpdate && (
-        <Message variant="success">
-          City has been updated successfully.
-        </Message>
+        <Message variant="success">Branch has been updated successfully.</Message>
       )}
       {isErrorUpdate && <Message variant="danger">{errorUpdate}</Message>}
       {isSuccessPost && (
-        <Message variant="success">
-          City has been Created successfully.
-        </Message>
+        <Message variant="success">Branch has been created successfully.</Message>
       )}
       {isErrorPost && <Message variant="danger">{errorPost}</Message>}
 
-      {isLoading ? (
-        <Spinner />
-      ) : isError ? (
+      {isError ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <ViewCities
+        <ViewBranches
           data={data}
           viewHandler={viewHandler}
           editHandler={editHandler}
@@ -176,14 +203,12 @@ const Cities = () => {
           isLoadingDelete={isLoadingDelete}
           setQ={setQ}
           q={q}
-          searchHandler={searchHandler}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          setView={setView}
+          searchHandler={searchHandler}
         />
       )}
-
-      <div className="ms-auto text-end">
+      <div className="my-3">
         <Pagination data={data} setPage={setPage} />
       </div>
 
@@ -202,23 +227,20 @@ const Cities = () => {
               as="div"
             >
               <h3 className="text-2xl font-bold">                
-                {edit ? "Edit City" : view ? "View City" : "Add City"}
+                {edit ? "Edit Branch" : view ? "View Branch" : "Add Branch"}
               </h3>
 
               <button
                 type="button"
                 className="inline-flex text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-600 focus-visible:ring-4 transition duration-150 ease-linear p-2"
                 aria-label="Close"
-                onClick={() => {
-                  setIsModalOpen(false);
-                  formCleanHandler();
-                }}
+                onClick={() => {setIsModalOpen(false); formCleanHandler()}}
               >
                 <span className="material-symbols-rounded">close</span>
               </button>
             </DialogTitle>
             <div className="flex-1 overflow-auto py-4 px-6">
-              <FormCities
+              <FormBranches
                 edit={edit}
                 view={view}
                 formCleanHandler={formCleanHandler}
@@ -231,7 +253,6 @@ const Cities = () => {
                 handleSubmit={handleSubmit}
                 submitHandler={submitHandler}
                 setIsModalOpen={setIsModalOpen}
-                stateData={stateData && stateData.data}
                 watch={watch}
                 error={error}
               />
@@ -244,4 +265,4 @@ const Cities = () => {
   );
 };
 
-export default Cities;
+export default Branches;
