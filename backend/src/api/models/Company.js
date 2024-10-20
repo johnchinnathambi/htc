@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs'
 
 const companyScheme = mongoose.Schema(
   {
+    sequenceNumber: { type: Number, unique: true },
     companySerialNo: { type: String },
     registrationDate: { type: String },
     introductionID: { type: String },

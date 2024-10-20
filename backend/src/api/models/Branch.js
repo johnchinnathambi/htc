@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs'
 
 const branchScheme = mongoose.Schema(
   {
+    sequenceNumber: { type: Number, unique: true },
     branchSerialNo: { type: String },
     registrationDate: { type: String },
     companyID: { type: String },
@@ -11,8 +12,7 @@ const branchScheme = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
-      unique: true,
+      required: true,      
     },
     branchName: { type: String },
     branchShortName: { type: String },

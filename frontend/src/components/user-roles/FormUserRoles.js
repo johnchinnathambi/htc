@@ -2,7 +2,8 @@ import { Spinner, Message } from "..";
 import { dynamicInputSelect } from "../../utils/dynamicForm";
 
 const FormUserRoles = ({
-  // edit,
+  edit,
+  view,
   formCleanHandler,
   isLoading,
   register,
@@ -36,6 +37,7 @@ const FormUserRoles = ({
               dataUsers.data &&
               dataUsers.data.filter((user) => user.confirmed && !user.blocked),
             placeholder: "User",
+            readOnly: view,
           })}
 
           {dynamicInputSelect({
@@ -46,8 +48,10 @@ const FormUserRoles = ({
             placeholder: "Role",
             data: dataRoles && dataRoles.data,
             value: "name",
+            readOnly: view,
           })}
 
+          {view ? "" :
           <div className="flex gap-3">
             <button
               type="submit"
@@ -63,7 +67,9 @@ const FormUserRoles = ({
                   <span className="sr-only">Loading...</span>
                 </span>
               ) : (
-                <span>Save</span>
+                <span>
+                  {edit ? 'Update' : 'Save' }
+                </span>
               )}
             </button>
             <button
@@ -77,6 +83,7 @@ const FormUserRoles = ({
               Cancel
             </button>
           </div>
+          }
         </form>
       )}
     </>

@@ -4,6 +4,8 @@ import bcrypt from 'bcryptjs'
 
 const userScheme = mongoose.Schema(
   {
+    sequenceNumber: { type: Number, unique: true },
+    userID: { type: String, required: true},
     department: { type: String },
     designation: { type: String },
     name: { type: String, required: true },

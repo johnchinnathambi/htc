@@ -267,6 +267,7 @@ const Companies = () => {
                 setIsModalOpen={setIsModalOpen}
                 watch={watch}
                 error={error}
+                nextSequenceNumber={data && data.nextSequenceNumber}
               />
             </div>
           </DialogPanel>

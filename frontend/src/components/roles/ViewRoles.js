@@ -3,12 +3,14 @@ import { Search } from "..";
 const ViewRoles = ({
   data,
   editHandler,
+  viewHandler,
   setIsModalOpen,
   deleteHandler,
   isLoadingDelete,
   setQ,
   q,
   searchHandler,
+  setView,
 }) => {
   return (
     <>
@@ -52,6 +54,17 @@ const ViewRoles = ({
 
                   <td className="p-2">
                     <div className="flex gap-2">
+
+                      <button
+                        className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          viewHandler(role);
+                        }}
+                      >
+                        <span className="material-symbols-rounded ">visibility</span>
+                      </button>
+
                       <button
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
                         onClick={() => {

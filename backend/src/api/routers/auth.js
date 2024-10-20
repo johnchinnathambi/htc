@@ -1,6 +1,36 @@
 import express from 'express'
 import { isAuth } from '../../utils/auth.js'
 import {
+  getServiceTypes,
+  postServiceType,
+  putServiceType,
+  deleteServiceType,
+} from '../controllers/auth/service-types.js'
+import {
+  getGSTTaxes,
+  postGSTTax,
+  putGSTTax,
+  deleteGSTTax,
+} from '../controllers/auth/gst-taxes.js'
+import {
+  getHSNs,
+  postHSN,
+  putHSN,
+  deleteHSN,
+} from '../controllers/auth/hsns.js'
+import {
+  getUnits,
+  postUnit,
+  putUnit,
+  deleteUnit,
+} from '../controllers/auth/units.js'
+import {
+  getUnitConversions,
+  postUnitConversion,
+  putUnitConversion,
+  deleteUnitConversion,
+} from '../controllers/auth/unit-conversions.js'
+import {
   getPermissions,
   postPermission,
   putPermission,
@@ -94,6 +124,41 @@ router.route('/api/auth/seed').get(seed)
 // user profiles
 router.route('/api/auth/user-profiles').get(isAuth, getUserProfiles)
 
+
+// service type
+router
+  .route('/api/auth/service-types')
+  .get(isAuth, getServiceTypes)
+  .post(isAuth, postServiceType)
+router
+  .route('/api/auth/service-types/:id')
+  .put(isAuth, putServiceType)
+  .delete(isAuth, deleteServiceType)
+
+
+// gst tax
+router
+  .route('/api/auth/gst-taxes')
+  .get(isAuth, getGSTTaxes)
+  .post(isAuth, postGSTTax)
+router
+  .route('/api/auth/gst-taxes/:id')
+  .put(isAuth, putGSTTax)
+  .delete(isAuth, deleteGSTTax)
+
+
+// hsn
+router
+  .route('/api/auth/hsns')
+  .get(isAuth, getHSNs)
+  .post(isAuth, postHSN)
+router
+  .route('/api/auth/hsns/:id')
+  .put(isAuth, putHSN)
+  .delete(isAuth, deleteHSN)
+
+
+
 // permissions
 router
   .route('/api/auth/permissions')
@@ -103,6 +168,26 @@ router
   .route('/api/auth/permissions/:id')
   .put(isAuth, putPermission)
   .delete(isAuth, deletePermission)
+
+// unit
+router
+  .route('/api/auth/units')
+  .get(isAuth, getUnits)
+  .post(isAuth, postUnit)
+router
+  .route('/api/auth/units/:id')
+  .put(isAuth, putUnit)
+  .delete(isAuth, deleteUnit)
+
+// unit conversion
+router
+  .route('/api/auth/unit-conversions')
+  .get(isAuth, getUnitConversions)
+  .post(isAuth, postUnitConversion)
+router
+  .route('/api/auth/unit-conversions/:id')
+  .put(isAuth, putUnitConversion)
+  .delete(isAuth, deleteUnitConversion)  
 
 // department
 router

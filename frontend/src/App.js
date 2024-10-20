@@ -7,9 +7,14 @@ import NotFound from "./screens/auth/NotFound";
 import ResetPassword from "./screens/auth/ResetPassword";
 import Profile from "./screens/account/Profile";
 import Menus from "./screens/admin/auth/Menus";
+import ServiceTypes from "./screens/admin/auth/ServiceTypes";
+import HSNs from "./screens/admin/auth/HSNs";
+import GSTTaxes from "./screens/admin/auth/GSTTaxes";
 import Permissions from "./screens/admin/auth/Permissions";
 import Departments from './screens/admin/auth/Departments';
 import Designations from './screens/admin/auth/Designations';
+import UnitConversions from './screens/admin/auth/UnitConversions';
+import Units from './screens/admin/auth/Units';
 import Cities from './screens/admin/auth/Cities';
 import States from './screens/admin/auth/States';
 import Roles from "./screens/admin/auth/Roles";
@@ -33,8 +38,13 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/account/profile" element={<Profile />} />
           <Route path="/admin/auth/menus" element={<Menus />} />
+          <Route path="/admin/auth/service-types" element={<ServiceTypes />} />
+          <Route path="/admin/auth/hsns" element={<HSNs />} />
+          <Route path="/admin/auth/gst-taxes" element={<GSTTaxes />} />
           <Route path='/admin/auth/departments' element={<Departments />} />
           <Route path='/admin/auth/designations' element={<Designations />} />
+          <Route path='/admin/auth/unit-conversions' element={<UnitConversions />} />
+          <Route path='/admin/auth/units' element={<Units />} />
           <Route path='/admin/auth/cities' element={<Cities />} />
           <Route path='/admin/auth/states' element={<States />} />
           <Route path="/admin/auth/permissions" element={<Permissions />} />

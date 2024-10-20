@@ -1,5 +1,6 @@
 import { Message } from "../../components";
 import {
+  inputHidden,
   inputCheckBox,
   inputEmail,  
   inputText,
@@ -24,6 +25,7 @@ export const FormCompanies = ({
   submitHandler,
   error,
   setIsModalOpen,
+  nextSequenceNumber
 }) => {
   return (
     <>
@@ -38,13 +40,23 @@ export const FormCompanies = ({
         <Message variant="danger">{error}</Message>
       ) : (
         <form onSubmit={handleSubmit(submitHandler)}>
+          {inputHidden({
+            register,
+            errors,
+            label: "",
+            name: "sequenceNumber",
+            placeholder: "Sequence Number",
+            value: nextSequenceNumber > 0 ? nextSequenceNumber : 1,
+            readOnly: true,
+          })}          
           {inputText({
             register,
             errors,
             label: "Company Serial No.",
             name: "companySerialNo",
             placeholder: "Company Serial No.",
-            readOnly: view,
+            value: "COM"+String(nextSequenceNumber > 0 ? nextSequenceNumber : 1).padStart(5, '0'),
+            readOnly: true,
           })}
           {inputDate({
             register,

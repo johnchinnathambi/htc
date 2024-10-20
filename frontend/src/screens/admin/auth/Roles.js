@@ -7,6 +7,7 @@ import usePermissionsHook from "../../../api/permissions";
 import useMenusHook from "../../../api/menus";
 import {
   ViewRoles,
+  ViewStates,
   Pagination,
   FormRoles,
   Message,
@@ -23,6 +24,7 @@ const Roles = () => {
   const [page, setPage] = useState(1);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
+  const [view, setView] = useState(false);
   const [q, setQ] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -115,8 +117,24 @@ const Roles = () => {
       : mutateAsyncPost(data);
   };
 
+  const viewHandler = (role) => {
+    setId(role._id);
+    setView(true);
+    setValue("name", role.name);
+    setValue("description", role.description);
+    setValue(
+      "permission",
+      role.permission && role.permission.map((item) => item._id)
+    );
+    setValue(
+      "menu",
+      role.menu && role.menu.map((item) => item._id)
+    );
+  };
+
   const editHandler = (role) => {
     setId(role._id);
+    setView(false);
     setEdit(true);
     setValue("name", role.name);
     setValue("description", role.description);
@@ -154,6 +172,7 @@ const Roles = () => {
       ) : (
         <ViewRoles
           data={data}
+          viewHandler={viewHandler}
           editHandler={editHandler}
           deleteHandler={deleteHandler}
           isLoadingDelete={isLoadingDelete}
@@ -162,6 +181,7 @@ const Roles = () => {
           searchHandler={searchHandler}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          setView={setView}
         />
       )}
 
@@ -184,7 +204,7 @@ const Roles = () => {
               as="div"
             >
               <h3 className="text-2xl font-bold">
-                {edit ? "Edit Role" : "Add Role"}
+                {edit ? "Edit Role" : view ? "View Role" : "Add Role"}
               </h3>
 
               <button
@@ -202,6 +222,7 @@ const Roles = () => {
             <div className="flex-1 overflow-auto py-4 px-6">
               <FormRoles
                 edit={edit}
+                view={view}
                 formCleanHandler={formCleanHandler}
                 isLoading={isLoading}
                 isError={isError}
@@ -216,9 +237,7 @@ const Roles = () => {
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 permissionData={permissionData && permissionData.data}
-                menuData={
-                  menuData && menuData.data
-                }
+                menuData={menuData && menuData.data}
               />
             </div>
           </DialogPanel>

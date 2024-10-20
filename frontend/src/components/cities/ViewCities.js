@@ -37,8 +37,8 @@ const ViewCities = ({
         <table className="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-400 rounded">
           <thead className="text-xs text-slate-500 uppercase bg-slate-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th className="px-2 py-4">City Name</th>
               <th className="px-2 py-4">City ID</th>
+              <th className="px-2 py-4">City Name</th>              
               <th className="px-2 py-4">City Short Name</th>
               <th className="px-2 py-4">State Name</th>
               <th className="px-2 py-4">Actions</th>
@@ -47,9 +47,9 @@ const ViewCities = ({
           <tbody>
             {data &&
               data.data.map((city) => (
-                <tr key={city._id}>
-                  <td className="p-2">{city.cityName}</td>
+                <tr key={city._id}>                  
                   <td className="p-2">{city.cityID}</td>
+                  <td className="p-2">{city.cityName}</td>
                   <td className="p-2">{city.cityShortName}</td>
                   <td className="p-2">{city.state.stateName}</td>
                   <td className="p-2">

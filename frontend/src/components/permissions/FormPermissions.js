@@ -6,7 +6,8 @@ import {
 } from "../../utils/dynamicForm";
 
 const FormPermissions = ({
-  // edit,
+  edit,
+  view,
   formCleanHandler,
   isLoading,
   register,
@@ -35,6 +36,7 @@ const FormPermissions = ({
             label: "Name",
             name: "name",
             placeholder: "Name",
+            readOnly: view,
           })}
           {staticInputSelect({
             register,
@@ -48,6 +50,7 @@ const FormPermissions = ({
               { name: "PUT" },
               { name: "DELETE" },
             ],
+            readOnly: view,
           })}
 
           {inputText({
@@ -56,6 +59,7 @@ const FormPermissions = ({
             label: "Route",
             name: "route",
             placeholder: "Route",
+            readOnly: view,
           })}
 
           {inputCheckBox({
@@ -66,9 +70,10 @@ const FormPermissions = ({
             label: "Auth",
             isRequired: false,
             placeholder: "Auth",
+            readOnly: view,
           })}
-          <div className="flex gap-3">
-          
+          {view ? "" :
+          <div className="flex gap-3">          
             <button
               type="submit"
               className="min-w-[120px] text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center "
@@ -83,7 +88,9 @@ const FormPermissions = ({
                   <span className="sr-only">Loading...</span>
                 </span>
               ) : (
-                <span>Save</span>
+                <span>
+                  {edit ? 'Update' : 'Save' }
+                </span>
               )}
             </button>
             <button
@@ -97,6 +104,7 @@ const FormPermissions = ({
               Cancel
             </button>
           </div>
+        }
         </form>
       )}
     </>

@@ -36,12 +36,12 @@ const ViewCompany = ({
       <div className="relative overflow-x-auto">
         <table className="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-400 rounded">
           <thead className="text-xs text-slate-500 uppercase bg-slate-200 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
+            <tr>            
+              <th className="px-2 py-4">Company Serial No</th>
               <th className="px-2 py-4">Joined Date</th>
               <th className="px-2 py-4">Introduction ID</th>
               <th className="px-2 py-4">Company ID</th>
-              <th className="px-2 py-4">Company Name</th>
-              <th className="px-2 py-4">Admin ID</th>
+              <th className="px-2 py-4">Company Name</th>              
               <th className="px-2 py-4">Address 1</th>
               <th className="px-2 py-4">Address 2</th>
               <th className="px-2 py-4">Address 3</th>
@@ -59,13 +59,13 @@ const ViewCompany = ({
             {data &&
               data.data.map((company) => (
                 <tr key={company._id}>
+                  <td className="p-2">{company.companySerialNo}</td>
                   <td className="p-2">
                     {moment(company.createdAt).format("lll")}
                   </td>
                   <td className="p-2">{company.introductionID}</td>
                   <td className="p-2">{company.companyID}</td>
-                  <td className="p-2">{company.companyName}</td>
-                  <td className="p-2">{company.user}</td>
+                  <td className="p-2">{company.companyName}</td>                  
                   <td className="p-2">{company.address1}</td>
                   <td className="p-2">{company.address2}</td>
                   <td className="p-2">{company.address3}</td>

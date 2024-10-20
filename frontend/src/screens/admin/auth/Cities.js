@@ -234,6 +234,7 @@ const Cities = () => {
                 stateData={stateData && stateData.data}
                 watch={watch}
                 error={error}
+                nextSequenceNumber={data && data.nextSequenceNumber}
               />
             </div>
           </DialogPanel>

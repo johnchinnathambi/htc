@@ -22,6 +22,9 @@ export const getDepartments = async (req, res) => {
 
     const result = await query
 
+    const getLastItem = await schemaName.find({}).sort({sequenceNumber: -1}).limit(1)
+    const nextSequenceNumber = getLastItem && getLastItem.length > 0 ? getLastItem[0].sequenceNumber + 1 : ''
+
     res.status(200).json({
       startIndex: skip + 1,
       endIndex: skip + result.length,
@@ -29,6 +32,7 @@ export const getDepartments = async (req, res) => {
       page,
       pages,
       total,
+      nextSequenceNumber,
       data: result,
     })
   } catch (error) {

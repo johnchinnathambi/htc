@@ -206,8 +206,10 @@ const Branches = () => {
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           searchHandler={searchHandler}
+          setView={setView}          
         />
       )}
+      
       <div className="my-3">
         <Pagination data={data} setPage={setPage} />
       </div>
@@ -226,7 +228,7 @@ const Branches = () => {
               className="flex justify-between items-center py-4 px-6"
               as="div"
             >
-              <h3 className="text-2xl font-bold">                
+              <h3 className="text-2xl font-bold"> 
                 {edit ? "Edit Branch" : view ? "View Branch" : "Add Branch"}
               </h3>
 
@@ -255,6 +257,7 @@ const Branches = () => {
                 setIsModalOpen={setIsModalOpen}
                 watch={watch}
                 error={error}
+                nextSequenceNumber={data && data.nextSequenceNumber}
               />
             </div>
           </DialogPanel>

@@ -8,8 +8,13 @@
 // import State from '../../models/State.js'
 // import Company from '../../models/Company.js'
 // import Branch from '../../models/Branch.js'
-import Department from '../../models/Department.js'
-import Designation from '../../models/Designation.js'
+// import Department from '../../models/Department.js'
+// import Designation from '../../models/Designation.js'
+// import Unit from '../../models/Unit.js'
+// import UnitConversion from '../../models/UnitConversion.js'
+import ServiceType from '../../models/ServiceType.js'
+import GSTTax from '../../models/GSTTax.js'
+import HSN from '../../models/HSN.js'
 import {  
   // users,
   // profile,
@@ -20,8 +25,13 @@ import {
   // cities,
   // companies,
   // branches,
-  departments,
-  designations,
+  // departments,
+  // designations,
+  // units,
+  // unitconversions,
+  servicetype,
+  gsttax,
+  hsn,
 } from '../../../config/data.js'
 
 const secret = 'js'
@@ -42,14 +52,35 @@ export const seed = async (req, res) => {
     // await City.deleteMany({})
     // await Company.deleteMany({})
     // await Branch.deleteMany({})
-    await Department.deleteMany({})
-    await Designation.deleteMany({})
+    // await Department.deleteMany({})
+    // await Designation.deleteMany({})
+    // await Unit.deleteMany({})
+    // await UnitConversion.deleteMany({})
+    await ServiceType.deleteMany({})
+    await GSTTax.deleteMany({})
+    await HSN.deleteMany({})
+
+
+    // Create Service Type
+    await ServiceType.create(servicetype)
+
+    // Create GST Tax
+    await GSTTax.create(gsttax)
+    
+    // Create HSN
+    await HSN.create(hsn)    
+
+    // Create Units
+    // await Unit.create(units)
+
+    // // Create Unit Conversions
+    // await UnitConversion.create(unitconversions)
 
     // Department Branch
-    await Department.create(departments)
+    // await Department.create(departments)
 
     // Designation Branch
-    await Designation.create(designations)
+    // await Designation.create(designations)
 
     // Create Branch
     //await Branch.create(branches)

@@ -1,3 +1,38 @@
+export const inputHidden = (args) => {
+  const {
+    register,
+    placeholder,
+    errors,
+    name,
+    label,
+    isRequired = true,
+    readOnly,
+    value
+  } = args;
+
+  return (
+    <div className="mb-3">
+      <label className="block mb-1" htmlFor={name}>
+        {label}
+      </label>
+      <input
+        {...register(name, isRequired && { required: `${label} is required` })}
+        type="hidden"
+        placeholder={`${placeholder}`}
+        readOnly={!!readOnly}
+        value={value}
+        className={`block w-full rounded-md border-0 py-2 px-3 text-gray-800 focus:shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 focus:outline-none sm:text-sm sm:leading-6 ${readOnly && 'bg-slate-200'}`}
+      />
+      {errors && errors[name] && (
+        <span className="block text-sm text-red-600 pt-1">
+          {errors[name].message}
+        </span>
+      )}
+    </div>
+  );
+};
+
+
 export const inputText = (args) => {
   const {
     register,
@@ -7,6 +42,7 @@ export const inputText = (args) => {
     label,
     isRequired = true,
     readOnly,
+    value
   } = args;
 
   return (
@@ -19,6 +55,7 @@ export const inputText = (args) => {
         type="text"
         placeholder={`${placeholder}`}
         readOnly={!!readOnly}
+        value={value}
         className={`block w-full rounded-md border-0 py-2 px-3 text-gray-800 focus:shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 focus:outline-none sm:text-sm sm:leading-6 ${readOnly && 'bg-slate-200'}`}
       />
       {errors && errors[name] && (

@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
 
 const CityScheme = mongoose.Schema(
-  {    
+  { 
+    sequenceNumber: { type: Number, unique: true },
     state:{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'State',

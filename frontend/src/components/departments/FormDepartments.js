@@ -1,5 +1,5 @@
 import { Spinner, Message } from "..";
-import { inputText } from "../../utils/dynamicForm";
+import { inputHidden, inputText } from "../../utils/dynamicForm";
 
 const FormDepartments = ({
   edit,
@@ -15,6 +15,7 @@ const FormDepartments = ({
   submitHandler,
   error,
   setIsModalOpen,
+  nextSequenceNumber
 }) => {
   return (
     <>
@@ -24,13 +25,23 @@ const FormDepartments = ({
         <Message variant="danger">{error}</Message>
       ) : (
         <form onSubmit={handleSubmit(submitHandler)}>
+          {inputHidden({
+            register,
+            errors,
+            label: "",
+            name: "sequenceNumber",
+            placeholder: "Sequence Number",
+            value: nextSequenceNumber > 0 ? nextSequenceNumber : 1,
+            readOnly: true,
+          })}
           {inputText({
             register,
             errors,
             label: "Department Serial No",
             name: "departmentSerialNo",
             placeholder: "Department Serial No",
-            readOnly: view,
+            value: "DEP"+String(nextSequenceNumber > 0 ? nextSequenceNumber : 1).padStart(5, '0'),
+            readOnly: true,
           })}
           {inputText({
             register,

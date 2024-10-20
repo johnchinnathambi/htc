@@ -16,6 +16,8 @@ const methodConversion = (methodName) => {
 }
 
 const FormRoles = ({
+  edit,
+  view,
   formCleanHandler,
   isLoading,
   register,
@@ -49,6 +51,7 @@ const FormRoles = ({
             label: "Name",
             name: "name",
             placeholder: "Name",            
+            readOnly: view,
           })}
 
           {inputTextArea({
@@ -57,6 +60,7 @@ const FormRoles = ({
             label: "Description",
             name: "description",
             placeholder: "Description",
+            readOnly: view,
           })}
 
           <div className="mb-3 p-3 border border-gray-400 rounded-md">
@@ -75,11 +79,12 @@ const FormRoles = ({
                     _id: item._id,
                 })),
               isRequired: false,
+              readOnly: view,
             })}
           </div>
 
-          {/* <div className="mb-3 p-3 border border-gray-400 rounded-md">
-            <h4 className="font-medium text-base mb-3">Menu</h4>
+          <div className="mb-3 p-3 border border-gray-400 rounded-md">
+            <h4 className="font-medium text-base mb-3">Menus</h4>
             {inputMultipleCheckBox({
               register,
               errors,
@@ -94,8 +99,9 @@ const FormRoles = ({
                 })),
               isRequired: false,
             })}
-          </div> */}
+          </div>
 
+          {view ? "" :
           <div className="flex gap-3">
             <button
               type="submit"
@@ -111,7 +117,9 @@ const FormRoles = ({
                   <span className="sr-only">Loading...</span>
                 </span>
               ) : (
-                <span>Save</span>
+                <span>
+                  {edit ? 'Update' : 'Save' }
+                </span>
               )}
             </button>
             <button
@@ -125,6 +133,7 @@ const FormRoles = ({
               Cancel
             </button>
           </div>
+        }
         </form>
       )}
     </>

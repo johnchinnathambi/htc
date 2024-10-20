@@ -37,8 +37,8 @@ const ViewStates = ({
         <table className="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-400 rounded">
           <thead className="text-xs text-slate-500 uppercase bg-slate-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th className="px-2 py-4">State Name</th>
               <th className="px-2 py-4">State ID</th>
+              <th className="px-2 py-4">State Name</th>              
               <th className="px-2 py-4">State Short Name</th>
               <th className="px-2 py-4">State GST Code</th>
               <th className="px-2 py-4">Actions</th>
@@ -49,8 +49,8 @@ const ViewStates = ({
             {data &&
               data.data.map((state) => (
                 <tr key={state._id}>
-                  <td className="p-2">{state.stateName}</td>
                   <td className="p-2">{state.stateID}</td>
+                  <td className="p-2">{state.stateName}</td>                  
                   <td className="p-2">{state.stateShortName}</td>
                   <td className="p-2">{state.stateGSTCode}</td>
                   <td className="p-2">

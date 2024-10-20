@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import usePermissionsHook from "../../../api/permissions";
 import {
   Spinner,
+  ViewStates,
   ViewPermissions,
   Pagination,
   FormPermissions,
@@ -22,6 +23,7 @@ const Permissions = () => {
   const [page, setPage] = useState(1);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
+  const [view, setView] = useState(false);
   const [q, setQ] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -109,8 +111,18 @@ const Permissions = () => {
       : mutateAsyncPost(data);
   };
 
+  const viewHandler = (permission) => {
+    setId(permission._id);
+    setView(true);
+    setValue("name", permission.name);
+    setValue("method", permission.method);
+    setValue("route", permission.route);
+    setValue("auth", permission.auth);
+  };
+
   const editHandler = (permission) => {
     setId(permission._id);
+    setView(false);
     setEdit(true);
     setValue("name", permission.name);
     setValue("method", permission.method);
@@ -150,6 +162,7 @@ const Permissions = () => {
       ) : (
         <ViewPermissions
           data={data}
+          viewHandler={viewHandler}
           editHandler={editHandler}
           deleteHandler={deleteHandler}
           isLoadingDelete={isLoadingDelete}
@@ -158,6 +171,7 @@ const Permissions = () => {
           searchHandler={searchHandler}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          setView={setView}
         />
       )}
       <div className="ms-auto text-end">
@@ -177,8 +191,8 @@ const Permissions = () => {
               className="flex justify-between items-center py-4 px-6"
               as="div"
             >
-              <h3 className="text-2xl font-bold">
-                {edit ? "Edit Permission" : "Add Permission"}
+              <h3 className="text-2xl font-bold">                
+                {edit ? "Edit Permission" : view ? "View Permission" : "Add Permission"}
               </h3>
 
               <button
@@ -196,6 +210,7 @@ const Permissions = () => {
             <div className="flex-1 overflow-auto py-4 px-6">
               <FormPermissions
                 edit={edit}
+                view={view}
                 formCleanHandler={formCleanHandler}
                 isLoading={isLoading}
                 isError={isError}
@@ -206,7 +221,6 @@ const Permissions = () => {
                 handleSubmit={handleSubmit}
                 submitHandler={submitHandler}
                 setIsModalOpen={setIsModalOpen}
-
                 watch={watch}
                 error={error}
               />

@@ -31,6 +31,9 @@ export const getUsers = async (req, res) => {
 
     const result = await query
 
+    const getLastItem = await schemaName.find({}).sort({sequenceNumber: -1}).limit(1)
+    const nextSequenceNumber = getLastItem && getLastItem.length > 0 ? getLastItem[0].sequenceNumber + 1 : ''
+
     res.status(200).json({
       startIndex: skip + 1,
       endIndex: skip + result.length,
@@ -38,6 +41,7 @@ export const getUsers = async (req, res) => {
       page,
       pages,
       total,
+      nextSequenceNumber,
       data: result,
     })
   } catch (error) {
@@ -141,7 +145,7 @@ export const deleteUser = async (req, res) => {
   try {
     console.log(req.params)
     const { id } = req.params
-    const object = await schemaName.findById(id)
+    const object = await schemaName.findByIdAndDelete(id)
 
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
@@ -153,7 +157,7 @@ export const deleteUser = async (req, res) => {
     const userRole = await UserRole.findOne({ user: object._id })
     userRole && (await userRole.remove())
     
-    await object.remove()
+    //await object.remove()
     
     res.status(200).json({ message: `${schemaNameString} removed` })
   } catch (error) {

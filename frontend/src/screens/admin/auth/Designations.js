@@ -231,6 +231,7 @@ const Designations = () => {
                 departmentData={departmentData && departmentData.data}
                 watch={watch}
                 error={error}
+                nextSequenceNumber={data && data.nextSequenceNumber}
               />
             </div>
           </DialogPanel>

@@ -172,7 +172,7 @@ const States = () => {
           searchHandler={searchHandler}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          setView={setView}
+          setView={setView}          
         />
       )}
 
@@ -226,6 +226,7 @@ const States = () => {
                 setIsModalOpen={setIsModalOpen}
                 watch={watch}
                 error={error}
+                nextSequenceNumber={data && data.nextSequenceNumber}
               />
             </div>
           </DialogPanel>

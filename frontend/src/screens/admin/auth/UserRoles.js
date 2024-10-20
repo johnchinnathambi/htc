@@ -24,6 +24,7 @@ const UserRoles = () => {
   const [page, setPage] = useState(1);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
+  const [view, setView] = useState(false);
   const [q, setQ] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -121,8 +122,16 @@ const UserRoles = () => {
       : mutateAsyncPost(data);
   };
 
+  const viewHandler = (userRole) => {
+    setId(userRole._id);
+    setView(true);
+    setValue("user", userRole.user && userRole.user._id);
+    setValue("role", userRole.role && userRole.role._id);
+  };
+
   const editHandler = (userRole) => {
     setId(userRole._id);
+    setView(false);
     setEdit(true);
     setValue("user", userRole.user && userRole.user._id);
     setValue("role", userRole.role && userRole.role._id);
@@ -160,6 +169,7 @@ const UserRoles = () => {
       ) : (
         <ViewUserRoles
           data={data}
+          viewHandler={viewHandler}
           editHandler={editHandler}
           deleteHandler={deleteHandler}
           isLoadingDelete={isLoadingDelete}
@@ -168,6 +178,7 @@ const UserRoles = () => {
           searchHandler={searchHandler}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          setView={setView}
         />
       )}
 
@@ -208,6 +219,7 @@ const UserRoles = () => {
             <div className="flex-1 overflow-auto py-4 px-6">
               <FormUserRoles
                 edit={edit}
+                view={view}
                 formCleanHandler={formCleanHandler}
                 isLoading={isLoading}
                 isError={isError}

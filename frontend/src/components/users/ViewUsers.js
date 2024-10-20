@@ -4,6 +4,7 @@ import { Search } from "..";
 const ViewUsers = ({
   data,
   editHandler,
+  viewHandler,
   deleteHandler,
   isLoadingDelete,
   setIsModalOpen,
@@ -55,6 +56,7 @@ const ViewUsers = ({
             <th className="px-2 py-4">Salary Schedule Type</th>             */}
               <th className="px-2 py-4">Confirmed</th>
               <th className="px-2 py-4">Blocked</th>
+              {/* <th className="px-2 py-4">Permission</th> */}
               <th className="px-2 py-4">Actions</th>
             </tr>
           </thead>
@@ -106,17 +108,45 @@ const ViewUsers = ({
                       </span>
                     )}
                   </td>
+                  
+                  {/* <td className="p-2">
+                    <div className="flex gap-2">
+                      <button
+                          className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
+                          onClick={() => {
+                            setIsModalOpen(true);
+                            editHandler(user);
+                          }}
+                        >                        
+                          <span className="material-symbols-rounded ">shield_person</span>
+                        </button>
+                    </div>
+                  </td> */}
 
                   <td className="p-2">
                     <div className="flex gap-2">
+
+                    <button
+                        className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          viewHandler(user);
+                        }}
+                      >
+                        <span className="material-symbols-rounded ">visibility</span>
+                      </button>
+
                       <button
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
+                        onMouseOver={() => {
+                                                      
+                        }}
                         onClick={() => {
                           setIsModalOpen(true);
                           editHandler(user);
                         }}
                       >
-                        <span className="material-symbols-rounded ">edit</span>
+                        <span className="material-symbols-rounded ">edit</span>                        
                       </button>
 
                       <button

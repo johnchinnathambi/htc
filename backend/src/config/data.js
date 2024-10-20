@@ -384,30 +384,82 @@
 // ]
 
 
-const departments = [
+// const departments = [
+//   {
+//     departmentSerialNo: 'DEP01',
+//     department: 'Sales',
+//   },
+//   {
+//     departmentSerialNo: 'DEP02',
+//     department: 'Purchase',
+//   }  
+// ]
+
+// const designations = [
+//   {
+//     designationSerialNo: 'DES01',
+//     department: 'Sales',
+//     designation: 'Manager',    
+//   },
+//   {
+//     designationSerialNo: 'DES02',
+//     department: 'Sales',
+//     designation: 'Executive',
+//   }  
+// ]
+
+// const units = [
+//   {
+//     unitSerialNo: 'UNT01',
+//     unitName: 'Kgs',
+//   },
+//   {
+//     unitSerialNo: 'UNT02',
+//     unitName: 'Pcs',
+//   }  
+// ]
+
+// const unitconversions = [
+//   {
+//     unitConversionSerialNo: 'UCV01',
+//     mainUnit: 'Kgs',
+//     subUnit: 'Gms',
+//     conversionFactor: '1000',
+//   },
+//   {
+//     unitConversionSerialNo: 'UCV02',
+//     mainUnit: 'Pcs',
+//     subUnit: 'Box',
+//     conversionFactor: '10000000',
+//   }  
+// ]
+
+
+const servicetype = [
   {
-    departmentSerialNo: 'DEP01',
-    department: 'Sales',
+    serviceSerialNo: 'SER01',
+    serviceName: 'S1',
+    particular: 'With GST',
+    fees: '500',
+    status: 'Active',
   },
-  {
-    departmentSerialNo: 'DEP02',
-    department: 'Purchase',
-  }  
 ]
 
-const designations = [
+const gsttax = [
   {
-    designationSerialNo: 'DES01',
-    department: 'Sales',
-    designation: 'Manager',    
+    gSTTaxSerialNo: 'GST01',
+    gSTTax: '18%',    
   },
-  {
-    designationSerialNo: 'DES02',
-    department: 'Sales',
-    designation: 'Executive',
-  }  
 ]
 
-// export { roles, users, profile, permissions, menus, states, cities, companies, branches }
+const hsn = [
+  {
+    hSNCodeSerialNo: 'HSN01',
+    hSNCode: '123456',
+    description: 'MONDAY',
+  },
+]
 
-export { departments, designations }
+// export { roles, users, profile, permissions, menus, states, cities, companies, branches, departments, designations, units, unitconversions }
+
+export { servicetype, gsttax, hsn }

@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { confirmAlert } from "react-confirm-alert";
 import { useForm } from "react-hook-form";
+import usePermissionsHook from "../../../api/permissions";
+import useMenusHook from "../../../api/menus";
 import useUsersHook from "../../../api/users";
 import {
   ViewUsers,
+  ViewStates,
   Pagination,
   FormUsers,
   Message,
@@ -21,12 +24,20 @@ const Users = () => {
   const [page, setPage] = useState(1);
   const [id, setId] = useState(null);
   const [edit, setEdit] = useState(false);
+  const [view, setView] = useState(false);
   const [q, setQ] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { getUsers, postUser, updateUser, deleteUser } = useUsersHook({
     page,
     q,
+  });
+
+  const { getPermissions } = usePermissionsHook({
+    limit: 1000000,
+  });
+  const { getMenus } = useMenusHook({
+    limit: 1000000,
   });
 
   const {
@@ -44,6 +55,8 @@ const Users = () => {
   });
 
   const { data, isLoading, isError, error, refetch } = getUsers;
+  const { data: permissionData } = getPermissions;
+  const { data: menuData } = getMenus;
 
   const {
     isLoading: isLoadingUpdate,
@@ -123,8 +136,32 @@ const Users = () => {
       : mutateAsyncPost(data);
   };
 
+  const viewHandler = (user) => {
+    setId(user._id);
+    setView(true);
+    setValue("department", user.department);
+    setValue("designation", user.designation);
+    setValue("name", user.name);
+    setValue("address1", user.address1);
+    setValue("address2", user.address2);
+    setValue("address3", user.address3);
+    setValue("city", user.city);
+    setValue("pincode", user.pincode);
+    setValue("state", user.state);
+    setValue("mobile", user.mobile);
+    setValue("pan", user.pan);
+    setValue("pf", user.pf);
+    setValue("esi", user.esi);
+    setValue("dob", user.dob);
+    setValue("salaryscheduletype", user.salaryscheduletype);
+    setValue("email", user.email);
+    setValue("confirmed", user.confirmed);
+    setValue("blocked", user.blocked);
+  };
+
   const editHandler = (user) => {
     setId(user._id);
+    setView(false);
     setEdit(true);
     setValue("department", user.department);
     setValue("designation", user.designation);
@@ -170,6 +207,7 @@ const Users = () => {
       ) : (
         <ViewUsers
           data={data}
+          viewHandler={viewHandler}
           editHandler={editHandler}
           deleteHandler={deleteHandler}
           isLoadingDelete={isLoadingDelete}
@@ -178,6 +216,7 @@ const Users = () => {
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           searchHandler={searchHandler}
+          setView={setView}
         />
       )}
       <div className="my-3">
@@ -199,7 +238,7 @@ const Users = () => {
               as="div"
             >
               <h3 className="text-2xl font-bold">
-                {edit ? "Edit User" : "Add User"}
+                {edit ? "Edit User" : view ? "View User" : "Add User"}
               </h3>
 
               <button
@@ -214,6 +253,7 @@ const Users = () => {
             <div className="flex-1 overflow-auto py-4 px-6">
               <FormUsers
                 edit={edit}
+                view={view}
                 formCleanHandler={formCleanHandler}
                 isLoading={isLoading}
                 isError={isError}
@@ -226,6 +266,9 @@ const Users = () => {
                 setIsModalOpen={setIsModalOpen}
                 watch={watch}
                 error={error}
+                permissionData={permissionData && permissionData.data}
+                menuData={menuData && menuData.data}
+                nextSequenceNumber={data && data.nextSequenceNumber}
               />
             </div>
           </DialogPanel>

@@ -1,5 +1,5 @@
 import { Spinner, Message } from "..";
-import { inputText } from "../../utils/dynamicForm";
+import { inputHidden, inputText, inputNumber } from "../../utils/dynamicForm";
 
 const FormStates = ({
   edit,
@@ -15,7 +15,9 @@ const FormStates = ({
   submitHandler,
   error,
   setIsModalOpen,
+  nextSequenceNumber
 }) => {
+
   return (
     <>
       {isLoading ? (
@@ -24,13 +26,23 @@ const FormStates = ({
         <Message variant="danger">{error}</Message>
       ) : (
         <form onSubmit={handleSubmit(submitHandler)}>
+          {inputHidden({
+            register,
+            errors,
+            label: "",
+            name: "sequenceNumber",
+            placeholder: "Sequence Number",
+            value: nextSequenceNumber > 0 ? nextSequenceNumber : 1,
+            readOnly: true,
+          })}
           {inputText({
             register,
             errors,
             label: "State ID",
             name: "stateID",
             placeholder: "State ID",
-            readOnly: view,
+            value: "STA"+String(nextSequenceNumber > 0 ? nextSequenceNumber : 1).padStart(5, '0'),
+            readOnly: true,
           })}
           {inputText({
             register,
@@ -48,7 +60,7 @@ const FormStates = ({
             placeholder: "State Short Name",
             readOnly: view,
           })}
-          {inputText({
+          {inputNumber({
             register,
             errors,
             label: "State GST Code",

@@ -3,12 +3,14 @@ import { Search } from "..";
 const ViewUserRoles = ({
   data,
   editHandler,
+  viewHandler,
   deleteHandler,
   isLoadingDelete,
   setQ,
   q,
   searchHandler,
   setIsModalOpen,
+  setView,
 }) => {
   return (
     <>
@@ -25,7 +27,7 @@ const ViewUserRoles = ({
           />
           <button
             className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 font-medium rounded-lg text-sm px-4 py-2.5 text-center"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => { setIsModalOpen(true);setView(false); }}
           >
             Add New User Role
           </button>
@@ -56,6 +58,17 @@ const ViewUserRoles = ({
 
                   <td className="p-2">
                     <div className="btn-group">
+
+                      <button
+                          className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
+                          onClick={() => {
+                            setIsModalOpen(true);
+                            viewHandler(userRole);
+                          }}
+                        >
+                        <span className="material-symbols-rounded ">visibility</span>
+                      </button>
+
                       <button
                         className="inline-flex text-gray-600 hover:text-blue-600 hover:bg-blue-100 focus:ring-4 focus:ring-blue-200 font-medium rounded-full text-sm p-2"
                         onClick={() => {
